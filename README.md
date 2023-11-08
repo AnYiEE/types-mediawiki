@@ -1,5 +1,4 @@
-[![NPM version](https://img.shields.io/npm/v/types-mediawiki.svg)](https://www.npmjs.com/package/types-mediawiki)
-![Linter](https://github.com/wikimedia-gadgets/types-mediawiki/workflows/Lint/badge.svg)
+[![NPM version](https://img.shields.io/npm/v/types-mediawiki-renovate.svg)](https://www.npmjs.com/package/types-mediawiki-renovate)
 
 # types-mediawiki
 
@@ -7,21 +6,21 @@ TypeScript definitions for MediaWiki JS interface.
 
 This package covers the functions and classes in the `mw` global object, as well a few jQuery plugins used in MediaWiki core. All commonly used parts of the interface are covered but as far as complete coverage is concerned, this is a work in progress.
 
-[![Download stats](https://nodei.co/npm/types-mediawiki.png?downloads=true&downloadRank=true)](https://nodei.co/npm/types-mediawiki/)
+[![Download stats](https://nodei.co/npm/types-mediawiki-renovate.png?downloads=true&downloadRank=true)](https://nodei.co/npm/types-mediawiki-renovate/)
 
 ## Usage
 
 To use types from this package, run
 
 ```bash
-npm i types-mediawiki
+pnpm add -D types-mediawiki-renovate
 ```
 
 Edit your project's `tsconfig.json` file so that it includes
 
 ```
 "include": [
-  "./node_modules/types-mediawiki"
+  "./node_modules/types-mediawiki-renovate"
 ]
 ```
 
@@ -38,13 +37,24 @@ let NS = mw.config.get("wgNamespaceNumber"); // NS gets type number
 let pageName = mw.config.get("wgPageName"); // pageName gets type string
 ```
 
-mw.config entries added by MediaWiki extensions can also be used but their type is not known, so they need to be explicitly cast:
+mw.config entries added by MediaWiki extensions can also be used but their type is not known, so they need to be declare:
+
+```ts
+interface MediaWikiConfigMap {
+    pageTriageNamespaces: number[];
+}
+let namespaces = mw.config.get("pageTriageNamespaces");
+```
+
+or explicitly cast:
 
 ```ts
 let namespaces = mw.config.get("pageTriageNamespaces") as number[];
 ```
 
-(`mw.config.get('pageTriageNamespaces')` gets the type `unknown` without a cast.)
+(`mw.config.get("pageTriageNamespaces")` gets the type `unknown` without using the interface merging or a cast.)
+
+The optional values ​​of the return value of `mw.config.get("wgAction")` can also be extended through `MediaWikiConfigMapWgAction` like `MediaWikiConfigMap`.
 
 ### MediaWiki API parameters
 
@@ -57,10 +67,12 @@ import type { ApiEditPageParams, ApiParseParams } from "types-mediawiki/api_para
 Since it is just a type import, it doesn't generate any JavaScript. Hence, such imports can also be used in non-modular applications.
 
 ## Types for OOjs & OOUI
+
 TypeScript definitions of OOjs and OOUI is available on [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) and npm as [`@types/oojs`](https://www.npmjs.com/package/@types/oojs) and [`@types/oojs-ui`](https://www.npmjs.com/package/@types/oojs-ui) packages.
 
 ## TODO
+
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
--   Add doc comments for `mw.Title`, `mw.Uri`, `mw.storage`, `mw.language` and `mw.loader`.
+-   Add doc comments for `mw.ForeignUpload`, `mw.ForeignStructuredUpload`, `mw.GallerySlideshow`, `mw.special.ApiSandbox`, `mw.Upload` and `mw.jqueryMsg` private methods.
 -   Add types for more jQuery plugins.
