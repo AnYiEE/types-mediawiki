@@ -21,21 +21,21 @@ declare global {
                 splitlines?: boolean;
                 selectionStart?: number;
                 selectionEnd?: number;
-            }
+            },
         ): JQuery;
 
         textSelection(
             command: "getCaretPosition",
             commandOptions?: {
                 startAndEnd?: false;
-            }
+            },
         ): number;
 
         textSelection(
             command: "getCaretPosition",
             commandOptions: {
                 startAndEnd: true;
-            }
+            },
         ): [number, number];
 
         textSelection(
@@ -43,14 +43,14 @@ declare global {
             commandOptions: {
                 start?: number;
                 end?: number;
-            }
+            },
         ): JQuery;
 
         textSelection(
             command: "scrollToCaretPosition",
             commandOptions: {
                 force?: boolean;
-            }
+            },
         ): JQuery;
     }
 }

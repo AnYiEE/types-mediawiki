@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "lib": ["es5", "dom"],
+        "lib": ["dom", "ESNext"],
         "noImplicitAny": true,
         "noImplicitThis": true,
         "strictNullChecks": true,
