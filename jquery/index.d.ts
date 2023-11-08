@@ -1,6 +1,6 @@
-import "jquery";
+import 'jquery';
 
-import "./textSelection";
-import "./collapsibleTabs";
-import "./client";
-import "./colorUtil";
+import './textSelection';
+import './collapsibleTabs';
+import './client';
+import './colorUtil';

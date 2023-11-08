@@ -39,46 +39,46 @@
  * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook
  */
 interface Hook {
-    /**
-     * Register a hook handler
-     *
-     * @param {...Function} handler Function to bind.
-     * @chainable
-     * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-add
-     */
-    add(...handler: Array<(...args: any[]) => any>): Hook;
+	/**
+	 * Register a hook handler
+	 *
+	 * @param {...Function} handler Function to bind.
+	 * @chainable
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-add
+	 */
+	add(...handler: Array<(...args: any[]) => any>): Hook;
 
-    /**
-     * Call hook handlers with data.
-     *
-     * @param {any} data
-     * @return {Hook}
-     * @chainable
-     * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-fire
-     */
-    fire(data?: any): Hook;
+	/**
+	 * Call hook handlers with data.
+	 *
+	 * @param {any} data
+	 * @return {Hook}
+	 * @chainable
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-fire
+	 */
+	fire(data?: any): Hook;
 
-    /**
-     * Unregister a hook handler
-     *
-     * @param {...Function} handler Function to unbind.
-     * @chainable
-     * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-remove
-     */
-    remove(...handler: Array<(...args: any[]) => any>): Hook;
+	/**
+	 * Unregister a hook handler
+	 *
+	 * @param {...Function} handler Function to unbind.
+	 * @chainable
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-remove
+	 */
+	remove(...handler: Array<(...args: any[]) => any>): Hook;
 }
 
 declare global {
-    namespace mw {
-        /**
-         * Create an instance of mw.hook.
-         *
-         * @method hook
-         * @member mw
-         * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook
-         */
-        function hook(event: string): Hook;
-    }
+	namespace mw {
+		/**
+		 * Create an instance of mw.hook.
+		 *
+		 * @method hook
+		 * @member mw
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook
+		 */
+		function hook(event: string): Hook;
+	}
 }
 
 export {};

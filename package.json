@@ -1,34 +1,34 @@
 {
-    "name": "types-mediawiki-renovate",
-    "version": "1.4.0",
-    "description": "TypeScript definitions for MediaWiki JS interface",
-    "types": "index.d.ts",
-    "scripts": {
-        "lint": "dtslint --localTs node_modules/typescript/lib .",
-        "format": "prettier --write ."
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/AnYiEE/types-mediawiki-renovate"
-    },
-    "files": [
-        "mw",
-        "jquery",
-        "api_params",
-        "index.d.ts"
-    ],
-    "license": "GPL-3.0-or-later",
-    "bugs": {
-        "url": "https://github.com/AnYiEE/types-mediawiki-renovate/issues"
-    },
-    "homepage": "https://github.com/AnYiEE/types-mediawiki-renovate#readme",
-    "dependencies": {
-        "@types/jquery": "^3.5.27"
-    },
-    "devDependencies": {
-        "dtslint": "^4.2.1",
-        "prettier": "^3.0.3",
-        "tslint-config-prettier": "^1.18.0",
-        "typescript": "^4.1.3"
-    }
+	"name": "types-mediawiki-renovate",
+	"version": "1.4.0",
+	"description": "TypeScript definitions for MediaWiki JS interface",
+	"types": "index.d.ts",
+	"scripts": {
+		"lint": "dtslint --localTs node_modules/typescript/lib .",
+		"format": "prettier --write ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/AnYiEE/types-mediawiki-renovate"
+	},
+	"files": [
+		"mw",
+		"jquery",
+		"api_params",
+		"index.d.ts"
+	],
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/AnYiEE/types-mediawiki-renovate/issues"
+	},
+	"homepage": "https://github.com/AnYiEE/types-mediawiki-renovate#readme",
+	"dependencies": {
+		"@types/jquery": "^3.5.27"
+	},
+	"devDependencies": {
+		"dtslint": "^4.2.1",
+		"prettier": "^3.0.3",
+		"tslint-config-prettier": "^1.18.0",
+		"typescript": "^4.1.3"
+	}
 }
