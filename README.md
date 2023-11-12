@@ -1,12 +1,12 @@
 [![NPM version](https://img.shields.io/npm/v/types-mediawiki-renovate.svg)](https://www.npmjs.com/package/types-mediawiki-renovate)
 
-# types-mediawiki
+# types-mediawiki-renovate
 
 TypeScript definitions for MediaWiki JS interface.
 
 This package covers the functions and classes in the `mw` global object, as well a few jQuery plugins used in MediaWiki core. All commonly used parts of the interface are covered but as far as complete coverage is concerned, this is a work in progress.
 
-[![Download stats](https://nodei.co/npm/types-mediawiki-renovate.png?downloads=true&downloadRank=true)](https://nodei.co/npm/types-mediawiki-renovate/)
+[![Download stats](https://nodei.co/npm/types-mediawiki-renovate.png?downloads=true&downloadRank=true)](https://www.npmjs.com/package/types-mediawiki-renovate)
 
 ## Usage
 

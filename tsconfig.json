@@ -2,10 +2,10 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"lib": ["dom", "ESNext"],
+		"noEmit": true,
 		"noImplicitAny": true,
 		"noImplicitThis": true,
-		"strictNullChecks": true,
 		"strictFunctionTypes": true,
-		"noEmit": true
+		"strictNullChecks": true
 	}
 }

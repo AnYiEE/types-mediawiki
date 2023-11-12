@@ -6,20 +6,21 @@
 		"lint": "dtslint --localTs node_modules/typescript/lib .",
 		"format": "prettier --write ."
 	},
-	"files": [
-		"mw",
-		"jquery",
-		"api_params",
-		"index.d.ts"
-	],
-	"types": "index.d.ts",
-	"bugs": {
-		"url": "https://github.com/AnYiEE/types-mediawiki-renovate/issues"
+	"author": {
+		"name": "AnYiEE",
+		"email": "i@anyi.in"
 	},
-	"homepage": "https://github.com/AnYiEE/types-mediawiki-renovate#readme",
+	"contributors": [
+		"Other contributors <https://github.com/wikimedia-gadgets/types-mediawiki/graphs/contributors>"
+	],
+	"license": "GPL-3.0-or-later",
+	"homepage": "https://github.com/AnYiEE/types-mediawiki-renovate",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/AnYiEE/types-mediawiki-renovate"
+		"url": "https://github.com/AnYiEE/types-mediawiki-renovate.git"
+	},
+	"bugs": {
+		"url": "https://github.com/AnYiEE/types-mediawiki-renovate/issues"
 	},
 	"keywords": [
 		"Gadget",
@@ -27,7 +28,13 @@
 		"MediaWiki Gadget",
 		"Types"
 	],
-	"license": "GPL-3.0-or-later",
+	"files": [
+		"index.d.ts",
+		"api_params",
+		"mw",
+		"jquery"
+	],
+	"types": "index.d.ts",
 	"dependencies": {
 		"@types/jquery": "^3.5.27"
 	},
@@ -35,6 +42,6 @@
 		"dtslint": "^4.2.1",
 		"prettier": "^3.0.3",
 		"tslint-config-prettier": "^1.18.0",
-		"typescript": "^4.1.3"
+		"typescript": "^4.9.5"
 	}
 }

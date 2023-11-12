@@ -1,0 +1,11 @@
+{
+	"recommendations": [
+		"cschlosser.doxdocgen",
+		"EditorConfig.EditorConfig",
+		"esbenp.prettier-vscode",
+		"mgmcdermott.vscode-language-babel",
+		"ms-vscode.vscode-typescript-next",
+		"usernamehw.errorlens",
+		"yoavbls.pretty-ts-errors"
+	]
+}
