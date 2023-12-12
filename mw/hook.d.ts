@@ -38,34 +38,36 @@
  * @class mw.hook
  * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook
  */
-interface Hook {
+interface Hook<T extends any[] = any[]> {
 	/**
 	 * Register a hook handler
 	 *
-	 * @param {...Function} handler Function to bind.
+	 * @param {((...data: T) => any)[]} handler Function to bind.
+	 * @return {this}
 	 * @chainable
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-add
 	 */
-	add(...handler: Array<(...args: any[]) => any>): Hook;
+	add(...handler: Array<(...data: T) => any>): this;
 
 	/**
 	 * Call hook handlers with data.
 	 *
-	 * @param {any} data
-	 * @return {Hook}
+	 * @param {T} data
+	 * @return {this}
 	 * @chainable
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-fire
 	 */
-	fire(data?: any): Hook;
+	fire(...data: T): this;
 
 	/**
 	 * Unregister a hook handler
 	 *
-	 * @param {...Function} handler Function to unbind.
+	 * @param {((...data: T) => any)[]} handler Function to unbind.
+	 * @return {this}
 	 * @chainable
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-remove
 	 */
-	remove(...handler: Array<(...args: any[]) => any>): Hook;
+	remove(...handler: Array<(...data: T) => any>): this;
 }
 
 declare global {
@@ -77,7 +79,7 @@ declare global {
 		 * @member mw
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook
 		 */
-		function hook(event: string): Hook;
+		function hook<T extends any[] = any[]>(event: string): Hook<T>;
 	}
 }
 

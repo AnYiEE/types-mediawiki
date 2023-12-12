@@ -5,8 +5,9 @@
 	},
 	"rules": {
 		"no-padding": false,
-		"no-redundant-jsdoc": false,
 		"no-unnecessary-qualifier": false,
-		"unified-signatures": false
+		"unified-signatures": false,
+		"no-redundant-jsdoc": false,
+		"no-unnecessary-generics": false
 	}
 }
