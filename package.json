@@ -17,7 +17,7 @@
 	"homepage": "https://github.com/AnYiEE/types-mediawiki-renovate",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/AnYiEE/types-mediawiki-renovate.git"
+		"url": "git+https://github.com/AnYiEE/types-mediawiki-renovate.git"
 	},
 	"bugs": {
 		"url": "https://github.com/AnYiEE/types-mediawiki-renovate/issues"
@@ -36,11 +36,11 @@
 	],
 	"types": "index.d.ts",
 	"dependencies": {
-		"@types/jquery": "^3.5.27"
+		"@types/jquery": "^3.5.29"
 	},
 	"devDependencies": {
 		"dtslint": "^4.2.1",
-		"prettier": "^3.0.3",
+		"prettier": "^3.1.1",
 		"tslint-config-prettier": "^1.18.0",
 		"typescript": "^4.9.5"
 	}
