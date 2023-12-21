@@ -52,6 +52,10 @@ declare global {
 				force?: boolean;
 			}
 		): JQuery;
+
+		textSelection(command: 'register', commandOptions: Record<string, (...args: any[]) => any>): void;
+
+		textSelection(command: 'unregister'): void;
 	}
 }
 
