@@ -246,22 +246,6 @@ declare global {
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-static-method-encode
 			 */
 			static encode(s: string): string;
-
-			/**
-			 * Function that's useful when constructing the URI string -- we frequently encounter the pattern
-			 * of having to add something to the URI as we go, but only if it's present, and to include a
-			 * character before or after if so.
-			 *
-			 * @private
-			 * @static
-			 * @param {string|undefined} pre To prepend
-			 * @param {string} val To include
-			 * @param {string} post To append
-			 * @param {boolean} raw If true, val will not be encoded
-			 * @return {string} Result
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-static-method-cat
-			 */
-			static cat(pre: string | undefined, val: string, post: string, raw: boolean): string;
 		}
 	}
 }
