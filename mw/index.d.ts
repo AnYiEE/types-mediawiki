@@ -6,6 +6,7 @@ import './Debug';
 import './errorLogger';
 import './ForeignApi';
 import './ForeignRest';
+import './deflate';
 import './global';
 import './hook';
 import './html';
