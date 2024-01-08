@@ -47,7 +47,7 @@ packages:
       typescript-5.1: /typescript@5.1.6
       typescript-5.2: /typescript@5.2.2
       typescript-5.3: /typescript@5.3.3
-      typescript-5.4: /typescript@5.4.0-dev.20231221
+      typescript-5.4: /typescript@5.4.0-dev.20240107
     dev: true
 
   /@definitelytyped/typescript-versions@0.0.184:
@@ -62,7 +62,7 @@ packages:
       '@definitelytyped/typescript-packages': 0.0.4
       '@definitelytyped/typescript-versions': 0.0.184
       '@qiwi/npm-registry-client': 8.9.1
-      '@types/node': 16.18.68
+      '@types/node': 16.18.70
       charm: 1.0.2
       minimatch: 9.0.3
       tar: 6.2.0
@@ -94,8 +94,8 @@ packages:
       '@types/sizzle': 2.3.8
     dev: false
 
-  /@types/node@16.18.68:
-    resolution: {integrity: sha512-sG3hPIQwJLoewrN7cr0dwEy+yF5nD4D/4FxtQpFciRD/xwUzgD+G05uxZHv5mhfXo4F9Jkp13jjn0CC2q325sg==}
+  /@types/node@16.18.70:
+    resolution: {integrity: sha512-8eIk20G5VVVQNZNouHjLA2b8utE2NvGybLjMaF4lyhA9uhGwnmXF8o+icdXKGSQSNANJewXva/sFUoZLwAaYAg==}
     dev: true
 
   /@types/sizzle@2.3.8:
@@ -1367,8 +1367,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.4.0-dev.20231221:
-    resolution: {integrity: sha512-vsu9WExlMAmSoA/elxcmBTyRDyf9REJCKV2DowCmSpp+oqv+oq0yku8490q1r2YBC7o9DP+u/q58J5sjqaAD+g==}
+  /typescript@5.4.0-dev.20240107:
+    resolution: {integrity: sha512-6EfwZFaO82JLhOUsgQ3+c4lHuYS4WAQ6xBC767qWwJGf7BKYYeSFUkSptSkNhWOdeCEhdooudx22mkU8LphAPg==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
@@ -1432,7 +1432,7 @@ packages:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     requiresBuild: true
     dependencies:
-      string-width: 4.2.3
+      string-width: 1.0.2
     dev: true
     optional: true
 
