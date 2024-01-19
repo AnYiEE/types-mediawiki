@@ -35,14 +35,14 @@
 		"jquery"
 	],
 	"types": "index.d.ts",
-	"dependencies": {
-		"@types/jquery": "^3.5.29",
-		"@types/oojs-ui": "^0.47.6"
-	},
 	"devDependencies": {
 		"dtslint": "^4.2.1",
 		"prettier": "^3.2.4",
 		"tslint-config-prettier": "^1.18.0",
 		"typescript": "^4.9.5"
+	},
+	"peerDependencies": {
+		"@types/jquery": "^3.0.0",
+		"@types/oojs-ui": "*"
 	}
 }

@@ -7,8 +7,6 @@ TypeScript definitions for MediaWiki JS interface.
 
 This package covers the functions and classes in the `mw` global object, as well some jQuery plugins used in MediaWiki core. All commonly used parts of the interface are covered.
 
-[`@types/jquery`](https://www.npmjs.com/package/@types/jquery) and [`@types/oojs-ui`](https://www.npmjs.com/package/@types/oojs-ui) from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) are included as dependencies, so you don't need to install them separately.
-
 [![Download stats](https://nodei.co/npm/types-mediawiki-renovate.png?downloads=true&downloadRank=true)](https://www.npmjs.com/package/types-mediawiki-renovate)
 
 ## Usage
@@ -16,14 +14,14 @@ This package covers the functions and classes in the `mw` global object, as well
 To use types from this package, run
 
 ```bash
-pnpm add -D types-mediawiki-renovate
+pnpm add -D @types/jquery @types/oojs-ui types-mediawiki-renovate
 ```
 
 Edit your project's `tsconfig.json` file so that it includes
 
 ```
 "include": [
-  "./node_modules/types-mediawiki-renovate"
+  "node_modules/types-mediawiki-renovate"
 ]
 ```
 

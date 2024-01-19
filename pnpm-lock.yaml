@@ -6,10 +6,10 @@ settings:
 
 dependencies:
   '@types/jquery':
-    specifier: ^3.5.29
+    specifier: ^3.0.0
     version: 3.5.29
   '@types/oojs-ui':
-    specifier: ^0.47.6
+    specifier: '*'
     version: 0.47.6
 
 devDependencies:
@@ -1453,7 +1453,7 @@ packages:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     requiresBuild: true
     dependencies:
-      string-width: 1.0.2
+      string-width: 4.2.3
     dev: true
     optional: true
 
