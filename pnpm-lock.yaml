@@ -8,6 +8,9 @@ dependencies:
   '@types/jquery':
     specifier: ^3.5.29
     version: 3.5.29
+  '@types/oojs-ui':
+    specifier: ^0.47.6
+    version: 0.47.6
 
 devDependencies:
   dtslint:
@@ -99,6 +102,17 @@ packages:
     dependencies:
       undici-types: 5.26.5
     dev: true
+
+  /@types/oojs-ui@0.47.6:
+    resolution: {integrity: sha512-rq24I8qov2hFnfF6PBFx3ECQI81sCr9HqghGpad2LnyUH30j/zHFgtqMqVUSthtxd0Ke4d1ZJmq2Vhg9qJrWrw==}
+    dependencies:
+      '@types/jquery': 3.5.29
+      '@types/oojs': 7.0.6
+    dev: false
+
+  /@types/oojs@7.0.6:
+    resolution: {integrity: sha512-e6UBEoqJ3bLBvxtPnaFmqkK4HzPwrS3sqfB2dORUmAaShp/T7WhMoYjlwhe+7g748qv7eeX/q4WdOaeeVG2LtA==}
+    dev: false
 
   /@types/sizzle@2.3.8:
     resolution: {integrity: sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg==}
@@ -1439,7 +1453,7 @@ packages:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     requiresBuild: true
     dependencies:
-      string-width: 1.0.2
+      string-width: 4.2.3
     dev: true
     optional: true
 

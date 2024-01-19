@@ -36,7 +36,8 @@
 	],
 	"types": "index.d.ts",
 	"dependencies": {
-		"@types/jquery": "^3.5.29"
+		"@types/jquery": "^3.5.29",
+		"@types/oojs-ui": "^0.47.6"
 	},
 	"devDependencies": {
 		"dtslint": "^4.2.1",
