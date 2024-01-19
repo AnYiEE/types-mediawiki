@@ -6,6 +6,6 @@
 		"noImplicitAny": true,
 		"noImplicitThis": true,
 		"strictFunctionTypes": true,
-		"strictNullChecks": true,
-	},
+		"strictNullChecks": true
+	}
 }
