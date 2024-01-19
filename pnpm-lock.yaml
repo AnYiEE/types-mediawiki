@@ -50,7 +50,7 @@ packages:
       typescript-5.1: /typescript@5.1.6
       typescript-5.2: /typescript@5.2.2
       typescript-5.3: /typescript@5.3.3
-      typescript-5.4: /typescript@5.4.0-dev.20240117
+      typescript-5.4: /typescript@5.4.0-dev.20240119
     dev: true
 
   /@definitelytyped/typescript-versions@0.1.0:
@@ -1384,8 +1384,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.4.0-dev.20240117:
-    resolution: {integrity: sha512-Ur4g3jvhZbV2NzF66R3fbCY5ejasRHkTudu4zamw9OnEx44VHiFVvimXazZR5ldUIXDbeDTveEPYf+h/M8/HFQ==}
+  /typescript@5.4.0-dev.20240119:
+    resolution: {integrity: sha512-I+Uge2+WNFs91q42WVrqTwxmq3NQwQlrL0MLora9zXhizbsKIGApE7LGcEJIbG+0yk6gpDilGaDH1pU4VUAKzw==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
@@ -1453,7 +1453,7 @@ packages:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     requiresBuild: true
     dependencies:
-      string-width: 4.2.3
+      string-width: 1.0.2
     dev: true
     optional: true
 
