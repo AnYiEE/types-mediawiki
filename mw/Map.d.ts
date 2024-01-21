@@ -20,7 +20,7 @@ declare global {
 			 * @return {boolean} True if the key exists
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Map-method-exists
 			 */
-			exists(selection: keyof V): boolean;
+			exists<S extends keyof V>(selection: S): selection is S;
 
 			/**
 			 * Get the value of one or more keys.
@@ -34,7 +34,7 @@ declare global {
 			 *  If no selection is passed, a new object with all key/values is returned.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Map-method-get
 			 */
-			get(): V;
+			get<S extends V>(): S;
 			get<S extends Array<keyof V>>(
 				selection: S,
 				fallback?: any
@@ -50,7 +50,7 @@ declare global {
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Map-method-set
 			 */
 			set<S extends keyof V>(selection: S, value: V[S]): boolean;
-			set(selection: Partial<V>): boolean;
+			set<S extends Partial<V>>(selection: S): boolean;
 		}
 	}
 }
