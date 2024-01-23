@@ -33,9 +33,9 @@ declare global {
 			 *     } );
 			 *
 			 * @constructor
-			 * @param {RestOptions} options
+			 * @param {Partial<RestOptions>} [options]
 			 */
-			constructor(options?: RestOptions);
+			constructor(options?: Partial<RestOptions>);
 
 			/**
 			 * Abort all unfinished requests issued by this Api object.

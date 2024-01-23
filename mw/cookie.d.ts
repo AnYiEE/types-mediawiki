@@ -14,29 +14,29 @@ declare global {
 			/**
 			 * Get the value of a cookie.
 			 *
-			 * @param {string} key
+			 * @param {string} key The key for the cookie
 			 * @param {string} [prefix=wgCookiePrefix] The prefix of the key. If `prefix` is
 			 *   `undefined` or `null`, then `wgCookiePrefix` is used
-			 * @param {T} [defaultValue=null]
+			 * @param {T} [defaultValue=null] A value to return if the cookie does not exist
 			 * @return {string|null|T} If the cookie exists, then the value of the
 			 *   cookie, otherwise `defaultValue`
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.cookie-method-get
 			 */
-			function get<T>(key: string, prefix?: string | null, defaultValue?: T): string | T;
+			function get<T>(key: string, prefix: string | undefined | null, defaultValue: T): string | T;
 			function get(key: string, prefix?: string): string;
 
 			/**
-			 * Get the value of a SameSite=None cookie, using the legacy ss0- cookie if needed.
+			 * Get the value of a `SameSite` = `None` cookie, using the legacy `ss0-` prefix if needed.
 			 *
-			 * @param {string} key
+			 * @param {string} key The key for the cookie
 			 * @param {string} [prefix=wgCookiePrefix] The prefix of the key. If `prefix` is
 			 *   `undefined` or `null`, then `wgCookiePrefix` is used
-			 * @param {T} [defaultValue=null]
+			 * @param {T} [defaultValue=null] A value to return if the cookie does not exist
 			 * @return {string|null|T} If the cookie exists, then the value of the
 			 *   cookie, otherwise `defaultValue`
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.cookie-method-getCrossSite
 			 */
-			function getCrossSite<T>(key: string, prefix?: string | null, defaultValue?: T): string | T;
+			function getCrossSite<T>(key: string, prefix: string | undefined | null, defaultValue: T): string | T;
 			function getCrossSite(key: string, prefix?: string): string;
 
 			/**

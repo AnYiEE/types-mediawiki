@@ -1,3 +1,5 @@
+type FlipObject<T extends Record<PropertyKey, PropertyKey>> = {[K in keyof T as T[K]]: K};
+
 declare global {
 	namespace mw {
 		/**
@@ -45,25 +47,43 @@ declare global {
 			 * @property {Object}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-property-data
 			 */
-			const data: Record<string, any>;
+			const data: Record<string, Map>;
 
 			/**
 			 * Information about month names in current UI language.
-			 *
-			 * Object keys:
-			 *
-			 * - `names`: array of month names (in nominative case in languages which have the distinction),
-			 *   zero-indexed
-			 * - `genitive`: array of month names in genitive case, zero-indexed
-			 * - `abbrev`: array of three-letter-long abbreviated month names, zero-indexed
-			 * - `keys`: object with three keys like the above, containing zero-indexed arrays of message keys
-			 *   for appropriate messages which can be passed to mw.msg.
 			 *
 			 * @property {Object}
 			 * @member mw.language
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-property-months
 			 */
-			const months: Record<string, any>;
+			const months: {
+				/**
+				 * Array of month names (in nominative case in languages which have the distinction),
+				 * zero-indexed.
+				 */
+				abbrev: string[];
+
+				/**
+				 * Object containing zero-indexed arrays of message keys for appropriate messages
+				 * which can be passed to {@link mw.msg}.
+				 */
+				keys: {
+					abbrev: string[];
+					genitive: string[];
+					names: string[];
+				};
+
+				/**
+				 * Array of month names in genitive case, zero-indexed.
+				 */
+				genitive: string[];
+
+				/**
+				 * Array of month names (in nominative case in languages which have the distinction),
+				 * zero-indexed.
+				 */
+				names: string[];
+			};
 
 			/**
 			 * Formats language tags according the BCP 47 standard.
@@ -90,7 +110,7 @@ declare global {
 			function convertGrammar(word: string, form: string): string;
 
 			/**
-			 * Converts a number using #getDigitTransformTable.
+			 * Converts a number using {@link getDigitTransformTable}.
 			 *
 			 * @param {number} num Value to be converted
 			 * @param {boolean} [integer=false] Whether to convert the return value to an integer
@@ -108,16 +128,20 @@ declare global {
 			 * @return {string} Correct form for quantifier in this language
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-convertPlural
 			 */
-			function convertPlural(count: number, forms: string[], explicitPluralForms?: Record<string, any>): string;
+			function convertPlural(
+				count: number,
+				forms: string[],
+				explicitPluralForms?: Record<number, string>
+			): string;
 
 			/**
 			 * Helper function to flip transformation tables.
 			 *
-			 * @param {...Object} Transformation tables
+			 * @param {...Object} tables Transformation tables
 			 * @return {Object}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-flipTransform
 			 */
-			function flipTransform(...Transformation: Array<Record<string, any>>): Record<string, any>;
+			function flipTransform<T extends Record<PropertyKey, PropertyKey>>(...tables: T[]): FlipObject<T>;
 
 			/**
 			 * Provides an alternative text depending on specified gender.
@@ -132,7 +156,7 @@ declare global {
 			 * @return {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-gender
 			 */
-			function gender(gender: string, forms: string[]): string;
+			function gender<T extends string>(gender: string, forms: [T?, T?, T?]): T;
 
 			/**
 			 * Convenience method for retrieving language data.
@@ -154,7 +178,7 @@ declare global {
 			 * @return {Object|Array}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-getDigitTransformTable
 			 */
-			function getDigitTransformTable(): any;
+			function getDigitTransformTable(): string[] | Record<number | string, string>;
 
 			/**
 			 * Get the language fallback chain for current UI language, including the language itself.
@@ -178,7 +202,7 @@ declare global {
 			 * @return {Object|Array}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-getSeparatorTransformTable
 			 */
-			function getSeparatorTransformTable(): any;
+			function getSeparatorTransformTable(): string[] | Record<number | string, string>;
 
 			/**
 			 * Turn a list of string into a simple list using commas and 'and'.
@@ -201,7 +225,8 @@ declare global {
 			 * @param {any} [value] Value for dataKey, omit if dataKey is an object
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-setData
 			 */
-			function setData(langCode: string, dataKey: any, value?: any): void;
+			function setData(langCode: string, dataKey: string, value: any): void;
+			function setData(langCode: string, dataKey: Record<string, any>): void;
 
 			/**
 			 * Apply numeric pattern to absolute value using options. Gives no

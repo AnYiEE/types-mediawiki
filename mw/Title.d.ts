@@ -1,15 +1,17 @@
+import {QueryParams} from './Uri';
+
 type title = string | mw.Title;
 
 declare global {
 	namespace mw {
 		/**
 		 * Parse titles into an object structure. Note that when using the constructor
-		 * directly, passing invalid titles will result in an exception. Use #newFromText to use the
+		 * directly, passing invalid titles will result in an exception. Use {@link newFromText} to use the
 		 * logic directly and get null for invalid titles which is easier to work with.
 		 *
-		 * Note that in the constructor and #newFromText method, `namespace` is the **default** namespace
+		 * Note that in the constructor and {@link newFromText} method, `namespace` is the **default** namespace
 		 * only, and can be overridden by a namespace prefix in `title`. If you do not want this behavior,
-		 * use #makeTitle. Compare:
+		 * use {@link makeTitle}. Compare:
 		 *
 		 *     new mw.Title( 'Foo', NS_TEMPLATE ).getPrefixedText();                  // => 'Template:Foo'
 		 *     mw.Title.newFromText( 'Foo', NS_TEMPLATE ).getPrefixedText();          // => 'Template:Foo'
@@ -32,26 +34,34 @@ declare global {
 			 *
 			 * @static
 			 * @property {Object} exist
-			 * @property {Object} exist.pages Keyed by title. Boolean true value indicates page does exist.
-			 *
-			 * @property {Function} exist.set The setter function.
-			 *
-			 *  Example to declare existing titles:
-			 *
-			 *     Title.exist.set( ['User:John_Doe', ...] );
-			 *
-			 *  Example to declare titles nonexistent:
-			 *
-			 *     Title.exist.set( ['File:Foo_bar.jpg', ...], false );
-			 *
-			 * @property {string|Array} exist.set.titles Title(s) in strict prefixedDb title form
-			 * @property {boolean} [exist.set.state=true] State of the given titles
-			 * @return {boolean}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-static-property-exist
 			 */
 			static exist: {
+				/**
+				 * Keyed by title. Boolean true value indicates page does exist.
+				 */
 				pages: {[title: string]: boolean};
-				set: (titles: string | string[], state?: boolean) => boolean;
+
+				/**
+				 * The setter function.
+				 *
+				 * Example to declare existing titles:
+				 *
+				 * ```js
+				 * Title.exist.set( ['User:John_Doe', ...] );
+				 * ```
+				 *
+				 * Example to declare titles nonexistent:
+				 *
+				 * ```js
+				 * Title.exist.set( ['File:Foo_bar.jpg', ...], false );
+				 * ```
+				 *
+				 * @param {string|string[]} titles Title(s) in strict prefixedDb title form
+				 * @param {boolean} [state=true] State of the given titles
+				 * @return {boolean}
+				 */
+				set(titles: string | string[], state?: boolean): boolean;
 			};
 
 			/**
@@ -94,7 +104,7 @@ declare global {
 			 * "File:Example_image.svg" will be returned as "Example image".
 			 *
 			 * Note that this method will work for non-file titles but probably give nonsensical results.
-			 * A title like "User:Dr._J._Fail" will be returned as "Dr. J"! Use #getMainText instead.
+			 * A title like "User:Dr._J._Fail" will be returned as "Dr. J"! Use {@link getMainText} instead.
 			 *
 			 * @return {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getFileNameTextWithoutExtension
@@ -107,7 +117,7 @@ declare global {
 			 * "File:Example_image.svg" will be returned as "Example_image".
 			 *
 			 * Note that this method will work for non-file titles but probably give nonsensical results.
-			 * A title like "User:Dr._J._Fail" will be returned as "Dr._J"! Use #getMain instead.
+			 * A title like "User:Dr._J._Fail" will be returned as "Dr._J"! Use {@link getMain} instead.
 			 *
 			 * @return {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getFileNameWithoutExtension
@@ -146,6 +156,19 @@ declare global {
 			getMainText(): string;
 
 			/**
+			 * Get the page name as if it is a file name, without extension or namespace prefix. Warning,
+			 * this is usually not what you want! A title like "User:Dr._J._Fail" will be returned as
+			 * "Dr. J"! Use {@link getMain} or {@link getMainText} for the actual page name.
+			 *
+			 * @deprecated since 1.40, use {@link getFileNameWithoutExtension} instead
+			 * @return {string} File name without file extension, in the canonical form with underscores
+			 *  instead of spaces. For example, the title "File:Example_image.svg" will be returned as
+			 *  "Example_image".
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getName
+			 */
+			getName(): string;
+
+			/**
 			 * Get the namespace number
 			 *
 			 * Example: 6 for "File:Example_image.svg".
@@ -165,6 +188,19 @@ declare global {
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getNamespacePrefix
 			 */
 			getNamespacePrefix(): string;
+
+			/**
+			 * Get the page name as if it is a file name, without extension or namespace prefix. Warning,
+			 * this is usually not what you want! A title like "User:Dr._J._Fail" will be returned as
+			 * "Dr. J"! Use {@link getMainText} for the actual page name.
+			 *
+			 * @deprecated since 1.40, use {@link getFileNameTextWithoutExtension} instead
+			 * @return {string} File name without file extension, formatted with spaces instead of
+			 *  underscores. For example, the title "File:Example_image.svg" will be returned as
+			 *  "Example image".
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getNameText
+			 */
+			getNameText(): string;
 
 			/**
 			 * Get the full page name
@@ -205,7 +241,7 @@ declare global {
 			/**
 			 * Get the title for the subject page of a talk page
 			 *
-			 * @return {mw.Title|null} The title for the subject page of a talk page, null if not available
+			 * @return {Title|null} The title for the subject page of a talk page, null if not available
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getSubjectPage
 			 */
 			getSubjectPage(): Title | null;
@@ -213,7 +249,7 @@ declare global {
 			/**
 			 * Get the title for the associated talk page
 			 *
-			 * @return {mw.Title|null} The title for the associated talk page, null if not available
+			 * @return {Title|null} The title for the associated talk page, null if not available
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getTalkPage
 			 */
 			getTalkPage(): Title | null;
@@ -226,18 +262,7 @@ declare global {
 			 * @return {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getUrl
 			 */
-			getUrl(params?: any): string;
-
-			/**
-			 * Check if a given namespace is a talk namespace
-			 *
-			 * See NamespaceInfo::isTalk in PHP
-			 *
-			 * @param {number} namespaceId Namespace ID
-			 * @return {boolean} Namespace is a talk namespace
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-isTalkNamespace
-			 */
-			isTalkNamespace(namespaceId: number): boolean;
+			getUrl(params?: QueryParams): string;
 
 			/**
 			 * Check if the title is in a talk namespace
@@ -248,27 +273,7 @@ declare global {
 			isTalkPage(): boolean;
 
 			/**
-			 * Normalize a file extension to the common form, making it lowercase and checking some synonyms,
-			 * and ensure it's clean. Extensions with non-alphanumeric characters will be discarded.
-			 * Keep in sync with File::normalizeExtension() in PHP.
-			 *
-			 * @param {string} extension File extension (without the leading dot)
-			 * @return {string} File extension in canonical form
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-normalizeExtension
-			 */
-			normalizeExtension(extension: string): string;
-
-			/**
-			 * PHP's strtoupper differs from String.toUpperCase in a number of cases (T147646).
-			 *
-			 * @param {string} chr Unicode character
-			 * @return {string} Unicode character, in upper case, according to the same rules as in PHP
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-phpCharToUpper
-			 */
-			phpCharToUpper(chr: string): string;
-
-			/**
-			 * Alias of mw.Title#getPrefixedDb
+			 * Alias of {@link mw.Title.getPrefixedDb}
 			 *
 			 * TODO: Use @-alias when we switch to JSDoc
 			 *
@@ -278,7 +283,7 @@ declare global {
 			toString(): string;
 
 			/**
-			 * Alias of mw.Title#getPrefixedText
+			 * Alias of {@link mw.Title.getPrefixedText}
 			 *
 			 * TODO: Use @-alias when we switch to JSDoc
 			 *
@@ -288,47 +293,10 @@ declare global {
 			toText(): string;
 
 			/**
-			 * Check if signature buttons should be shown in a given namespace
-			 *
-			 * See NamespaceInfo::wantSignatures in PHP
-			 *
-			 * @param {number} namespaceId Namespace ID
-			 * @return {boolean} Namespace is a signature namespace
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-wantSignaturesNamespace
-			 */
-			wantSignatureNamespace(namespaceId: number): boolean;
-
-			/**
-			 * Get the page name as if it is a file name, without extension or namespace prefix. Warning,
-			 * this is usually not what you want! A title like "User:Dr._J._Fail" will be returned as
-			 * "Dr. J"! Use #getMain or #getMainText for the actual page name.
-			 *
-			 * @deprecated since 1.40, use #getFileNameWithoutExtension instead
-			 * @return {string} File name without file extension, in the canonical form with underscores
-			 *  instead of spaces. For example, the title "File:Example_image.svg" will be returned as
-			 *  "Example_image".
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getName
-			 */
-			getName(): string;
-
-			/**
-			 * Get the page name as if it is a file name, without extension or namespace prefix. Warning,
-			 * this is usually not what you want! A title like "User:Dr._J._Fail" will be returned as
-			 * "Dr. J"! Use #getMainText for the actual page name.
-			 *
-			 * @deprecated since 1.40, use #getFileNameTextWithoutExtension instead
-			 * @return {string} File name without file extension, formatted with spaces instead of
-			 *  underscores. For example, the title "File:Example_image.svg" will be returned as
-			 *  "Example image".
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-getNameText
-			 */
-			getNameText(): string;
-
-			/**
 			 * Whether this title exists on the wiki.
 			 *
 			 * @static
-			 * @param {string|mw.Title} title prefixed db-key name (string) or instance of Title
+			 * @param {string|Title} title prefixed db-key name (string) or instance of Title
 			 * @return {boolean|null} Boolean if the information is available, otherwise null
 			 * @throws {Error} If title is not a string or mw.Title
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-static-method-exists
@@ -336,13 +304,25 @@ declare global {
 			static exists(title: title): boolean | null;
 
 			/**
+			 * Check if a given namespace is a talk namespace
+			 *
+			 * See NamespaceInfo::isTalk in PHP
+			 *
+			 * @static
+			 * @param {number} namespaceId Namespace ID
+			 * @return {boolean} Namespace is a talk namespace
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-isTalkNamespace
+			 */
+			static isTalkNamespace(namespaceId: number): boolean;
+
+			/**
 			 * Constructor for Title objects with predefined namespace.
 			 *
-			 * Unlike #newFromText or #constructor, this function doesn't allow the given `namespace` to be
-			 * overridden by a namespace prefix in `title`. See #constructor for details about this behavior.
+			 * Unlike {@link newFromText} or {@link constructor}, this function doesn't allow the given `namespace` to be
+			 * overridden by a namespace prefix in `title`. See {@link constructor} for details about this behavior.
 			 *
 			 * The single exception to this is when `namespace` is 0, indicating the main namespace. The
-			 * function behaves like #newFromText in that case.
+			 * function behaves like {@link newFromText} in that case.
 			 *
 			 * @static
 			 * @param {number} namespace Namespace to use for the title
@@ -363,7 +343,7 @@ declare global {
 			 * @return {Title|null} A valid Title object or null if the title is invalid
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-static-method-newFromFileName
 			 */
-			static newFromFileName(uncleanName: string): Title;
+			static newFromFileName(uncleanName: string): Title | null;
 
 			/**
 			 * Get the file title from an image element
@@ -381,7 +361,7 @@ declare global {
 			 * Constructor for Title objects with a null return instead of an exception for invalid titles.
 			 *
 			 * Note that `namespace` is the **default** namespace only, and can be overridden by a namespace
-			 * prefix in `title`. If you do not want this behavior, use #makeTitle. See #constructor for
+			 * prefix in `title`. If you do not want this behavior, use {@link makeTitle}. See {@link constructor} for
 			 * details.
 			 *
 			 * @static
@@ -408,7 +388,45 @@ declare global {
 			 * @return {Title|null} A valid Title object or null if the input cannot be turned into a valid title
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-static-method-newFromUserInput
 			 */
-			static newFromUserInput(title: string, defaultNamespace?: number, options?: {forUploading: boolean}): Title;
+			static newFromUserInput(
+				title: string,
+				defaultNamespace?: number,
+				options?: {forUploading: boolean}
+			): Title | null;
+
+			/**
+			 * Normalize a file extension to the common form, making it lowercase and checking some synonyms,
+			 * and ensure it's clean. Extensions with non-alphanumeric characters will be discarded.
+			 * Keep in sync with File::normalizeExtension() in PHP.
+			 *
+			 * @static
+			 * @param {string} extension File extension (without the leading dot)
+			 * @return {string} File extension in canonical form
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-normalizeExtension
+			 */
+			static normalizeExtension(extension: string): string;
+
+			/**
+			 * PHP's strtoupper differs from {@link String.toUpperCase} in a number of cases (T147646).
+			 *
+			 * @static
+			 * @param {string} chr Unicode character
+			 * @return {string} Unicode character, in upper case, according to the same rules as in PHP
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-phpCharToUpper
+			 */
+			static phpCharToUpper(chr: string): string;
+
+			/**
+			 * Check if signature buttons should be shown in a given namespace
+			 *
+			 * See NamespaceInfo::wantSignatures in PHP
+			 *
+			 * @static
+			 * @param {number} namespaceId Namespace ID
+			 * @return {boolean} Namespace is a signature namespace
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title-method-wantSignaturesNamespace
+			 */
+			static wantSignatureNamespace(namespaceId: number): boolean;
 		}
 	}
 }

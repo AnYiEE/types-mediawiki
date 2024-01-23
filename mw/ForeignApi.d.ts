@@ -14,7 +14,7 @@ declare global {
 		 */
 		class ForeignApi extends Api {
 			/**
-			 * Create an object like mw.Api, but automatically handling everything required to communicate
+			 * Create an object like {@link mw.Api}, but automatically handling everything required to communicate
 			 * with another MediaWiki wiki via cross-origin requests (CORS).
 			 *
 			 * The foreign wiki must be configured to accept requests from the current wiki. See
@@ -44,10 +44,10 @@ declare global {
 			 *
 			 * @since 1.26
 			 * @class mw.ForeignApi
-			 * @extends mw.Api
+			 * @extends Api
 			 *
 			 * @constructor
-			 * @param {string|mw.Uri} url URL pointing to another wiki's `api.php` endpoint.
+			 * @param {string|Uri} url URL pointing to another wiki's `api.php` endpoint.
 			 * @param {ForeignApiOptions} [options]
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignApi-method-constructor
 			 */

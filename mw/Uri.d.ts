@@ -1,10 +1,21 @@
-type Options =
-	| {
-			strictMode?: boolean;
-			overrideKeys?: boolean;
-			arrayParams?: boolean;
-	  }
-	| boolean;
+export type QueryParams = Record<string, any>;
+
+interface UriOptions {
+	/**
+	 * Trigger strict mode parsing of the url.
+	 */
+	strictMode: boolean;
+	/**
+	 * Whether to let duplicate query parameters override each other (`true`) or automagically convert them to an array (`false`).
+	 */
+	overrideKeys: boolean;
+	/**
+	 * Whether to parse array query parameters (e.g. `&foo[0]=a&foo[1]=b` or `&foo[]=a&foo[]=b`) or leave them alone.
+	 * Currently this does not handle associative or multi-dimensional arrays, but that may be improved in the future.
+	 * Implies `overrideKeys: true` (query parameters without `[...]` are not parsed as arrays).
+	 */
+	arrayParams: boolean;
+}
 
 declare global {
 	namespace mw {
@@ -19,8 +30,74 @@ declare global {
 		 * @return {Function} An mw.Uri class constructor
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-UriRelative
 		 */
-		function UriRelative(documentLocation: string | ((...args: any[]) => string)): Uri;
+		function UriRelative(documentLocation: string | (() => string)): typeof Uri;
 
+		/**
+		 * Library for simple URI parsing and manipulation.
+		 *
+		 * Intended to be minimal, but featureful; do not expect full RFC 3986 compliance. The use cases we
+		 * have in mind are constructing 'next page' or 'previous page' URLs, detecting whether we need to
+		 * use cross-domain proxies for an API, constructing simple URL-based API calls, etc. Parsing here
+		 * is regex-based, so may not work on all URIs, but is good enough for most.
+		 *
+		 * You can modify the properties directly, then use the {@link toString} method to extract the full URI
+		 * string again. Example:
+		 *
+		 *     var uri = new mw.Uri( 'http://example.com/mysite/mypage.php?quux=2' );
+		 *
+		 *     if ( uri.host == 'example.com' ) {
+		 *         uri.host = 'foo.example.com';
+		 *         uri.extend( { bar: 1 } );
+		 *
+		 *         $( 'a#id1' ).attr( 'href', uri );
+		 *         // anchor with id 'id1' now links to http://foo.example.com/mysite/mypage.php?bar=1&quux=2
+		 *
+		 *         $( 'a#id2' ).attr( 'href', uri.clone().extend( { bar: 3, pif: 'paf' } ) );
+		 *         // anchor with id 'id2' now links to http://foo.example.com/mysite/mypage.php?bar=3&quux=2&pif=paf
+		 *     }
+		 *
+		 * Given a URI like
+		 * `http://usr:pwd@www.example.com:81/dir/dir.2/index.htm?q1=0&&test1&test2=&test3=value+%28escaped%29&r=1&r=2#top`
+		 * the returned object will have the following properties:
+		 *
+		 *     protocol  'http'
+		 *     user      'usr'
+		 *     password  'pwd'
+		 *     host      'www.example.com'
+		 *     port      '81'
+		 *     path      '/dir/dir.2/index.htm'
+		 *     query     {
+		 *                   q1: '0',
+		 *                   test1: null,
+		 *                   test2: '',
+		 *                   test3: 'value (escaped)'
+		 *                   r: ['1', '2']
+		 *               }
+		 *     fragment  'top'
+		 *
+		 * (N.b., 'password' is technically not allowed for HTTP URIs, but it is possible with other kinds
+		 * of URIs.)
+		 *
+		 * Parsing based on parseUri 1.2.2 (c) Steven Levithan <http://stevenlevithan.com>, MIT License.
+		 * <http://stevenlevithan.com/demo/parseuri/js/>
+		 *
+		 * Construct a new URI object. Throws error if arguments are illegal/impossible, or
+		 * otherwise don't parse.
+		 *
+		 * @constructor
+		 * @class
+		 * @classdesc Library for simple URI parsing and manipulation.
+		 * @name mw.Uri
+		 * @param {Object|string} [uri] URI string, or an Object with appropriate properties (especially
+		 *  another URI object to clone). Object must have non-blank `protocol`, `host`, and `path`
+		 *  properties. If omitted (or set to `undefined`, `null` or empty string), then an object
+		 *  will be created for the default `uri` of this constructor (`location.href` for mw.Uri,
+		 *  other values for other instances -- see mw.UriRelative for details).
+		 * @param {mw.Uri.UriOptions|boolean} [options] Object with options, or (backwards compatibility) a boolean
+		 *  for strictMode
+		 * @throws {Error} when the query string or fragment contains an unknown % sequence
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri
+		 */
 		class Uri {
 			/**
 			 * @property {string|undefined} fragment For example `top`
@@ -56,7 +133,7 @@ declare global {
 			 * @property {Object} query For example `{ a: '0', b: '', c: 'value' }` (always present)
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-query
 			 */
-			query: any;
+			query: QueryParams;
 			/**
 			 * @property {string|undefined} user For example `usr`
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-user
@@ -114,20 +191,8 @@ declare global {
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-constructor
 			 */
 			constructor(
-				uri?:
-					| string
-					| Uri
-					| Partial<{
-							fragment: string;
-							host: string;
-							password: string;
-							path: string;
-							port: string;
-							protocol: string;
-							query: any;
-							user: string;
-					  }>,
-				options?: Options
+				uri?: string | Uri | Partial<Record<(typeof Uri.properties)[number], string>>,
+				options?: Partial<UriOptions> | boolean
 			);
 
 			/**
@@ -146,7 +211,7 @@ declare global {
 			 * @return {Uri} This URI object
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-extend
 			 */
-			extend(parameters: Record<string, any>): Uri;
+			extend(parameters: QueryParams): Uri;
 
 			/**
 			 * Get the userInfo, host and port section of the URI.
@@ -206,7 +271,7 @@ declare global {
 			 * @return {string} The URI string
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-toString
 			 */
-			toString(): string;
+			toString(): `${string}://${string}`;
 
 			/**
 			 * Parse a string and set our properties accordingly.
@@ -217,12 +282,12 @@ declare global {
 			 * @throws {Error} when the query string or fragment contains an unknown % sequence
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-parse
 			 */
-			parse(str: string, options: Options): void;
+			parse(str: string, options: Partial<UriOptions>): void;
 
 			/**
 			 * Decode a url encoded value.
 			 *
-			 * Reversed #encode. Standard decodeURIComponent, with addition of replacing
+			 * Reversed {@link encode}. Standard decodeURIComponent, with addition of replacing
 			 * `+` with a space.
 			 *
 			 * @static

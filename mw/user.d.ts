@@ -1,20 +1,45 @@
+export interface UserInfo {
+	/**
+	 * User groups that the user belongs to
+	 */
+	groups: string[];
+	/**
+	 * User's rights
+	 */
+	rights: string[];
+}
+
 export interface User {
 	/**
 	 * @property {Map}
-	 * @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-property-options
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-property-options
 	 */
 	// TODO: add types for items in the options map
 	options: mw.Map;
 
 	/**
-	 * @property {mw.Map}
-	 * @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-property-tokens
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-property-tokens
 	 */
 	tokens: mw.Map<{
 		csrfToken: string;
 		patrolToken: string;
 		watchToken: string;
 	}>;
+
+	/**
+	 * Acquire a temporary user username and stash it in the current session, if temp account creation
+	 * is enabled and the current user is logged out. If a name has already been stashed, returns the
+	 * same name.
+	 *
+	 * If the user later performs an action that results in temp account creation, the stashed username
+	 * will be used for their account. It may also be used in previews. However, the account is not
+	 * created yet, and the name is not visible to other users.
+	 *
+	 * @return {JQuery.Promise} Promise resolved with the username if we succeeded,
+	 *   or resolved with `null` if we failed
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-acquireTempUserName
+	 */
+	acquireTempUserName(): JQuery.Promise<string>;
 
 	/**
 	 * Generate a random user session ID.
@@ -36,7 +61,7 @@ export interface User {
 	 * See https://en.wikipedia.org/wiki/Birthday_attack#Mathematics
 	 * n(p;H) = n(0.01,2^80)= sqrt (2 * 2^80 * ln(1/(1-0.01)))
 	 *
-	 * @return {string} 80 bit integer in hex format, padded
+	 * @return {string} 80 bit integer (20 characters) in hex format, padded
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-generateRandomSessionId
 	 */
 	generateRandomSessionId(): string;
@@ -48,12 +73,13 @@ export interface User {
 	 * @return {JQuery.Promise}
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-getGroups
 	 */
-	getGroups(callback?: (groups: string[]) => any): JQuery.Promise<string[]>;
+	getGroups(callback: (groups: string[]) => any): JQuery.Promise<undefined>;
+	getGroups(): JQuery.Promise<string[]>;
 
 	/**
 	 * Get the current user's database id
 	 *
-	 * Not to be confused with #id.
+	 * Not to be confused with {@link id}.
 	 *
 	 * @return {number} Current user's id, or 0 if user is anonymous
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-getId
@@ -85,7 +111,7 @@ export interface User {
 	 *  unavailable, or Date for when the user registered.
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-getRegistration
 	 */
-	getRegistration(): boolean | null | Date;
+	getRegistration(): false | null | Date;
 
 	/**
 	 * Get the current user's rights
@@ -94,12 +120,13 @@ export interface User {
 	 * @return {JQuery.Promise}
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-getRights
 	 */
-	getRights(callback?: (rights: string[]) => any): JQuery.Promise<string[]>;
+	getRights(callback: (rights: string[]) => any): JQuery.Promise<undefined>;
+	getRights(): JQuery.Promise<string[]>;
 
 	/**
 	 * Get the current user's name or the session ID
 	 *
-	 * Not to be confused with #getId.
+	 * Not to be confused with {@link getId}.
 	 *
 	 * @return {string} User name or random session ID
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-id
@@ -139,7 +166,7 @@ export interface User {
 	 *
 	 * **Note:** Server-side code must never interpret or modify this value.
 	 *
-	 * @return {string} Random session ID
+	 * @return {string} Random session ID (20 hex characters)
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-sessionId
 	 */
 	sessionId(): string;
@@ -151,10 +178,7 @@ export interface User {
 	 * @return {JQuery.Promise}
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-getUserInfo
 	 */
-	getUserInfo(): JQuery.Promise<{
-		groups: string[];
-		rights: string[];
-	}>;
+	getUserInfo(): JQuery.Promise<UserInfo>;
 }
 
 declare global {

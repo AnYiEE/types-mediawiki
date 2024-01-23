@@ -316,7 +316,7 @@ declare global {
 		 *
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook
 		 */
-		function hook<T extends any[] = any[]>(name: string): Hook<T>;
+		function hook<T extends any[] = any[]>(event: string): Hook<T>;
 	}
 }
 

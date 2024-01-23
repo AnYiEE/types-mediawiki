@@ -1,3 +1,9 @@
+type NoReturn<T extends (...args: any[]) => any> = T extends (this: infer U, ...args: infer V) => any
+	? unknown extends U
+		? (...args: V) => void
+		: (this: U, ...args: V) => void
+	: never;
+
 declare global {
 	namespace mw {
 		/**
@@ -21,7 +27,7 @@ declare global {
 			 *
 			 * If you need just the wikipage content (not any of the
 			 * extra elements output by the skin), use `$( '#mw-content-text' )`
-			 * instead. Or listen to mw.hook#wikipage_content which will
+			 * instead. Or listen to {@link mw.hook mw.hook("wikipage.content")} which will
 			 * allow your code to re-run when the page changes (e.g. live preview
 			 * or re-render after ajax save).
 			 *
@@ -34,7 +40,7 @@ declare global {
 			 * Append a new style block to the head and return the CSSStyleSheet object.
 			 *
 			 * To access the `<style>` element, reference `sheet.ownerNode`, or call
-			 * the mw.loader#addStyleTag method directly.
+			 * the {@link mw.loader.addStyleTag} method directly.
 			 *
 			 * This function returns the CSSStyleSheet object for convience with features
 			 * that are managed at that level, such as toggling of styles:
@@ -52,6 +58,20 @@ declare global {
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-addCSS
 			 */
 			function addCSS(text: string): CSSStyleSheet;
+
+			/**
+			 * Creates a detached portlet Element in the skin with no elements.
+			 *
+			 * @param {string} id of the new portlet.
+			 * @param {string} [label] of the new portlet.
+			 * @param {string} [before] selector of the element preceding the new portlet. If not passed
+			 *  the caller is responsible for appending the element to the DOM before using addPortletLink.
+			 * @return {HTMLElement|null} will be null if it was not possible to create an portlet with
+			 *  the required information e.g. the selector given in before parameter could not be resolved
+			 *  to an existing element in the page.
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-addPortlet
+			 */
+			function addPortlet(id: string, label?: string, before?: string): HTMLElement | null;
 
 			/**
 			 * Add a link to a portlet menu on the page, such as:
@@ -156,7 +176,12 @@ declare global {
 			 * @return {Function} Debounced function
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-debounce
 			 */
-			function debounce<T extends (...args: any[]) => any>(func: T, wait?: number, immediate?: boolean): T;
+			function debounce<T extends (...args: any[]) => any>(
+				func: T,
+				wait?: number,
+				immediate?: boolean
+			): NoReturn<T>;
+			function debounce<T extends (...args: any[]) => any>(wait: number, func: T): NoReturn<T>;
 
 			/**
 			 * Encode a string as CSS id, for use as HTML id attribute value.
@@ -195,6 +220,22 @@ declare global {
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-escapeRegExp
 			 */
 			function escapeRegExp(str: string): string;
+
+			/**
+			 * Get the value for an array query parameter, combined according to similar rules as PHP uses.
+			 * Currently this does not handle associative or multi-dimensional arrays, but that may be
+			 * improved in the future.
+			 *
+			 *     mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo[0]=a&foo[1]=b' ) ); // [ 'a', 'b' ]
+			 *     mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo[]=a&foo[]=b' ) ); // [ 'a', 'b' ]
+			 *     mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo=a' ) ); // null
+			 *
+			 * @param {string} param The parameter name.
+			 * @param {URLSearchParams} [params] Parsed URL parameters to search through, defaulting to the current browsing location.
+			 * @return {string[]|null} Parameter value, or null if parameter was not found.
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-getArrayParam
+			 */
+			function getArrayParam(param: string, params?: URLSearchParams): string[] | null;
 
 			/**
 			 * Get the value for a given URL query parameter.
@@ -241,7 +282,12 @@ declare global {
 			 * @return {string} URL, relative to `wgServer`.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-getUrl
 			 */
-			function getUrl(pageName?: string | null, params?: {[param: string]: string}): string;
+			// params are handled by $.param, which converts any value to a string. However, instead of using toString(),
+			// object are serialized (deep ones recursively), so only simple values are allowed to prevent mistakes.
+			function getUrl(
+				pageName?: string | null,
+				params?: {[param: string]: string | number | boolean | null | undefined}
+			): string;
 
 			/**
 			 * Hide a portlet.
@@ -280,7 +326,14 @@ declare global {
 			 * @return {boolean}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-isIPv4Address
 			 */
-			function isIPv4Address(address: string, allowBlock?: boolean): boolean;
+			function isIPv4Address(
+				address: string,
+				allowBlock: true
+			): address is `${number}.${number}.${number}.${number}${`/${number}` | ''}`;
+			function isIPv4Address(
+				address: string,
+				allowBlock?: false
+			): address is `${number}.${number}.${number}.${number}`;
 
 			/**
 			 * Whether a string is a valid IPv6 address or not.
@@ -312,9 +365,9 @@ declare global {
 			function isPortletVisible(portletId: string): boolean;
 
 			/**
-			 * This functionality has been adapted from MediaWiki\User\TempUser\Pattern::isMatch()
+			 * Does given username match $wgAutoCreateTempUser?
 			 *
-			 * Checks if the pattern matches the given username
+			 * This functionality has been adapted from MediaWiki\User\TempUser\Pattern::isMatch()
 			 *
 			 * @param {string} username
 			 * @return {boolean}
@@ -367,10 +420,11 @@ declare global {
 			function percentDecodeFragment(text: string): string | null;
 
 			/**
-			 * This functionality has been adapted from \Wikimedia\IPUtils::prettifyIP()
-			 *
 			 * Prettify an IP for display to end users.
+			 *
 			 * This will make it more compact and lower-case.
+			 *
+			 * This functionality has been adapted from \Wikimedia\IPUtils::prettifyIP()
 			 *
 			 * @param {string} ip IP address in quad or octet form (CIDR or not).
 			 * @return {string|null}
@@ -388,12 +442,13 @@ declare global {
 			function rawurlencode(str: string): string;
 
 			/**
-			 * This functionality has been adapted from \Wikimedia\IPUtils::sanitizeIP()
-			 *
 			 * Convert an IP into a verbose, uppercase, normalized form.
+			 *
 			 * Both IPv4 and IPv6 addresses are trimmed. Additionally,
 			 * IPv6 addresses in octet notation are expanded to 8 words;
 			 * IPv4 addresses have leading zeros, in each octet, removed.
+			 *
+			 * This functionality has been adapted from \Wikimedia\IPUtils::sanitizeIP()
 			 *
 			 * @param {string} ip IP address in quad or octet form (CIDR or not).
 			 * @return {string|null}
@@ -425,7 +480,7 @@ declare global {
 			 * @return {Function} Throttled function
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-throttle
 			 */
-			function throttle<T extends (...args: any[]) => any>(func: T, wait: number): T;
+			function throttle<T extends (...args: any[]) => any>(func: T, wait: number): NoReturn<T>;
 
 			/**
 			 * Validate a string as representing a valid e-mail address.
@@ -441,7 +496,7 @@ declare global {
 			function validateEmail(email: string): boolean | null;
 
 			/**
-			 * Get URL to a MediaWiki server entry point.
+			 * Get URL to a MediaWiki entry point.
 			 *
 			 * Similar to `wfScript()` in PHP.
 			 *

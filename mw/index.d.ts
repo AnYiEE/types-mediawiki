@@ -37,6 +37,15 @@ declare global {
 	 *
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw
 	 */
+	const mediaWiki: typeof mw;
+
+	/**
+	 * Base library for MediaWiki.
+	 *
+	 * Exposed globally as `mw`, with `mediaWiki` as alias.
+	 *
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw
+	 */
 	namespace mw {
 		/**
 		 * Empty object for third-party libraries, for cases where you don't
@@ -114,7 +123,7 @@ declare global {
 		/**
 		 * Format a string. Replace $1, $2 ... $N with positional arguments.
 		 *
-		 * Used by Message#parser().
+		 * Used by {@link Message.parser()}.
 		 *
 		 * @since 1.25
 		 * @param {string} formatString Format string
@@ -199,9 +208,9 @@ declare global {
 		 * arranged from most general to most specific. Each path component should have a clear and
 		 * well-defined purpose.
 		 *
-		 * Data handlers are registered via `mw.trackSubscribe`, and receive the full set of
-		 * events that match their subscription, including those that fired before the handler was
-		 * bound.
+		 * Data handlers are registered via {@link mw.trackSubscribe}, and receive the full set of
+		 * events that match their subscription, including buffered events that fired before the handler
+		 * was subscribed.
 		 *
 		 * @param {string} topic Topic name
 		 * @param {Object|number|string} [data] Data describing the event.
@@ -214,7 +223,7 @@ declare global {
 		 *
 		 * @private
 		 * @param {string} topic Topic name
-		 * @param {Object} data Data describing the event, encoded as an object; see mw#logError
+		 * @param {Object} data Data describing the event, encoded as an object; see {@link errorLogger.logError}
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-trackError
 		 */
 		function trackError(topic: string, data: object): void;
@@ -241,7 +250,7 @@ declare global {
 		 * @param {Object} [callback.data]
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-trackSubscribe
 		 */
-		function trackSubscribe(topic: string, callback: (topic: string, data?: object) => any): void;
+		function trackSubscribe(topic: string, callback: (topic: string, data?: object) => void): void;
 
 		/**
 		 * Stop handling events for a particular handler
@@ -249,7 +258,7 @@ declare global {
 		 * @param {Function} callback
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-trackUnsubscribe
 		 */
-		function trackUnsubscribe(callback: (topic: string, data: object) => any): void;
+		function trackUnsubscribe(callback: (topic: string, data: object) => void): void;
 
 		/**
 		 * List of all analytic events emitted so far.
@@ -260,7 +269,10 @@ declare global {
 		 * @property {Array}
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-property-trackQueue
 		 */
-		const trackQueue: Array<{topic: string; data?: Record<string, any> | number | string}>;
+		const trackQueue: Array<{
+			topic: string;
+			data?: Record<string, any> | number | string;
+		}>;
 	}
 }
 

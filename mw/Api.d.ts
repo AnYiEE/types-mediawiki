@@ -6,14 +6,15 @@ import {
 	ApiRollbackParams,
 	ApiUploadParams,
 } from '../api_params';
+import {UserInfo} from './user';
 
 type TitleLike = string | mw.Title;
 type TitleLikeArray = string[] | mw.Title[]; // TitleLike[] would be a mixed array
 type ApiParams = Record<string, string | string[] | boolean | number | number[]> | _ApiParams;
-type ApiResponse = Record<string, any>; // it will always be a JSON object, the rest is uncertain...
+type ApiResponse = Record<string, any>; // it will always be a JSON object, the rest is uncertain ...
 
 /**
- * Default options for jQuery#ajax calls. Can be overridden by passing
+ * Default options for {@link jQuery.ajax} calls. Can be overridden by passing
  * `options` to {@link mw.Api} constructor.
  *
  * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api-property-defaultOptions
@@ -24,7 +25,7 @@ export interface ApiOptions {
 	 */
 	parameters?: ApiParams;
 	/**
-	 * Default options for jQuery#ajax
+	 * Default options for {@link jQuery.ajax}
 	 */
 	ajax?: JQuery.AjaxSettings;
 	/**
@@ -73,7 +74,7 @@ declare global {
 			 * Constructor to create an object to interact with the API of a particular MediaWiki
 			 * server. mw.Api objects represent the API of a particular MediaWiki server.
 			 *
-			 * @param {ApiOptions} options
+			 * @param {ApiOptions} [options]
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api-method-constructor
 			 */
 			constructor(options?: ApiOptions);
@@ -215,7 +216,7 @@ declare global {
 			 * @param {TitleLike} title Page title
 			 * @param {ApiEditPageParams} params Edit API parameters
 			 * @param {string} content Page content
-			 * @return {JQuery.Promise<ApiResponse>}
+			 * @return {JQuery.Promise<ApiResponse>} API response
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.edit-method-create
 			 */
 			create(title: TitleLike, params: ApiEditPageParams, content: string): JQuery.Promise<ApiResponse>;
@@ -321,7 +322,7 @@ declare global {
 			/**
 			 * API helper to grab a csrf token.
 			 *
-			 * @return {JQuery.Promise<string>}
+			 * @return {JQuery.Promise<string>} Received token.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.edit-method-getEditToken
 			 */
 			getEditToken(): JQuery.Promise<string>;
@@ -391,10 +392,7 @@ declare global {
 			 * @return {string[]} return.done.userInfo.rights Current user's rights
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.user-method-getUserInfo
 			 */
-			getUserInfo(): JQuery.Promise<{
-				groups: string[];
-				rights: string[];
-			}>;
+			getUserInfo(): JQuery.Promise<UserInfo>;
 
 			/**
 			 * Determine if a category exists.
@@ -455,8 +453,9 @@ declare global {
 			 * Convenience method for `action=parse`.
 			 *
 			 * @param {TitleLike} content Content to parse, either as a wikitext string or a mw.Title
-			 * @param {ApiParseParams} additionalParams
-			 * @return {JQuery.Promise<string>}
+			 * @param {ApiParseParams} [additionalParams] Parameters object to set custom settings, e.g.
+			 *   redirects, sectionpreview.  prop should not be overridden.
+			 * @return {JQuery.Promise<string>} Parsed HTML of `wikitext`.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.parse-method-parse
 			 */
 			parse(content: TitleLike, additionalParams?: ApiParseParams): JQuery.Promise<string>;
@@ -511,6 +510,7 @@ declare global {
 			 * @param {TitleLike} page
 			 * @param {string} user
 			 * @param {ApiRollbackParams} [params] Additional parameters
+			 * @return {JQuery.Promise<ApiResponse>}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.rollback-method-rollback
 			 */
 			rollback(page: TitleLike, user: string, params?: ApiRollbackParams): JQuery.Promise<ApiResponse>;
@@ -540,7 +540,7 @@ declare global {
 			 * completed, otherwise MediaWiki gets sad. No requests are sent for anonymous users, as they
 			 * would fail anyway. See T214963.
 			 *
-			 * @param {Object} options
+			 * @param {Object} options Options as a `{ name: value, … }` object
 			 * @return {JQuery.Promise<ApiResponse>}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.options-method-saveOptions
 			 */

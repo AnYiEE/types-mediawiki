@@ -95,7 +95,7 @@ declare global {
 			/**
 			 * Format message and return as escaped text in HTML.
 			 *
-			 * This is equivalent to the #text format, which is then HTML-escaped.
+			 * This is equivalent to the {@link text} format, which is then HTML-escaped.
 			 *
 			 * @return {string} String form of html escaped message
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-escaped
@@ -131,21 +131,21 @@ declare global {
 			 * @chainable
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-params
 			 */
-			params(parameters: any[]): Message;
+			params(parameters: any[]): this;
 
 			/**
-			 * Change format to 'parse' and convert message to string
+			 * Parse message as wikitext and return HTML.
 			 *
-			 * If `jqueryMsg` is loaded, this parses the message text from wikitext (where supported) to HTML
+			 * If jqueryMsg is loaded, this transforms text and parses a subset of supported wikitext
+			 * into HTML. Without jqueryMsg, it is equivalent to {@link escaped}.
 			 *
-			 * Otherwise, it is equivalent to plain.
-			 *
+			 * @return {string} String form of parsed message
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-parse
 			 */
 			parse(): string;
 
 			/**
-			 * Parse the message to DOM nodes, rather than HTML string like #parse.
+			 * Parse the message to DOM nodes, rather than HTML string like {@link parse}.
 			 *
 			 * This method is only available when jqueryMsg is loaded.
 			 *
@@ -156,29 +156,6 @@ declare global {
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-parseDom
 			 */
 			parseDom(): JQuery;
-
-			/**
-			 * Return message plainly.
-			 *
-			 * This substitutes parameters, but otherwise does not transform the
-			 * message content.
-			 *
-			 * @return {string} String form of plain message
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-plain
-			 */
-			plain(): string;
-
-			/**
-			 * Format message with text transformations applied.
-			 *
-			 * If jqueryMsg is loaded, `{{`-transformation is done for supported
-			 * magic words such as `{{plural:}}`, `{{gender:}}`, and `{{int:}}`.
-			 * Without jqueryMsg, it is equivalent to #plain.
-			 *
-			 * @return {string} String form of text message
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-text
-			 */
-			text(): string;
 
 			/**
 			 * Get parsed contents of the message.
@@ -197,10 +174,33 @@ declare global {
 			parser(format: string): string;
 
 			/**
+			 * Return message plainly.
+			 *
+			 * This substitutes parameters, but otherwise does not transform the
+			 * message content.
+			 *
+			 * @return {string} String form of plain message
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-plain
+			 */
+			plain(): string;
+
+			/**
+			 * Format message with text transformations applied.
+			 *
+			 * If jqueryMsg is loaded, `{{`-transformation is done for supported
+			 * magic words such as `{{plural:}}`, `{{gender:}}`, and `{{int:}}`.
+			 * Without jqueryMsg, it is equivalent to {@link plain}.
+			 *
+			 * @return {string} String form of text message
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-text
+			 */
+			text(): string;
+
+			/**
 			 * Convert message object to a string using the "text"-format .
 			 *
 			 * This exists for implicit string type casting only.
-			 * Do not call this directly. Use mw.Message#text() instead, one of the
+			 * Do not call this directly. Use {@link mw.Message.text()} instead, one of the
 			 * other format methods.
 			 *
 			 * @private
@@ -210,7 +210,7 @@ declare global {
 			 *  does not exist.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-toString
 			 */
-			toString(format?: string): string;
+			toString(format?: 'escaped' | 'parse' | 'plain' | 'text'): string;
 		}
 	}
 }

@@ -16,7 +16,7 @@ declare global {
 		 */
 		class ForeignRest extends Rest {
 			/**
-			 * Create an object like mw.Rest, but automatically handling everything required to communicate
+			 * Create an object like {@link mw.Rest}, but automatically handling everything required to communicate
 			 * with another MediaWiki wiki via cross-origin requests (CORS).
 			 *
 			 *
@@ -40,11 +40,11 @@ declare global {
 			 *
 			 * @since 1.36
 			 * @class mw.ForeignRest
-			 * @extends mw.Rest
+			 * @extends Rest
 			 *
 			 * @constructor
 			 * @param {string} url URL pointing to another wiki's `rest.php` endpoint.
-			 * @param {mw.ForeignApi} foreignActionApi
+			 * @param {ForeignApi} foreignActionApi
 			 * @param {ForeignRestOptions} [options]
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignRest-method-constructor
 			 */

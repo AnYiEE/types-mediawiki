@@ -16,7 +16,7 @@ interface SafeStorage {
 	 *  if storage is not available.
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.SafeStorage-method-get
 	 */
-	get(key: string): string | null | boolean;
+	get(key: string): string | null | false;
 
 	/**
 	 * Retrieve JSON object from device storage.
@@ -58,7 +58,7 @@ interface SafeStorage {
 	 * @return {boolean} The expiry was set (or cleared) [since 1.41]
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.SafeStorage-method-setExpires
 	 */
-	setExpires(key: string, expiry?: number): void;
+	setExpires(key: string, expiry?: number): boolean;
 
 	/**
 	 * Set an object value in device storage by JSON encoding
@@ -78,7 +78,7 @@ interface SafeStorage {
 	 * @return {JQuery.Promise} Resolves when items have been expired
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.SafeStorage-method-clearExpired
 	 */
-	clearExpired(): JQuery.Promise<any>;
+	clearExpired(): JQuery.Promise<undefined>;
 
 	/**
 	 * Get all keys with expiry values
@@ -88,7 +88,7 @@ interface SafeStorage {
 	 *  expiry values (unprefixed), or as many could be retrieved in the allocated time.
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.SafeStorage-method-getExpiryKeys
 	 */
-	getExpiryKeys(): JQuery.Promise<any>;
+	getExpiryKeys(): JQuery.Promise<string[]>;
 
 	/**
 	 * Check if a given key has expired
@@ -102,6 +102,29 @@ interface SafeStorage {
 }
 
 interface MwStorage extends SafeStorage {
+	/**
+	 * A safe interface to HTML5 `sessionStorage`.
+	 *
+	 * This normalises differences across browsers and silences any and all
+	 * exceptions that may occur.
+	 *
+	 * **Note**: Data persisted via `sessionStorage` will persist for the lifetime
+	 * of the browser *tab*, not the browser *window*.
+	 * For longer-lasting persistence across tabs, refer to {@link mw.storage} or {@link mw.cookie} instead.
+	 *
+	 * Example:
+	 *
+	 *     mw.storage.session.set( key, value );
+	 *     mw.storage.session.get( key );
+	 *
+	 * Example:
+	 *
+	 *     var session = require( 'mediawiki.storage' ).session;
+	 *     session.set( key, value );
+	 *     session.get( key );
+	 *
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.storage.session
+	 */
 	session: SafeStorage;
 }
 
@@ -145,7 +168,7 @@ declare global {
 		 *
 		 * @class
 		 * @singleton
-		 * @extends mw.SafeStorage
+		 * @extends SafeStorage
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.storage
 		 */
 		const storage: MwStorage;

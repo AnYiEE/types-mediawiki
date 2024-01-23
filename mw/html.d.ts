@@ -1,6 +1,20 @@
 declare global {
 	namespace mw {
 		/**
+		 * HTML construction helper functions.
+		 *
+		 *     @example
+		 *
+		 *     var Html, output;
+		 *
+		 *     Html = mw.html;
+		 *     output = Html.element( 'div', {}, new Html.Raw(
+		 *         Html.element( 'img', { src: '<' } )
+		 *     ) );
+		 *     mw.log( output ); // <div><img src="&lt;"/></div>
+		 *
+		 * @namespace mw.html
+		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.html
 		 */
 		namespace html {
@@ -17,7 +31,11 @@ declare global {
 			 * @return {string} HTML
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.html-method-element
 			 */
-			function element(name: string, attrs?: Record<string, string>, contents?: string | Raw | null): string;
+			function element(
+				name: string,
+				attrs?: Record<string, boolean | number | string>,
+				contents?: string | Raw | null
+			): string;
 
 			/**
 			 * Escape a string for HTML.
@@ -34,7 +52,7 @@ declare global {
 			function escape(s: string): string;
 
 			/**
-			 * Wrapper object for raw HTML passed to mw.html.element().
+			 * Wrapper object for raw HTML passed to {@link mw.html.element()}.
 			 *
 			 * @class mw.html.Raw
 			 * @constructor

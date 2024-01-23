@@ -14,6 +14,8 @@ declare global {
 			 * This method is mainly intended for verbose logging. It is a no-op in production mode.
 			 * In ResourceLoader debug mode, it will use the browser's console.
 			 *
+			 * See {@link mw.log} for other logging methods.
+			 *
 			 * @member mw
 			 * @param {...string} msg Messages to output to console.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-log
@@ -39,13 +41,7 @@ declare global {
 			 *  Tracking is disabled by default, except for global variables on `window`.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-deprecate
 			 */
-			deprecate(
-				obj: Record<string, any>,
-				key: string,
-				val: Record<string, any>,
-				msg?: string,
-				logName?: string
-			): void;
+			deprecate<T, K extends string & keyof T>(obj: T, key: K, val: T[K], msg?: string, logName?: string): void;
 
 			/**
 			 * Write a message to the browser console's error channel.
