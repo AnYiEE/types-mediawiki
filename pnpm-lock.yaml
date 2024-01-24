@@ -28,12 +28,12 @@ devDependencies:
 
 packages:
 
-  /@definitelytyped/header-parser@0.2.0:
-    resolution: {integrity: sha512-TD10p6rkc0HzP/G4mBM+UCrgVp8l/BVYwRlTUaCpsyD4Bx5Wg7fwYEWQfmFYyZ22kVlGnbo3H6M7ZtMfvAU1pA==}
+  /@definitelytyped/header-parser@0.2.1:
+    resolution: {integrity: sha512-EupvDd023Ro0ulkI8BMQF6VXHUvReiCyycuMwBgnriMxudp2/CcDHm0Ee4KYYp39wgxJMswnbW8H9BdwUtryeA==}
     engines: {node: '>=18.18.0'}
     dependencies:
       '@definitelytyped/typescript-versions': 0.1.0
-      '@definitelytyped/utils': 0.1.0
+      '@definitelytyped/utils': 0.1.1
       semver: 7.5.4
     dev: true
 
@@ -50,7 +50,7 @@ packages:
       typescript-5.1: /typescript@5.1.6
       typescript-5.2: /typescript@5.2.2
       typescript-5.3: /typescript@5.3.3
-      typescript-5.4: /typescript@5.4.0-dev.20240119
+      typescript-5.4: /typescript@5.4.0-dev.20240124
     dev: true
 
   /@definitelytyped/typescript-versions@0.1.0:
@@ -58,18 +58,19 @@ packages:
     engines: {node: '>=18.18.0'}
     dev: true
 
-  /@definitelytyped/utils@0.1.0:
-    resolution: {integrity: sha512-lmQX0/FZwP8qc1kf4DPDixBDsXtbkGRPAxtwt/7ED3BibtNRL/Vvi8gDDWX6BN03heH+pbXKEhCN5NQ0g7x7sQ==}
+  /@definitelytyped/utils@0.1.1:
+    resolution: {integrity: sha512-VCamUy7vNS4x4ZkSTMs/YpyvwDOoPSfJ6OzoHM2PrArGRpvP34z7Au5yauiGGlAOpW3S6JjLQKZaF91sHVUTEg==}
     engines: {node: '>=18.18.0'}
     dependencies:
       '@definitelytyped/typescript-packages': 0.1.0
       '@definitelytyped/typescript-versions': 0.1.0
       '@qiwi/npm-registry-client': 8.9.1
-      '@types/node': 18.19.8
+      '@types/node': 18.19.9
+      cachedir: 2.4.0
       charm: 1.0.2
       minimatch: 9.0.3
       tar: 6.2.0
-      tar-stream: 3.1.6
+      tar-stream: 3.1.7
       which: 4.0.0
     dev: true
 
@@ -97,8 +98,8 @@ packages:
       '@types/sizzle': 2.3.8
     dev: false
 
-  /@types/node@18.19.8:
-    resolution: {integrity: sha512-g1pZtPhsvGVTwmeVoexWZLTQaOvXwoSq//pTL0DHeNzUDrFnir4fgETdhjhIxjVnN+hKOuh98+E1eMLnUXstFg==}
+  /@types/node@18.19.9:
+    resolution: {integrity: sha512-oZFKlC8l5YtzGQNT4zC2PiSSKzQVZ8bAwwd+EYdPLtyk0nSEq6O16SkK+rkkT2eflDAbormJgEF3QnH3oDrTSw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -246,6 +247,11 @@ packages:
 
   /builtins@1.0.3:
     resolution: {integrity: sha512-uYBjakWipfaO/bXI7E8rq6kpwHRZK5cNYrUv2OzZSI/FvmdMyXJ2tG9dKcjEC5YHmHpUAwsargWIZNWdxb/bnQ==}
+    dev: true
+
+  /cachedir@2.4.0:
+    resolution: {integrity: sha512-9EtFOZR8g22CL7BWjJ9BUx1+A/djkofnyW3aOXZORNW2kxoUpx2h+uN2cOqwPmFhnpVmxg+KW2OjOSgChTEvsQ==}
+    engines: {node: '>=6'}
     dev: true
 
   /call-bind@1.0.5:
@@ -420,7 +426,7 @@ packages:
     peerDependencies:
       typescript: '*'
     dependencies:
-      '@definitelytyped/header-parser': 0.2.0
+      '@definitelytyped/header-parser': 0.2.1
       command-exists: 1.2.9
       rimraf: 3.0.2
       semver: 6.3.1
@@ -436,9 +442,9 @@ packages:
     peerDependencies:
       typescript: '>= 3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.7.0-dev || >= 3.8.0-dev || >= 3.9.0-dev || >= 4.0.0-dev'
     dependencies:
-      '@definitelytyped/header-parser': 0.2.0
+      '@definitelytyped/header-parser': 0.2.1
       '@definitelytyped/typescript-versions': 0.1.0
-      '@definitelytyped/utils': 0.1.0
+      '@definitelytyped/utils': 0.1.1
       dts-critic: 3.3.11(typescript@4.9.5)
       fs-extra: 6.0.1
       json-stable-stringify: 1.1.1
@@ -1245,8 +1251,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tar-stream@3.1.6:
-    resolution: {integrity: sha512-B/UyjYwPpMBv+PaFSWAmtYjwdrlEaZQEhMIBFNC5oEG8lpiW8XjcSdmEaClj28ArfKScKHs2nshz3k2le6crsg==}
+  /tar-stream@3.1.7:
+    resolution: {integrity: sha512-qJj60CXt7IU1Ffyc3NJMjh6EkuCFej46zUqJ4J7pqYlThyd9bO0XBTmcOIhSzZJVWfsLks0+nle/j538YAW9RQ==}
     dependencies:
       b4a: 1.6.4
       fast-fifo: 1.3.2
@@ -1384,8 +1390,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.4.0-dev.20240119:
-    resolution: {integrity: sha512-I+Uge2+WNFs91q42WVrqTwxmq3NQwQlrL0MLora9zXhizbsKIGApE7LGcEJIbG+0yk6gpDilGaDH1pU4VUAKzw==}
+  /typescript@5.4.0-dev.20240124:
+    resolution: {integrity: sha512-OAWV1z3s7OoZR1tKuVK8UokiDmv5J8EEjKJu7BtU7veEXBA9cLGQ6LEw4Jt83BidP8lWytDetVuOxmF/VtLQPg==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
@@ -1453,7 +1459,7 @@ packages:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     requiresBuild: true
     dependencies:
-      string-width: 4.2.3
+      string-width: 1.0.2
     dev: true
     optional: true
 
