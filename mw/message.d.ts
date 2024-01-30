@@ -185,7 +185,7 @@ declare global {
 			 * @returns {string} Parsed message
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-parser
 			 */
-			parser(format: string): string;
+			private parser(format: string): string;
 
 			/**
 			 * Return message plainly.
@@ -224,7 +224,7 @@ declare global {
 			 *  does not exist.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message-method-toString
 			 */
-			toString(format?: 'escaped' | 'parse' | 'plain' | 'text'): string;
+			private toString(format?: 'escaped' | 'parse' | 'plain' | 'text'): string;
 		}
 
 		/**

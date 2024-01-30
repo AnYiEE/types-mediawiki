@@ -63,7 +63,7 @@ declare global {
 				/**
 				 * @private
 				 */
-				value: V;
+				private value: V;
 			}
 		}
 	}

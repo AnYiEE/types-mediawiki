@@ -131,14 +131,17 @@ declare global {
 			 * @returns {Object}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Rest-method-objectKeysToLowerCase
 			 */
-			objectKeysToLowerCase<T extends JQuery.AjaxSettings['headers']>(headers: T): T;
+			private objectKeysToLowerCase<T extends JQuery.AjaxSettings['headers']>(headers: T): T;
 
 			/**
 			 * @private
 			 */
-			defaults: RestOptions;
+			private defaults: RestOptions;
 
-			requests: JQuery.jqXHR[];
+			/**
+			 * @private
+			 */
+			private requests: JQuery.jqXHR[];
 		}
 	}
 }

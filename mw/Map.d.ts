@@ -18,7 +18,7 @@ declare global {
 			/**
 			 * @private
 			 */
-			values: V;
+			private values: V;
 
 			/**
 			 * Check if a given key exists in the map.

@@ -599,7 +599,7 @@ declare global {
 			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.upload-method-getFirstKey
 			 */
-			getFirstKey(obj: Record<string, string>): string;
+			private getFirstKey(obj: Record<string, string>): string;
 
 			/**
 			 * Massage parameters from the nice format we accept into a format suitable for the API.
@@ -609,7 +609,7 @@ declare global {
 			 * @param {boolean} useUS Whether to use U+001F when joining multi-valued parameters.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api-method-preprocessParameters
 			 */
-			preprocessParameters(parameters: ApiParams, useUS: boolean): void;
+			private preprocessParameters(parameters: ApiParams, useUS: boolean): void;
 
 			/**
 			 * Launch the upload anew if it failed because of network issues.
@@ -621,7 +621,7 @@ declare global {
 			 * @returns {JQuery.Promise}
 			 * @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.upload-method-retry
 			 */
-			retry(
+			private retry(
 				code: string,
 				result: ApiResponse,
 				callable: () => JQuery.Promise<ApiResponse>
@@ -637,7 +637,7 @@ declare global {
 			 * @returns {Blob}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.upload-method-slice
 			 */
-			slice(file: File, start: number, stop: number): Blob;
+			private slice(file: File, start: number, stop: number): Blob;
 
 			/**
 			 * Uploads a file using the FormData API.
@@ -648,7 +648,7 @@ declare global {
 			 * @returns {JQuery.Promise}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.upload-method-uploadWithFormData
 			 */
-			uploadWithFormData(file: File, data: ApiUploadParams): JQuery.Promise<ApiResponse>;
+			private uploadWithFormData(file: File, data: ApiUploadParams): JQuery.Promise<ApiResponse>;
 
 			/**
 			 * Uploads a file using the FormData API.
@@ -663,7 +663,7 @@ declare global {
 			 * @returns {JQuery.Promise}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api.plugin.upload-method-uploadChunk
 			 */
-			uploadChunk(
+			private uploadChunk(
 				file: File,
 				data: ApiUploadParams,
 				start: number,
@@ -676,9 +676,12 @@ declare global {
 			 * @private
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/source/index4.html#mw-Api-method-constructor
 			 */
-			defaults: ApiOptions;
+			private defaults: ApiOptions;
 
-			requests: JQuery.jqXHR[];
+			/**
+			 * @private
+			 */
+			private requests: JQuery.jqXHR[];
 		}
 	}
 }

@@ -150,7 +150,7 @@ declare global {
 			 * @private
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-static-property-parser
 			 */
-			static parser: UriParser;
+			private static parser: UriParser;
 
 			/**
 			 * The order here matches the order of captured matches in the `parser` property regexes.
@@ -158,7 +158,7 @@ declare global {
 			 * @private
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-static-property-properties
 			 */
-			static properties: ['protocol', 'user', 'password', 'host', 'port', 'path', 'query', 'fragment'];
+			private static properties: ['protocol', 'user', 'password', 'host', 'port', 'path', 'query', 'fragment'];
 
 			/**
 			 * Construct a new URI object. Throws error if arguments are illegal/impossible, or
@@ -266,7 +266,7 @@ declare global {
 			 * @throws {Error} when the query string or fragment contains an unknown % sequence
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-parse
 			 */
-			parse(str: string, options: Partial<UriOptions>): void;
+			private parse(str: string, options: Partial<UriOptions>): void;
 
 			/**
 			 * Decode a url encoded value.
