@@ -1,4 +1,5 @@
 import {
+	ApiParams as _ApiParams,
 	ApiEditPageParams,
 	ApiParseParams,
 	ApiQueryAllMessagesParams,
@@ -11,7 +12,7 @@ import {UserInfo} from './user';
 type TypeOrArray<T> = T extends any ? T | T[] : never; // T[] would be a mixed array
 type ReplaceValue<T extends U | U[], U, V> = T extends U[] ? V[] : V;
 
-type ApiParams = Record<string, string | string[] | boolean | number | number[]>;
+type ApiParams = Record<string, string | string[] | boolean | number | number[]> | _ApiParams;
 type ApiResponse = Record<string, any>; // it will always be a JSON object, the rest is uncertain ...
 
 interface Revision {
