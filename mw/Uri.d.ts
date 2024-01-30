@@ -1,4 +1,4 @@
-export type QueryParams = Record<string, any>;
+export type QueryParams = Record<string, string | number | boolean | null | undefined>;
 
 interface UriOptions {
 	/**
@@ -17,16 +17,19 @@ interface UriOptions {
 	arrayParams: boolean;
 }
 
+interface UriParser {
+	strict: RegExp;
+	loose: RegExp;
+}
+
 declare global {
 	namespace mw {
 		/**
 		 * A factory method to create an mw.Uri class with a default location to resolve relative URLs
 		 * against (including protocol-relative URLs).
 		 *
-		 * @method
 		 * @param {string|Function} documentLocation A full url, or function returning one.
 		 *  If passed a function, the return value may change over time and this will be honoured. (T74334)
-		 * @member mw
 		 * @return {Function} An mw.Uri class constructor
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-UriRelative
 		 */
@@ -43,37 +46,41 @@ declare global {
 		 * You can modify the properties directly, then use the {@link toString} method to extract the full URI
 		 * string again. Example:
 		 *
-		 *     var uri = new mw.Uri( 'http://example.com/mysite/mypage.php?quux=2' );
+		 * ```js
+		 * var uri = new mw.Uri( 'http://example.com/mysite/mypage.php?quux=2' );
 		 *
-		 *     if ( uri.host == 'example.com' ) {
-		 *         uri.host = 'foo.example.com';
-		 *         uri.extend( { bar: 1 } );
+		 * if ( uri.host == 'example.com' ) {
+		 *     uri.host = 'foo.example.com';
+		 *     uri.extend( { bar: 1 } );
 		 *
-		 *         $( 'a#id1' ).attr( 'href', uri );
-		 *         // anchor with id 'id1' now links to http://foo.example.com/mysite/mypage.php?bar=1&quux=2
+		 *     $( 'a#id1' ).attr( 'href', uri );
+		 *     // anchor with id 'id1' now links to http://foo.example.com/mysite/mypage.php?bar=1&quux=2
 		 *
-		 *         $( 'a#id2' ).attr( 'href', uri.clone().extend( { bar: 3, pif: 'paf' } ) );
-		 *         // anchor with id 'id2' now links to http://foo.example.com/mysite/mypage.php?bar=3&quux=2&pif=paf
-		 *     }
+		 *     $( 'a#id2' ).attr( 'href', uri.clone().extend( { bar: 3, pif: 'paf' } ) );
+		 *     // anchor with id 'id2' now links to http://foo.example.com/mysite/mypage.php?bar=3&quux=2&pif=paf
+		 * }
+		 * ```
 		 *
 		 * Given a URI like
 		 * `http://usr:pwd@www.example.com:81/dir/dir.2/index.htm?q1=0&&test1&test2=&test3=value+%28escaped%29&r=1&r=2#top`
 		 * the returned object will have the following properties:
 		 *
-		 *     protocol  'http'
-		 *     user      'usr'
-		 *     password  'pwd'
-		 *     host      'www.example.com'
-		 *     port      '81'
-		 *     path      '/dir/dir.2/index.htm'
-		 *     query     {
-		 *                   q1: '0',
-		 *                   test1: null,
-		 *                   test2: '',
-		 *                   test3: 'value (escaped)'
-		 *                   r: ['1', '2']
-		 *               }
-		 *     fragment  'top'
+		 * ```js
+		 * protocol  'http'
+		 * user      'usr'
+		 * password  'pwd'
+		 * host      'www.example.com'
+		 * port      '81'
+		 * path      '/dir/dir.2/index.htm'
+		 * query     {
+		 *               q1: '0',
+		 *               test1: null,
+		 *               test2: '',
+		 *               test3: 'value (escaped)'
+		 *               r: ['1', '2']
+		 *           }
+		 * fragment  'top'
+		 * ```
 		 *
 		 * (N.b., 'password' is technically not allowed for HTTP URIs, but it is possible with other kinds
 		 * of URIs.)
@@ -81,61 +88,54 @@ declare global {
 		 * Parsing based on parseUri 1.2.2 (c) Steven Levithan <http://stevenlevithan.com>, MIT License.
 		 * <http://stevenlevithan.com/demo/parseuri/js/>
 		 *
-		 * Construct a new URI object. Throws error if arguments are illegal/impossible, or
-		 * otherwise don't parse.
-		 *
-		 * @constructor
-		 * @class
-		 * @classdesc Library for simple URI parsing and manipulation.
-		 * @name mw.Uri
-		 * @param {Object|string} [uri] URI string, or an Object with appropriate properties (especially
-		 *  another URI object to clone). Object must have non-blank `protocol`, `host`, and `path`
-		 *  properties. If omitted (or set to `undefined`, `null` or empty string), then an object
-		 *  will be created for the default `uri` of this constructor (`location.href` for mw.Uri,
-		 *  other values for other instances -- see mw.UriRelative for details).
-		 * @param {mw.Uri.UriOptions|boolean} [options] Object with options, or (backwards compatibility) a boolean
-		 *  for strictMode
-		 * @throws {Error} when the query string or fragment contains an unknown % sequence
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri
 		 */
 		class Uri {
 			/**
-			 * @property {string|undefined} fragment For example `top`
+			 * For example `top`
+			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-fragment
 			 */
 			fragment: string | undefined;
 			/**
-			 * @property {string} host For example `www.example.com` (always present)
+			 * For example `www.example.com` (always present)
+			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-host
 			 */
 			host: string;
 			/**
-			 * @property {string|undefined} password For example `pwd`
+			 * For example `pwd`
+			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-password
 			 */
 			password: string | undefined;
 			/**
-			 * @property {string} path For example `/dir/dir.2/index.htm` (always present)
+			 * For example `/dir/dir.2/index.htm` (always present)
+			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-path
 			 */
 			path: string;
 			/**
-			 * @property {string|undefined} port For example `81`
+			 * For example `81`
+			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-port
 			 */
 			port: string | undefined;
 			/**
-			 * @property {string} protocol For example `http` (always present)
+			 * For example `http` (always present)
+			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-protocol
 			 */
 			protocol: string;
 			/**
-			 * @property {Object} query For example `{ a: '0', b: '', c: 'value' }` (always present)
+			 * For example `{ a: '0', b: '', c: 'value' }` (always present)
+			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-query
 			 */
 			query: QueryParams;
 			/**
-			 * @property {string|undefined} user For example `usr`
+			 * For example `usr`
+			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-property-user
 			 */
 			user: string | undefined;
@@ -148,21 +148,14 @@ declare global {
 			 * so the server-side strips these before delivering to the client.
 			 *
 			 * @private
-			 * @static
-			 * @property {Object} parser
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-static-property-parser
 			 */
-			static parser: {
-				strict: RegExp;
-				loose: RegExp;
-			};
+			static parser: UriParser;
 
 			/**
 			 * The order here matches the order of captured matches in the `parser` property regexes.
 			 *
 			 * @private
-			 * @static
-			 * @property {string[]} properties
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-static-property-properties
 			 */
 			static properties: ['protocol', 'user', 'password', 'host', 'port', 'path', 'query', 'fragment'];
@@ -171,22 +164,13 @@ declare global {
 			 * Construct a new URI object. Throws error if arguments are illegal/impossible, or
 			 * otherwise don't parse.
 			 *
-			 * @class mw.Uri
-			 * @constructor
 			 * @param {Object|string} [uri] URI string, or an Object with appropriate properties (especially
 			 *  another URI object to clone). Object must have non-blank `protocol`, `host`, and `path`
 			 *  properties. If omitted (or set to `undefined`, `null` or empty string), then an object
 			 *  will be created for the default `uri` of this constructor (`location.href` for mw.Uri,
 			 *  other values for other instances -- see mw.UriRelative for details).
-			 * @param {Object|boolean} [options] Object with options, or (backwards compatibility) a boolean
+			 * @param {Partial<UriOptions>|boolean} [options] Object with options, or (backwards compatibility) a boolean
 			 *  for strictMode
-			 * @param {boolean} [options.strictMode=false] Trigger strict mode parsing of the url.
-			 * @param {boolean} [options.overrideKeys=false] Whether to let duplicate query parameters
-			 *  override each other (`true`) or automagically convert them to an array (`false`).
-			 * @param {boolean} [options.arrayParams=false] Whether to parse array query parameters (e.g.
-			 *  `&foo[0]=a&foo[1]=b` or `&foo[]=a&foo[]=b`) or leave them alone. Currently this does not
-			 *  handle associative or multi-dimensional arrays, but that may be improved in the future.
-			 *  Implies `overrideKeys: true` (query parameters without `[...]` are not parsed as arrays).
 			 * @throws {Error} when the query string or fragment contains an unknown % sequence
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-constructor
 			 */
@@ -198,7 +182,7 @@ declare global {
 			/**
 			 * Clone this URI
 			 *
-			 * @return {Uri} New URI object with same properties
+			 * @returns {Uri} New URI object with same properties
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-clone
 			 */
 			clone(): Uri;
@@ -206,9 +190,9 @@ declare global {
 			/**
 			 * Extend the query section of the URI with new parameters.
 			 *
-			 * @param {Object} parameters Query parameters to add to ours (or to override ours with) as an
+			 * @param {QueryParams} parameters Query parameters to add to ours (or to override ours with) as an
 			 *  object
-			 * @return {Uri} This URI object
+			 * @returns {Uri} This URI object
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-extend
 			 */
 			extend(parameters: QueryParams): Uri;
@@ -218,7 +202,7 @@ declare global {
 			 *
 			 * In most real-world URLs this is simply the hostname, but the definition of 'authority' section is more general.
 			 *
-			 * @return {string}
+			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-getAuthority
 			 */
 			getAuthority(): string;
@@ -226,7 +210,7 @@ declare global {
 			/**
 			 * Get host and port section of a URI.
 			 *
-			 * @return {string}
+			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-getHostPort
 			 */
 			getHostPort(): string;
@@ -236,7 +220,7 @@ declare global {
 			 *
 			 * Does not preserve the original order of arguments passed in the URI. Does handle escaping.
 			 *
-			 * @return {string}
+			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-getQueryString
 			 */
 			getQueryString(): string;
@@ -244,7 +228,7 @@ declare global {
 			/**
 			 * Get everything after the authority section of the URI.
 			 *
-			 * @return {string}
+			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-getRelativePath
 			 */
 			getRelativePath(): string;
@@ -252,7 +236,7 @@ declare global {
 			/**
 			 * Get user and password section of a URI.
 			 *
-			 * @return {string}
+			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-getUserInfo
 			 */
 			getUserInfo(): string;
@@ -268,7 +252,7 @@ declare global {
 			 * web2017-polyfills, which loads a polyfill if needed) in contexts where the fragment
 			 * is important.
 			 *
-			 * @return {string} The URI string
+			 * @returns {string} The URI string
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-toString
 			 */
 			toString(): `${string}://${string}`;
@@ -278,7 +262,7 @@ declare global {
 			 *
 			 * @private
 			 * @param {string} str URI, see constructor.
-			 * @param {Object} options See constructor.
+			 * @param {Partial<UriOptions>} options See constructor.
 			 * @throws {Error} when the query string or fragment contains an unknown % sequence
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-method-parse
 			 */
@@ -290,9 +274,8 @@ declare global {
 			 * Reversed {@link encode}. Standard decodeURIComponent, with addition of replacing
 			 * `+` with a space.
 			 *
-			 * @static
 			 * @param {string} s String to decode
-			 * @return {string} Decoded string
+			 * @returns {string} Decoded string
 			 * @throws {Error} when the string contains an unknown % sequence
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-static-method-decode
 			 */
@@ -305,9 +288,8 @@ declare global {
 			 * compliant with RFC 3986. Similar to rawurlencode from PHP and our JS library
 			 * mw.util.rawurlencode, except this also replaces spaces with `+`.
 			 *
-			 * @static
 			 * @param {string} s String to encode
-			 * @return {string} Encoded string for URI
+			 * @returns {string} Encoded string for URI
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri-static-method-encode
 			 */
 			static encode(s: string): string;

@@ -1,8 +1,6 @@
 declare global {
 	namespace mw {
 		/**
-		 * @class mw.String
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String
 		 */
 		namespace String {
@@ -58,8 +56,8 @@ declare global {
 			 * @param {number} byteLimit Number of bytes the value may be in size.
 			 * @param {Function} [filterFunction] Function to call on the string before assessing the length.
 			 * @return {Object}
-			 * @return {string} return.newVal
-			 * @return {boolean} return.trimmed
+			 * @returns {string} return.newVal
+			 * @returns {boolean} return.trimmed
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-trimByteLength
 			 */
 			function trimByteLength(
@@ -85,8 +83,8 @@ declare global {
 			 * @param {number} codePointLimit Number of characters the value may be in size.
 			 * @param {Function} [filterFunction] Function to call on the string before assessing the length.
 			 * @return {Object}
-			 * @return {string} return.newVal
-			 * @return {boolean} return.trimmed
+			 * @returns {string} return.newVal
+			 * @returns {boolean} return.trimmed
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-trimCodePointLength
 			 */
 			function trimCodePointLength(

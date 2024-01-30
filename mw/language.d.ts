@@ -6,12 +6,10 @@ declare global {
 		 * Base language object with methods related to language support, attempting to mirror some of the
 		 * functionality of the Language class in MediaWiki:
 		 *
-		 *   - storing and retrieving language data
-		 *   - transforming message syntax (`{{PLURAL:}}`, `{{GRAMMAR:}}`, `{{GENDER:}}`)
-		 *   - formatting numbers
+		 * - storing and retrieving language data
+		 * - transforming message syntax (`{{PLURAL:}}`, `{{GRAMMAR:}}`, `{{GENDER:}}`)
+		 * - formatting numbers
 		 *
-		 * @class
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language
 		 */
 		namespace language {
@@ -22,29 +20,32 @@ declare global {
 			 *
 			 * To set data:
 			 *
-			 *     // Override, extend or create the language data object of 'nl'
-			 *     mw.language.setData( 'nl', 'myKey', 'My value' );
+			 * ```js
+			 * // Override, extend or create the language data object of 'nl'
+			 * mw.language.setData( 'nl', 'myKey', 'My value' );
 			 *
-			 *     // Set multiple key/values pairs at once
-			 *     mw.language.setData( 'nl', { foo: 'X', bar: 'Y' } );
+			 * // Set multiple key/values pairs at once
+			 * mw.language.setData( 'nl', { foo: 'X', bar: 'Y' } );
+			 * ```
 			 *
 			 * To get GrammarForms data for language 'nl':
 			 *
-			 *     var grammarForms = mw.language.getData( 'nl', 'grammarForms' );
+			 * ```js
+			 * var grammarForms = mw.language.getData( 'nl', 'grammarForms' );
+			 * ```
 			 *
 			 * Possible data keys:
 			 *
-			 *  - `digitTransformTable`
-			 *  - `separatorTransformTable`
-			 *  - `minimumGroupingDigits`
-			 *  - `grammarForms`
-			 *  - `pluralRules`
-			 *  - `digitGroupingPattern`
-			 *  - `fallbackLanguages`
-			 *  - `bcp47Map`
-			 *  - `languageNames`
+			 * - `digitTransformTable`
+			 * - `separatorTransformTable`
+			 * - `minimumGroupingDigits`
+			 * - `grammarForms`
+			 * - `pluralRules`
+			 * - `digitGroupingPattern`
+			 * - `fallbackLanguages`
+			 * - `bcp47Map`
+			 * - `languageNames`
 			 *
-			 * @property {Object}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-property-data
 			 */
 			const data: Record<string, Map>;
@@ -52,8 +53,6 @@ declare global {
 			/**
 			 * Information about month names in current UI language.
 			 *
-			 * @property {Object}
-			 * @member mw.language
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-property-months
 			 */
 			const months: {
@@ -67,11 +66,7 @@ declare global {
 				 * Object containing zero-indexed arrays of message keys for appropriate messages
 				 * which can be passed to {@link mw.msg}.
 				 */
-				keys: {
-					abbrev: string[];
-					genitive: string[];
-					names: string[];
-				};
+				keys: Record<'abbrev' | 'genitive' | 'names', string[]>;
 
 				/**
 				 * Array of month names in genitive case, zero-indexed.
@@ -123,8 +118,8 @@ declare global {
 			 * Plural form transformations, needed for some languages.
 			 *
 			 * @param {number} count Non-localized quantifier
-			 * @param {Array} forms List of plural forms
-			 * @param {Object} [explicitPluralForms] List of explicit plural forms
+			 * @param {string[]} forms List of plural forms
+			 * @param {Object.<number, string>} [explicitPluralForms] List of explicit plural forms
 			 * @return {string} Correct form for quantifier in this language
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-convertPlural
 			 */
@@ -137,8 +132,8 @@ declare global {
 			/**
 			 * Helper function to flip transformation tables.
 			 *
-			 * @param {...Object} tables Transformation tables
-			 * @return {Object}
+			 * @param {...Object.<number|string, string>} tables Transformation tables
+			 * @return {Object.<string, number|string>}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-flipTransform
 			 */
 			function flipTransform<T extends Record<PropertyKey, PropertyKey>>(...tables: T[]): FlipObject<T>;
@@ -152,7 +147,7 @@ declare global {
 			 * These details may be overridden per language.
 			 *
 			 * @param {string} gender 'male', 'female', or anything else for neutral.
-			 * @param {Array} forms List of gender forms
+			 * @param {string[]} forms List of gender forms
 			 * @return {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-gender
 			 */
@@ -166,7 +161,7 @@ declare global {
 			 *
 			 * @param {string} langCode
 			 * @param {string} dataKey
-			 * @return {any} Value stored in the mw.Map (or `undefined` if there is no map for the
+			 * @return {Mixed} Value stored in the mw.Map (or `undefined` if there is no map for the
 			 *  specified langCode)
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-getData
 			 */
@@ -175,7 +170,7 @@ declare global {
 			/**
 			 * Get the digit transform table for current UI language.
 			 *
-			 * @return {Object|Array}
+			 * @return {Object.<number|string, string>|string[]}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-getDigitTransformTable
 			 */
 			function getDigitTransformTable(): string[] | Record<number | string, string>;
@@ -199,7 +194,7 @@ declare global {
 			/**
 			 * Get the separator transform table for current UI language.
 			 *
-			 * @return {Object|Array}
+			 * @return {Object.<number|string, string>|string[]}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-getSeparatorTransformTable
 			 */
 			function getSeparatorTransformTable(): string[] | Record<number | string, string>;
@@ -221,8 +216,8 @@ declare global {
 			 * Creates the data mw.Map if there isn't one for the specified language already.
 			 *
 			 * @param {string} langCode
-			 * @param {string|Object} dataKey Key or object of key/values
-			 * @param {any} [value] Value for dataKey, omit if dataKey is an object
+			 * @param {string|Object.<string, any>} dataKey Key or object of key/values
+			 * @param {Mixed} [value] Value for dataKey, omit if dataKey is an object
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-setData
 			 */
 			function setData(langCode: string, dataKey: string, value: any): void;
@@ -257,7 +252,9 @@ declare global {
 			 *
 			 * Example: Fill the string to length 10 with '+' characters on the right.
 			 *
-			 *     pad( 'blah', 10, '+', true ); // => 'blah++++++'
+			 * ```js
+			 * pad( 'blah', 10, '+', true ); // => 'blah++++++'
+			 * ```
 			 *
 			 * @private
 			 * @param {string} text The string to pad
@@ -272,9 +269,9 @@ declare global {
 			 * Pads an array to a specific length by copying the last one element.
 			 *
 			 * @private
-			 * @param {Array} forms Number of forms given to convertPlural
+			 * @param {string[]} forms Number of forms given to convertPlural
 			 * @param {number} count Number of forms required
-			 * @return {Array} Padded array of forms
+			 * @return {string[]} Padded array of forms
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-preConvertPlural
 			 */
 			function preConvertPlural(forms: string[], count: number): string[];

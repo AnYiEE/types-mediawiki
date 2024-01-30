@@ -6,15 +6,12 @@ declare global {
 		 * Enabled server-side through `$wgDebugToolbar`.
 		 *
 		 * @since 1.19
-		 * @class mw.Debug
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug
 		 */
 		namespace Debug {
 			/**
 			 * Toolbar container element
 			 *
-			 * @property {JQuery}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-property-S-container
 			 */
 			const $container: JQuery;
@@ -22,7 +19,6 @@ declare global {
 			/**
 			 * Object containing data for the debug toolbar
 			 *
-			 * @property {Object}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-property-data
 			 */
 			const data: Record<string, any>;

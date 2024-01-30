@@ -17,8 +17,10 @@ import {User} from './user';
  *
  * Example usage:
  *
- *     mw.hook( 'wikipage.content' ).add( fn ).remove( fn );
- *     mw.hook( 'wikipage.content' ).fire( $content );
+ * ```js
+ * mw.hook( 'wikipage.content' ).add( fn ).remove( fn );
+ * mw.hook( 'wikipage.content' ).fire( $content );
+ * ```
  *
  * Handlers can be added and fired for arbitrary event names at any time. The same
  * event can be fired multiple times. The last run of an event is memorized
@@ -31,22 +33,21 @@ import {User} from './user';
  * You can pass around the `add` and/or `fire` method to another piece of code
  * without it having to know the event name (or `mw.hook` for that matter).
  *
- *     var h = mw.hook( 'bar.ready' );
- *     new mw.Foo( .. ).fetch( { callback: h.fire } );
+ * ```js
+ * var h = mw.hook( 'bar.ready' );
+ * new mw.Foo( .. ).fetch( { callback: h.fire } );
+ * ```
  *
  * Note: Events are documented with an underscore instead of a dot in the event
  * name due to jsduck not supporting dots in that position.
  *
- * @class mw.hook
  * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook
  */
 interface Hook<T extends any[] = any[]> {
 	/**
 	 * Register a hook handler.
 	 *
-	 * @param {((...data: T) => any)[]} handler Function to bind.
-	 * @return {this}
-	 * @chainable
+	 * @param {...Function} handler Function to bind.
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-add
 	 */
 	add(...handler: Array<(...data: T) => any>): this;
@@ -54,9 +55,7 @@ interface Hook<T extends any[] = any[]> {
 	/**
 	 * Call hook handlers with data.
 	 *
-	 * @param {T} data
-	 * @return {this}
-	 * @chainable
+	 * @param {Mixed} data
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-fire
 	 */
 	fire(...data: T): this;
@@ -64,9 +63,7 @@ interface Hook<T extends any[] = any[]> {
 	/**
 	 * Unregister a hook handler.
 	 *
-	 * @param {((...data: T) => any)[]} handler Function to unbind.
-	 * @return {this}
-	 * @chainable
+	 * @param {...Function} handler Function to unbind.
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook-method-remove
 	 */
 	remove(...handler: Array<(...data: T) => any>): this;
@@ -143,7 +140,7 @@ declare global {
 		 *
 		 * Code that fires the postEdit hook should first set `wgRevisionId` and `wgCurRevisionId` to the revision associated with the edit that triggered the postEdit hook, then fire the postEdit hook, e.g.:
 		 *
-		 * ```
+		 * ```js
 		 * mw.config.set( {
 		 *    wgCurRevisionId: data.newrevid,
 		 *    wgRevisionId: data.newrevid
@@ -299,7 +296,8 @@ declare global {
 		 * Create an instance of mw.hook, fired when the page watch status has changed.
 		 *
 		 * Example usage:
-		 * ```
+		 *
+		 * ```js
 		 * mw.hook( 'wikipage.watchlistChange' ).add( ( isWatched, expiry, expirySelected ) => {
 		 *     // Do things
 		 * } );
@@ -314,7 +312,7 @@ declare global {
 		/**
 		 * Create an instance of mw.hook.
 		 *
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-hook
 		 */
 		function hook<T extends any[] = any[]>(event: string): Hook<T>;
 	}

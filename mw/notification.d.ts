@@ -56,12 +56,6 @@ interface NotificationOptions {
  * The constructor is not publicly accessible; use {@link mw.notification.notify} instead.
  * This does not insert anything into the document (see {@link start}).
  *
- * @class mw.Notification_
- * @alternateClassName mw.Notification
- * @constructor
- * @private
- * @param {mw.Message|JQuery|HTMLElement|string} message
- * @param {Object} options
  * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Notification_
  */
 interface Notification {
@@ -117,9 +111,9 @@ declare global {
 		 * Display a notification message to the user.
 		 *
 		 * @param {HTMLElement|HTMLElement[]|JQuery|Message|string} message
-		 * @param {Object} [options] The options to use for the notification.
+		 * @param {Partial<NotificationOptions>} [options] The options to use for the notification.
 		 *  See {@link NotificationOptions defaults} for details.
-		 * @return {JQuery.Promise} Notification object
+		 * @return {JQuery.Promise<Notification>} Notification object
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-notify
 		 */
 		function notify(
@@ -128,14 +122,10 @@ declare global {
 		): JQuery.Promise<Notification>;
 
 		/**
-		 * @class mw.notification
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification
 		 */
 		namespace notification {
 			/**
-			 * @property {number}
-			 *
 			 * Maximum number of simultaneous notifications to start auto-hide timers for.
 			 * Only this number of notifications being displayed will be auto-hidden at one time.
 			 * Any additional notifications in the list will only start counting their timeout for
@@ -159,7 +149,7 @@ declare global {
 			 * Display a notification message to the user.
 			 *
 			 * @param {HTMLElement|HTMLElement[]|JQuery|Message|string} message
-			 * @param {Object} [options] The options to use for the notification.
+			 * @param {Partial<NotificationOptions>} [options] The options to use for the notification.
 			 *  See {@link NotificationOptions defaults} for details.
 			 * @return {Notification} Notification object
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification-method-notify
@@ -187,7 +177,6 @@ declare global {
 
 			/**
 			 * @private
-			 * @property {Object}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification-property-autoHideSeconds
 			 */
 			const autoHideSeconds: {

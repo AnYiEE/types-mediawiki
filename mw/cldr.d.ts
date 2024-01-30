@@ -3,8 +3,6 @@ declare global {
 		/**
 		 * Namespace for CLDR-related utility methods.
 		 *
-		 * @class
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.cldr
 		 */
 		namespace cldr {
@@ -16,7 +14,7 @@ declare global {
 			 *
 			 * @param {number} number
 			 * @param {Array} pluralRules
-			 * @return {number} plural form index
+			 * @returns {number} plural form index
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.cldr-method-getPluralForm
 			 */
 			function getPluralForm(number: number, pluralRules: any[]): void;

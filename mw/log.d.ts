@@ -3,8 +3,6 @@ declare global {
 		/**
 		 * Collection of methods to help log messages to the console.
 		 *
-		 * @class mw.log
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.log
 		 */
 		const log: {
@@ -16,11 +14,10 @@ declare global {
 			 *
 			 * See {@link mw.log} for other logging methods.
 			 *
-			 * @member mw
-			 * @param {...string} msg Messages to output to console.
+			 * @param {...any} msg Messages to output to console.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-log
 			 */
-			(...msg: string[]): void;
+			(...msg: any[]): void;
 
 			/**
 			 * Create a property on a host object that, when accessed, will log
@@ -28,14 +25,15 @@ declare global {
 			 *
 			 * Usage:
 			 *
-			 *    mw.log.deprecate( window, 'myGlobalFn', myGlobalFn );
+			 * ```js
+			 * mw.log.deprecate( window, 'myGlobalFn', myGlobalFn );
 			 *
-			 *    mw.log.deprecate( Thing, 'old', old, 'Use Other.thing instead', 'Thing.old'  );
-			 *
+			 * mw.log.deprecate( Thing, 'old', old, 'Use Other.thing instead', 'Thing.old'  );
+			 * ```
 			 *
 			 * @param {Object} obj Host object of deprecated property
 			 * @param {string} key Name of property to create in `obj`
-			 * @param {Object} val The value this property should return when accessed
+			 * @param {Mixed} val The value this property should return when accessed
 			 * @param {string} [msg] Optional extra text to add to the deprecation warning
 			 * @param {string} [logName] Name of the feature for deprecation tracker.
 			 *  Tracking is disabled by default, except for global variables on `window`.
@@ -50,7 +48,7 @@ declare global {
 			 * argument is an Error object.
 			 *
 			 * @since 1.26
-			 * @param {...any} msg Messages to output to console
+			 * @param {...Mixed} msg Messages to output to console
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-error
 			 */
 			error(...msg: any[]): void;
@@ -60,24 +58,25 @@ declare global {
 			 *
 			 * Usage:
 			 *
-			 *     var deprecatedNoB = mw.log.makeDeprecated( 'hello_without_b', 'Use of hello without b is deprecated.' );
+			 * ```js
+			 * var deprecatedNoB = mw.log.makeDeprecated( 'hello_without_b', 'Use of hello without b is deprecated.' );
 			 *
-			 *     function hello( a, b ) {
-			 *       if ( b === undefined ) {
+			 * function hello( a, b ) {
+			 *     if ( b === undefined ) {
 			 *         deprecatedNoB();
 			 *         b = 0;
-			 *       }
-			 *       return a + b;
 			 *     }
+			 *     return a + b;
+			 * }
 			 *
-			 *     hello( 1 );
-			 *
+			 * hello( 1 );
+			 * ```
 			 *
 			 * @since 1.38
 			 * @param {string|null} key Name of the feature for deprecation tracker,
 			 *  or null for a console-only deprecation.
 			 * @param {string} msg Deprecation warning.
-			 * @return {Function}
+			 * @returns {Function}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-makeDeprecated
 			 */
 			makeDeprecated(key: string | null, msg: string): () => void;
@@ -85,10 +84,10 @@ declare global {
 			/**
 			 * Write a message to the browser console's warning channel.
 			 *
-			 * @param {...string} msg Messages to output to console
+			 * @param {...any} msg Messages to output to console
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.log-method-warn
 			 */
-			warn(...msg: string[]): void;
+			warn(...msg: any[]): void;
 		};
 	}
 }

@@ -1,16 +1,38 @@
+import {QueryParams} from './Uri';
+
 type NoReturn<T extends (...args: any[]) => any> = T extends (this: infer U, ...args: infer V) => any
 	? unknown extends U
 		? (...args: V) => void
 		: (this: U, ...args: V) => void
 	: never;
 
+interface ImageUrlData {
+	/**
+	 * File name (same format as {@link mw.Title.getMainText()}).
+	 */
+	name: string;
+
+	/**
+	 * Thumbnail width, in pixels. Null when the file is not a thumbnail.
+	 */
+	width: number | null;
+
+	/**
+	 * @param w Width, which must be smaller than the width of the original image (or equal to it; that
+	 *   only works if `MediaHandler::mustRender` returns true for the file). Null when the
+	 *   file in the original URL is not a thumbnail.
+	 *   On wikis with `$wgGenerateThumbnailOnParse` set to true, this will fall back to using
+	 *   `Special:Redirect` which is less efficient. Otherwise, it is a direct thumbnail URL.
+	 * @returns A thumbnail URL (URL-encoded) with that width.
+	 */
+	resizeUrl: (w: number) => string | null;
+}
+
 declare global {
 	namespace mw {
 		/**
 		 * Utility library provided by the `mediawiki.util` module.
 		 *
-		 * @class mw.util
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util
 		 */
 		namespace util {
@@ -31,7 +53,6 @@ declare global {
 			 * allow your code to re-run when the page changes (e.g. live preview
 			 * or re-render after ajax save).
 			 *
-			 * @property {JQuery}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-property-S-content
 			 */
 			const $content: JQuery;
@@ -45,11 +66,13 @@ declare global {
 			 * This function returns the CSSStyleSheet object for convience with features
 			 * that are managed at that level, such as toggling of styles:
 			 *
-			 *     var sheet = util.addCSS( '.foobar { display: none; }' );
-			 *     $( '#myButton' ).click( function () {
-			 *         // Toggle the sheet on and off
-			 *         sheet.disabled = !sheet.disabled;
-			 *     } );
+			 * ```js
+			 * var sheet = util.addCSS( '.foobar { display: none; }' );
+			 * $( '#myButton' ).click( function () {
+			 *     // Toggle the sheet on and off
+			 *     sheet.disabled = !sheet.disabled;
+			 * } );
+			 * ```
 			 *
 			 * See also [MDN: CSSStyleSheet](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet).
 			 *
@@ -84,7 +107,10 @@ declare global {
 			 * - p-namespaces (For namespaces on legacy skins)
 			 *
 			 * Additional menus can be discovered through the following code:
-			 * ```$('.mw-portlet').toArray().map((el) => el.id);```
+			 *
+			 * ```js
+			 * $('.mw-portlet').toArray().map((el) => el.id);
+			 * ```
 			 *
 			 * Menu availability varies by skin, wiki, and current page.
 			 *
@@ -95,27 +121,31 @@ declare global {
 			 * add the link before an existing item, pass the DOM node or a CSS selector
 			 * for that item, e.g. `'#foobar'` or `document.getElementById( 'foobar' )`.
 			 *
-			 *     mw.util.addPortletLink(
-			 *         'p-tb', 'https://www.mediawiki.org/',
-			 *         'mediawiki.org', 't-mworg', 'Go to mediawiki.org', 'm', '#t-print'
-			 *     );
+			 * ```js
+			 * mw.util.addPortletLink(
+			 *     'p-tb', 'https://www.mediawiki.org/',
+			 *     'mediawiki.org', 't-mworg', 'Go to mediawiki.org', 'm', '#t-print'
+			 * );
 			 *
-			 *     var node = mw.util.addPortletLink(
-			 *         'p-tb',
-			 *         new mw.Title( 'Special:Example' ).getUrl(),
-			 *         'Example'
-			 *     );
-			 *     $( node ).on( 'click', function ( e ) {
-			 *         console.log( 'Example' );
-			 *         e.preventDefault();
-			 *     } );
+			 * var node = mw.util.addPortletLink(
+			 *     'p-tb',
+			 *     mw.util.getUrl( 'Special:Example' ),
+			 *     'Example'
+			 * );
+			 * $( node ).on( 'click', function ( e ) {
+			 *     console.log( 'Example' );
+			 *     e.preventDefault();
+			 * } );
+			 * ```
 			 *
 			 * Remember that to call this inside a user script, you may have to ensure the
 			 * `mediawiki.util` is loaded first:
 			 *
-			 *     $.when( mw.loader.using( [ 'mediawiki.util' ] ), $.ready ).then( function () {
-			 *          mw.util.addPortletLink( 'p-tb', 'https://www.mediawiki.org/', 'mediawiki.org' );
-			 *     } );
+			 * ```js
+			 * $.when( mw.loader.using( [ 'mediawiki.util' ] ), $.ready ).then( function () {
+			 *      mw.util.addPortletLink( 'p-tb', 'https://www.mediawiki.org/', 'mediawiki.org' );
+			 * } );
+			 * ```
 			 *
 			 * @param {string} portletId ID of the target portlet (e.g. 'p-cactions' or 'p-personal')
 			 * @param {string} href Link URL
@@ -212,9 +242,11 @@ declare global {
 			 *
 			 * The following characters are escaped:
 			 *
-			 *     \ { } ( ) | . ? * + - ^ $ [ ]
+			 * ```text
+			 * \ { } ( ) | . ? * + - ^ $ [ ]
+			 * ```
 			 *
-			 * @since 1.26; moved to mw.util in 1.34
+			 * @since 1.26; moved to {@link mw.util} in 1.34
 			 * @param {string} str String to escape
 			 * @return {string} Escaped string
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-escapeRegExp
@@ -226,9 +258,11 @@ declare global {
 			 * Currently this does not handle associative or multi-dimensional arrays, but that may be
 			 * improved in the future.
 			 *
-			 *     mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo[0]=a&foo[1]=b' ) ); // [ 'a', 'b' ]
-			 *     mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo[]=a&foo[]=b' ) ); // [ 'a', 'b' ]
-			 *     mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo=a' ) ); // null
+			 * ```js
+			 * mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo[0]=a&foo[1]=b' ) ); // [ 'a', 'b' ]
+			 * mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo[]=a&foo[]=b' ) ); // [ 'a', 'b' ]
+			 * mw.util.getArrayParam( 'foo', new URLSearchParams( '?foo=a' ) ); // null
+			 * ```
 			 *
 			 * @param {string} param The parameter name.
 			 * @param {URLSearchParams} [params] Parsed URL parameters to search through, defaulting to the current browsing location.
@@ -240,9 +274,11 @@ declare global {
 			/**
 			 * Get the value for a given URL query parameter.
 			 *
-			 *     mw.util.getParamValue( 'foo', '/?foo=x' ); // "x"
-			 *     mw.util.getParamValue( 'foo', '/?foo=' ); // ""
-			 *     mw.util.getParamValue( 'foo', '/' ); // null
+			 * ```js
+			 * mw.util.getParamValue( 'foo', '/?foo=x' ); // "x"
+			 * mw.util.getParamValue( 'foo', '/?foo=' ); // ""
+			 * mw.util.getParamValue( 'foo', '/' ); // null
+			 * ```
 			 *
 			 * @param {string} param The parameter name.
 			 * @param {string} [url=location.href] URL to search through, defaulting to the current browsing location.
@@ -255,7 +291,7 @@ declare global {
 			 * Get the target element from a link hash
 			 *
 			 * This is the same element as you would get from
-			 * document.querySelectorAll(':target'), but can be used on
+			 * `document.querySelectorAll(':target')`, but can be used on
 			 * an arbitrary hash fragment, or after pushState/replaceState
 			 * has been used.
 			 *
@@ -277,17 +313,14 @@ declare global {
 			 * Get the URL to a given local wiki page name,
 			 *
 			 * @param {string|null} [pageName=wgPageName] Page name
-			 * @param {Object} [params] A mapping of query parameter names to values,
+			 * @param {QueryParams} [params] A mapping of query parameter names to values,
 			 *  e.g. `{ action: 'edit' }`
 			 * @return {string} URL, relative to `wgServer`.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-getUrl
 			 */
 			// params are handled by $.param, which converts any value to a string. However, instead of using toString(),
 			// object are serialized (deep ones recursively), so only simple values are allowed to prevent mistakes.
-			function getUrl(
-				pageName?: string | null,
-				params?: {[param: string]: string | number | boolean | null | undefined}
-			): string;
+			function getUrl(pageName?: string | null, params?: QueryParams): string;
 
 			/**
 			 * Hide a portlet.
@@ -313,13 +346,15 @@ declare global {
 			 *
 			 * Based on \Wikimedia\IPUtils::isIPv4 in PHP.
 			 *
-			 *     // Valid
-			 *     mw.util.isIPv4Address( '80.100.20.101' );
-			 *     mw.util.isIPv4Address( '192.168.1.101' );
+			 * ```js
+			 * // Valid
+			 * mw.util.isIPv4Address( '80.100.20.101' );
+			 * mw.util.isIPv4Address( '192.168.1.101' );
 			 *
-			 *     // Invalid
-			 *     mw.util.isIPv4Address( '192.0.2.0/24' );
-			 *     mw.util.isIPv4Address( 'hello' );
+			 * // Invalid
+			 * mw.util.isIPv4Address( '192.0.2.0/24' );
+			 * mw.util.isIPv4Address( 'hello' );
+			 * ```
 			 *
 			 * @param {string} address
 			 * @param {boolean} [allowBlock=false]
@@ -328,25 +363,27 @@ declare global {
 			 */
 			function isIPv4Address(
 				address: string,
-				allowBlock: true
-			): address is `${number}.${number}.${number}.${number}${`/${number}` | ''}`;
-			function isIPv4Address(
-				address: string,
 				allowBlock?: false
 			): address is `${number}.${number}.${number}.${number}`;
+			function isIPv4Address(
+				address: string,
+				allowBlock: boolean
+			): address is `${number}.${number}.${number}.${number}${`/${number}` | ''}`;
 
 			/**
 			 * Whether a string is a valid IPv6 address or not.
 			 *
 			 * Based on \Wikimedia\IPUtils::isIPv6 in PHP.
 			 *
-			 *     // Valid
-			 *     mw.util.isIPv6Address( '2001:db8:a:0:0:0:0:0' );
-			 *     mw.util.isIPv6Address( '2001:db8:a::' );
+			 * ```js
+			 * // Valid
+			 * mw.util.isIPv6Address( '2001:db8:a:0:0:0:0:0' );
+			 * mw.util.isIPv6Address( '2001:db8:a::' );
 			 *
-			 *     // Invalid
-			 *     mw.util.isIPv6Address( '2001:db8:a::/32' );
-			 *     mw.util.isIPv6Address( 'hello' );
+			 * // Invalid
+			 * mw.util.isIPv6Address( '2001:db8:a::/32' );
+			 * mw.util.isIPv6Address( 'hello' );
+			 * ```
 			 *
 			 * @param {string} address
 			 * @param {boolean} [allowBlock=false]
@@ -367,7 +404,7 @@ declare global {
 			/**
 			 * Does given username match $wgAutoCreateTempUser?
 			 *
-			 * This functionality has been adapted from MediaWiki\User\TempUser\Pattern::isMatch()
+			 * This functionality has been adapted from `MediaWiki\User\TempUser\Pattern::isMatch()`
 			 *
 			 * @param {string} username
 			 * @return {boolean}
@@ -381,33 +418,19 @@ declare global {
 			 * the image.
 			 *
 			 * @param {string} url URL to parse (URL-encoded)
-			 * @return {Object|null} URL data, or null if the URL is not a valid MediaWiki
+			 * @return {ImageUrlData|null} URL data, or null if the URL is not a valid MediaWiki
 			 *   image/thumbnail URL.
-			 * @return {string} return.name File name (same format as Title.getMainText()).
-			 * @return {number} [return.width] Thumbnail width, in pixels. Null when the file is not
-			 *   a thumbnail.
-			 * @return {function(number):string} [return.resizeUrl] A function that takes a width
-			 *   parameter and returns a thumbnail URL (URL-encoded) with that width. The width
-			 *   parameter must be smaller than the width of the original image (or equal to it; that
-			 *   only works if MediaHandler::mustRender returns true for the file). Null when the
-			 *   file in the original URL is not a thumbnail.
-			 *   On wikis with $wgGenerateThumbnailOnParse set to true, this will fall back to using
-			 *   Special:Redirect which is less efficient. Otherwise, it is a direct thumbnail URL.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util-method-parseImageUrl
 			 */
-			function parseImageUrl(url: string): {
-				name: string;
-				width?: number | null;
-				resizeUrl: (w: number) => string;
-			} | null;
+			function parseImageUrl(url: string): ImageUrlData | null;
 
 			/**
 			 * Percent-decode a string, as found in a URL hash fragment
 			 *
 			 * Implements the percent-decode method as defined in
-			 * https://url.spec.whatwg.org/#percent-decode.
+			 * {@link https://url.spec.whatwg.org/#percent-decode}.
 			 *
-			 * URLSearchParams implements https://url.spec.whatwg.org/#concept-urlencoded-parser
+			 * URLSearchParams implements {@link https://url.spec.whatwg.org/#concept-urlencoded-parser}
 			 * which performs a '+' to ' ' substitution before running percent-decode.
 			 *
 			 * To get the desired behaviour we percent-encode any '+' in the fragment
@@ -424,7 +447,7 @@ declare global {
 			 *
 			 * This will make it more compact and lower-case.
 			 *
-			 * This functionality has been adapted from \Wikimedia\IPUtils::prettifyIP()
+			 * This functionality has been adapted from `\Wikimedia\IPUtils::prettifyIP()`
 			 *
 			 * @param {string} ip IP address in quad or octet form (CIDR or not).
 			 * @return {string|null}
@@ -448,7 +471,7 @@ declare global {
 			 * IPv6 addresses in octet notation are expanded to 8 words;
 			 * IPv4 addresses have leading zeros, in each octet, removed.
 			 *
-			 * This functionality has been adapted from \Wikimedia\IPUtils::sanitizeIP()
+			 * This functionality has been adapted from `\Wikimedia\IPUtils::sanitizeIP()`
 			 *
 			 * @param {string} ip IP address in quad or octet form (CIDR or not).
 			 * @return {string|null}
@@ -487,7 +510,9 @@ declare global {
 			 *
 			 * This validation is based on the HTML5 specification.
 			 *
-			 *     mw.util.validateEmail( "me@example.org" ) === true;
+			 * ```js
+			 * mw.util.validateEmail( "me@example.org" ) === true;
+			 * ```
 			 *
 			 * @param {string} email E-mail address
 			 * @return {boolean|null} True if valid, false if invalid, null if `email` was empty.

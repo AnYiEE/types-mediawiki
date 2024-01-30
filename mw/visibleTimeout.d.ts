@@ -1,8 +1,6 @@
 declare global {
 	namespace mw {
 		/**
-		 * @class mw.visibleTimeout
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.visibleTimeout
 		 */
 		namespace visibleTimeout {

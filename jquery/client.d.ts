@@ -2,6 +2,8 @@ declare global {
 	interface JQueryStatic {
 		/**
 		 * User-agent detection
+		 *
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/jQuery.client
 		 */
 		client: Client;
 	}
@@ -13,26 +15,30 @@ interface Client {
 	 *
 	 * The resulting client object will be in the following format:
 	 *
-	 *     {
-	 *         'name': 'firefox',
-	 *         'layout': 'gecko',
-	 *         'layoutVersion': 20101026,
-	 *         'platform': 'linux'
-	 *         'version': '3.5.1',
-	 *         'versionBase': '3',
-	 *         'versionNumber': 3.5,
-	 *     }
+	 * ```js
+	 * {
+	 *     'name': 'firefox',
+	 *     'layout': 'gecko',
+	 *     'layoutVersion': 20101026,
+	 *     'platform': 'linux'
+	 *     'version': '3.5.1',
+	 *     'versionBase': '3',
+	 *     'versionNumber': 3.5,
+	 * }
+	 * ```
 	 *
 	 * Example:
 	 *
-	 *     if ( $.client.profile().layout == 'gecko' ) {
-	 *         // This will only run in Gecko browsers, such as Mozilla Firefox.
-	 *     }
+	 * ```js
+	 * if ( $.client.profile().layout == 'gecko' ) {
+	 *     // This will only run in Gecko browsers, such as Mozilla Firefox.
+	 * }
 	 *
-	 *     var profile = $.client.profile();
-	 *     if ( profile.layout == 'gecko' && profile.platform == 'linux' ) {
-	 *         // This will only run in Gecko browsers on Linux.
-	 *     }
+	 * var profile = $.client.profile();
+	 * if ( profile.layout == 'gecko' && profile.platform == 'linux' ) {
+	 *     // This will only run in Gecko browsers on Linux.
+	 * }
+	 * ```
 	 *
 	 * Recognised browser names:
 	 *
@@ -70,9 +76,10 @@ interface Client {
 	 * - `solaris` (untested)
 	 * - `win`
 	 *
-	 * @param {Object} [nav] An object with a 'userAgent' and 'platform' property.
+	 * @param {ClientNavigator} [nav] An object with a 'userAgent' and 'platform' property.
 	 *  Defaults to the global `navigator` object.
-	 * @return {Object} The client object
+	 * @returns {ClientProfile} The client object
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/jQuery.client-method-profile
 	 */
 	profile(nav?: ClientNavigator): ClientProfile;
 
@@ -85,40 +92,41 @@ interface Client {
 	 *
 	 * A browser map is in the following format:
 	 *
-	 *     {
-	 *         // Multiple rules with configurable operators
-	 *         'msie': [['>=', 7], ['!=', 9]],
-	 *         // Match no versions
-	 *         'iphone': false,
-	 *         // Match any version
-	 *         'android': null
-	 *     }
+	 * ```js
+	 * {
+	 *     // Multiple rules with configurable operators
+	 *     'msie': [['>=', 7], ['!=', 9]],
+	 *     // Match no versions
+	 *     'iphone': false,
+	 *     // Match any version
+	 *     'android': null
+	 * }
+	 * ```
 	 *
 	 * It can optionally be split into ltr/rtl sections:
 	 *
-	 *     {
-	 *         'ltr': {
-	 *             'android': null,
-	 *             'iphone': false
-	 *         },
-	 *         'rtl': {
-	 *             'android': false,
-	 *             // rules are not inherited from ltr
-	 *             'iphone': false
-	 *         }
+	 * ```js
+	 * {
+	 *     'ltr': {
+	 *         'android': null,
+	 *         'iphone': false
+	 *     },
+	 *     'rtl': {
+	 *         'android': false,
+	 *         // rules are not inherited from ltr
+	 *         'iphone': false
 	 *     }
+	 * }
+	 * ```
 	 *
-	 * @param {Object} map Browser support map
-	 * @param {Object} [profile] A client-profile object
+	 * @param {ClientSupportMap} map Browser support map
+	 * @param {ClientProfile} [profile] A client-profile object
 	 * @param {boolean} [exactMatchOnly=false] Only return true if the browser is matched,
 	 *  otherwise returns true if the browser is not found.
-	 * @return {boolean} The current browser is in the support map
+	 * @returns {boolean} The current browser is in the support map
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/jQuery.client-method-test
 	 */
-	test(
-		map: ClientSupportMap | {ltr: ClientSupportMap; rtl: ClientSupportMap},
-		profile?: ClientProfile,
-		exactMatchOnly?: boolean
-	): boolean;
+	test(map: ClientSupportMap, profile?: ClientProfile, exactMatchOnly?: boolean): boolean;
 }
 
 export interface ClientNavigator {
@@ -140,8 +148,11 @@ type ClientProfileName =
 	| 'safari'
 	| 'silk';
 
-type ClientSupportMap = Partial<Record<ClientProfileName, false | null | ClientSupportCondition[]>>;
-type ClientSupportCondition = ['==' | '===' | '!=' | '!==' | '<' | '<=' | '>' | '>=', string | number];
+type ComparisonOperator = '==' | '===' | '!=' | '!==' | '<' | '<=' | '>' | '>=';
+type ClientSupportCondition = [ComparisonOperator, string | number];
+
+type UndirectedClientSupportMap = Partial<Record<ClientProfileName, false | null | ClientSupportCondition[]>>;
+type ClientSupportMap = UndirectedClientSupportMap | Record<'ltr' | 'rtl', UndirectedClientSupportMap>;
 
 interface ClientProfile {
 	name: ClientProfileName;

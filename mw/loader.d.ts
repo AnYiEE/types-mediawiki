@@ -24,7 +24,7 @@ interface ModuleRequire {
 	 * Get the exported value of a module.
 	 *
 	 * @param moduleName Module name
-	 * @return Exported value
+	 * @returns Exported value
 	 */
 	(moduleName: string): any;
 }
@@ -71,8 +71,6 @@ declare global {
 		 * For more information, refer to
 		 * <https://www.mediawiki.org/wiki/ResourceLoader/Features>
 		 *
-		 * @class mw.loader
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader
 		 */
 		namespace loader {
@@ -90,7 +88,6 @@ declare global {
 			/**
 			 * Get the names of all registered ResourceLoader modules.
 			 *
-			 * @member mw.loader
 			 * @return {string[]}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-method-getModuleNames
 			 */
@@ -101,18 +98,19 @@ declare global {
 			 *
 			 * Example:
 			 *
-			 *     mw.loader.getScript(
-			 *         'https://example.org/x-1.0.0.js'
-			 *     )
-			 *         .then( function () {
-			 *             // Script succeeded. You can use X now.
-			 *         }, function ( e ) {
-			 *             // Script failed. X is not avaiable
-			 *             mw.log.error( e.message ); // => "Failed to load script"
-			 *         } );
+			 * ```js
+			 * mw.loader.getScript(
+			 *     'https://example.org/x-1.0.0.js'
+			 * )
+			 *     .then( function () {
+			 *         // Script succeeded. You can use X now.
+			 *     }, function ( e ) {
+			 *         // Script failed. X is not avaiable
+			 *         mw.log.error( e.message ); // => "Failed to load script"
 			 *     } );
+			 * } );
+			 * ```
 			 *
-			 * @member mw.loader
 			 * @param {string} url Script URL
 			 * @return {JQuery.Promise} Resolved when the script is loaded
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-method-getScript
@@ -149,7 +147,7 @@ declare global {
 			 *   as '`[name]@[version]`". This version should match the requested version
 			 *   (from #batchRequest and #registry). This avoids race conditions (T117587).
 			 *
-			 * - 1. {Function|Array|string|Object} [script] Module code. This can be a function,
+			 * - 1. {ModuleScript} [script] Module code. This can be a function,
 			 *   a list of URLs to load via `<script src>`, a string for `globalEval()`, or an
 			 *   object like {"files": {"foo.js":function, "bar.js": function, ...}, "main": "foo.js"}.
 			 *   If an object is provided, the main file will be executed immediately, and the other
@@ -157,16 +155,18 @@ declare global {
 			 *   provided, it will be executed/evaluated immediately. If an array is provided, all
 			 *   URLs in the array will be loaded immediately, and executed as soon as they arrive.
 			 *
-			 * - 2. {Object} [style] Should follow one of the following patterns:
+			 * - 2. {ModuleStyle} [style] Should follow one of the following patterns:
 			 *
-			 *     { "css": [css, ..] }
-			 *     { "url": { (media): [url, ..] } }
+			 *   ```js
+			 *   { "css": [css, ..] }
+			 *   { "url": { (media): [url, ..] } }
+			 *   ```
 			 *
 			 *   The reason css strings are not concatenated anymore is T33676. We now check
 			 *   whether it's safe to extend the stylesheet.
 			 *
-			 * - 3. {Object} [messages] List of key/value pairs to be added to {@link mw.messages}.
-			 * - 4. {Object} [templates] List of key/value pairs to be added to {@link mw.templates}.
+			 * - 3. {ModuleMessages} [messages] List of key/value pairs to be added to {@link mw.messages}.
+			 * - 4. {ModuleTemplates} [templates] List of key/value pairs to be added to {@link mw.templates}.
 			 * - 5. {String|null} [deprecationWarning] Deprecation warning if any
 			 *
 			 * The declarator must not use any scope variables, since it will be serialized with
@@ -187,28 +187,30 @@ declare global {
 			 * Does not support mw.loader.store caching.
 			 *
 			 * @param {string} module
-			 * @param {Function|Array|string|Object} [script] Module code. This can be a function,
+			 * @param {ModuleScript} [script] Module code. This can be a function,
 			 *  a list of URLs to load via `<script src>`, a string for `domEval()`, or an
 			 *  object like {"files": {"foo.js":function, "bar.js": function, ...}, "main": "foo.js"}.
 			 *  If an object is provided, the main file will be executed immediately, and the other
 			 *  files will only be executed if loaded via require(). If a function or string is
 			 *  provided, it will be executed/evaluated immediately. If an array is provided, all
 			 *  URLs in the array will be loaded immediately, and executed as soon as they arrive.
-			 * @param {Object} [style] Should follow one of the following patterns:
+			 * @param {ModuleStyle} [style] Should follow one of the following patterns:
 			 *
-			 *     { "css": [css, ..] }
-			 *     { "url": { <media>: [url, ..] } }4
+			 * ```js
+			 * { "css": [css, ..] }
+			 * { "url": { <media>: [url, ..] } }
+			 * ```
 			 *
 			 * The reason css strings are not concatenated anymore is T33676. We now check
 			 * whether it's safe to extend the stylesheet.
-			 * @param {Object} [messages] List of key/value pairs to be added to {@link mw.messages}.
-			 * @param {Object} [templates] List of key/value pairs to be added to {@link mw.templates}.
+			 * @param {ModuleMessages} [messages] List of key/value pairs to be added to {@link mw.messages}.
+			 * @param {ModuleTemplates} [templates] List of key/value pairs to be added to {@link mw.templates}.
 			 * @param {string|null} [deprecationWarning] Deprecation warning if any
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-method-implement
 			 */
 			function implement(
 				module: string,
-				script?: any,
+				script?: ModuleScript,
 				style?: ModuleStyle,
 				messages?: ModuleMessages,
 				templates?: ModuleTemplates,
@@ -227,7 +229,7 @@ declare global {
 			 * - This method is used for preloading, which must not throw. Later code that
 			 *   calls {@link using()} will handle the error.
 			 *
-			 * @param {string|Array} modules Either the name of a module, array of modules,
+			 * @param {string|string[]} modules Either the name of a module, array of modules,
 			 *  or a URL of an external script or style
 			 * @param {string} [type='text/javascript'] MIME type to use if calling with a URL of an
 			 *  external script or style; acceptable values are "text/css" and
@@ -280,7 +282,7 @@ declare global {
 			/**
 			 * Change the state of one or more modules.
 			 *
-			 * @param {Object} states Object of module name/state pairs
+			 * @param {Object.<string, ModuleState>} states Object of module name/state pairs
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-method-state
 			 */
 			function state(states: Record<string, ModuleState>): void;
@@ -301,26 +303,29 @@ declare global {
 			 *
 			 * Example of inline dependency on OOjs:
 			 *
-			 *     mw.loader.using( 'oojs', function () {
-			 *         OO.compare( [ 1 ], [ 1 ] );
-			 *     } );
+			 * ```js
+			 * mw.loader.using( 'oojs', function () {
+			 *     OO.compare( [ 1 ], [ 1 ] );
+			 * } );
+			 * ```
 			 *
 			 * Example of inline dependency obtained via `require()`:
 			 *
-			 *     mw.loader.using( [ 'mediawiki.util' ], function ( require ) {
-			 *         var util = require( 'mediawiki.util' );
-			 *     } );
+			 * ```js
+			 * mw.loader.using( [ 'mediawiki.util' ], function ( require ) {
+			 *     var util = require( 'mediawiki.util' );
+			 * } );
+			 * ```
 			 *
 			 * Since MediaWiki 1.23 this returns a promise.
 			 *
 			 * Since MediaWiki 1.28 the promise is resolved with a `require` function.
 			 *
-			 * @member mw.loader
-			 * @param {string|Array} dependencies Module name or array of modules names the
+			 * @param {string|string[]} dependencies Module name or array of modules names the
 			 *  callback depends on to be ready before executing
 			 * @param {Function} [ready] Callback to execute when all dependencies are ready
 			 * @param {Function} [error] Callback to execute if one or more dependencies failed
-			 * @return {JQuery.Promise} With a `require` function
+			 * @return {JQuery.Promise<ModuleRequire>} With a `require` function
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-method-using
 			 */
 			function using(
@@ -333,7 +338,6 @@ declare global {
 			 * Exposed for testing and debugging only.
 			 *
 			 * @private
-			 * @property {number}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-property-maxQueryLength
 			 */
 			const maxQueryLength: number;
@@ -343,7 +347,6 @@ declare global {
 			 * state; it is not a public interface for modifying the registry.
 			 *
 			 * @private
-			 * @property {Object}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-property-moduleRegistry
 			 */
 			const moduleRegistry: Record<string, ModuleRegistryEntry>;
@@ -402,8 +405,6 @@ declare global {
 			 *
 			 * @since 1.27
 			 * @private
-			 * @param {string} moduleName Module name
-			 * @return {any} Exported value
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-method-require
 			 */
 			const require: ModuleRequire;
@@ -413,7 +414,7 @@ declare global {
 			 *
 			 * @private
 			 * @param {string[]} modules Array of string module names
-			 * @return {Array} List of dependencies, including 'module'.
+			 * @return {string[]} List of dependencies, including 'module'.
 			 * @throws {Error} If an unregistered module or a dependency loop is encountered
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader-method-resolve
 			 */
@@ -435,7 +436,6 @@ declare global {
 				 * The localStorage key for the entire module store. The key references
 				 * $wgDBname to prevent clashes between wikis which share a common host.
 				 *
-				 * @property {string}
 				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader.store-property-key
 				 */
 				const key: string;
@@ -445,7 +445,6 @@ declare global {
 				 *
 				 * Defined by ResourceLoader\StartupModule::getStoreVary() in PHP.
 				 *
-				 * @property {string}
 				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader.store-property-vary
 				 */
 				const vary: string;
@@ -581,7 +580,6 @@ declare global {
 				 * be called if the store is enabled.
 				 *
 				 * @private
-				 * @method
 				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.loader.store-method-requestUpdate
 				 */
 				function requestUpdate(): void;

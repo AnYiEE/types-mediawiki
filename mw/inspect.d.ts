@@ -3,14 +3,11 @@ declare global {
 		/**
 		 * Tools for inspecting page composition and performance.
 		 *
-		 * @class mw.inspect
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect
 		 */
 		const inspect: {
 			/**
-			 * @inheritdoc mw.inspect#runReports
-			 * @method
+			 * @inheritdoc {@link inspect.runReports}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-inspect
 			 */
 			(): void;
@@ -21,9 +18,9 @@ declare global {
 			 * document.
 			 *
 			 * @param {string} css CSS source
-			 * @return {Object} Selector counts
-			 * @return {number} return.selectors Total number of selectors
-			 * @return {number} return.matched Number of matched selectors
+			 * @returns {Object} Selector counts
+			 * @returns {number} return.selectors Total number of selectors
+			 * @returns {number} return.matched Number of matched selectors
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-auditSelectors
 			 */
 			auditSelectors(css: string): {
@@ -43,7 +40,7 @@ declare global {
 			/**
 			 * Return a map of all dependency relationships between loaded modules.
 			 *
-			 * @return {Object} Maps module names to objects. Each sub-object has
+			 * @returns {Object} Maps module names to objects. Each sub-object has
 			 *  two properties, 'requires' and 'requiredBy'.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-getDependencyGraph
 			 */
@@ -52,7 +49,7 @@ declare global {
 			/**
 			 * Get a list of all loaded ResourceLoader modules.
 			 *
-			 * @return {Array} List of module names
+			 * @returns {Array} List of module names
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-getLoadedModules
 			 */
 			getLoadedModules(): string[];
@@ -61,7 +58,7 @@ declare global {
 			 * Calculate the byte size of a ResourceLoader module.
 			 *
 			 * @param {string} moduleName The name of the module
-			 * @return {number|null} Module size in bytes or null
+			 * @returns {number|null} Module size in bytes or null
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-getModuleSize
 			 */
 			getModuleSize(moduleName: string): number | null;
@@ -72,7 +69,7 @@ declare global {
 			 * modules that matched.
 			 *
 			 * @param {string|RegExp} pattern String or regexp to match.
-			 * @return {Array} Array of the names of modules that matched.
+			 * @returns {Array} Array of the names of modules that matched.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-grep
 			 */
 			grep(pattern: string | RegExp): string[];
@@ -89,8 +86,6 @@ declare global {
 
 			/**
 			 * @private
-			 * @class mw.inspect.reports
-			 * @singleton
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports
 			 */
 			reports: {
@@ -98,7 +93,7 @@ declare global {
 				 * For each module with styles, count the number of selectors, and
 				 * count how many match against some element currently in the DOM.
 				 *
-				 * @return {Object[]} CSS reports
+				 * @returns {Object[]} CSS reports
 				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports-method-css
 				 */
 				css(): any[];
@@ -107,7 +102,7 @@ declare global {
 				 * Generate a breakdown of all loaded modules and their size in
 				 * kibibytes. Modules are ordered from largest to smallest.
 				 *
-				 * @return {Object[]} Size reports
+				 * @returns {Object[]} Size reports
 				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports-method-size
 				 */
 				size(): any[];
@@ -117,7 +112,7 @@ declare global {
 				 * cache hits and misses, the number of items purged from the
 				 * cache, and the total size of the module blob in localStorage.
 				 *
-				 * @return {Object[]} Store stats
+				 * @returns {Object[]} Store stats
 				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports-method-store
 				 */
 				store(): any[];
@@ -128,7 +123,7 @@ declare global {
 				 *
 				 * This timing data is collected by mw.loader.profiler.
 				 *
-				 * @return {Object[]} Table rows
+				 * @returns {Object[]} Table rows
 				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports-method-time
 				 */
 				time(): any[];

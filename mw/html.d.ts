@@ -1,20 +1,18 @@
 declare global {
 	namespace mw {
 		/**
-		 * HTML construction helper functions.
+		 * HTML construction helper functions
 		 *
-		 *     @example
+		 * ```js
+		 * var Html, output;
 		 *
-		 *     var Html, output;
+		 * Html = mw.html;
+		 * output = Html.element( 'div', {}, new Html.Raw(
+		 *     Html.element( 'img', { src: '<' } )
+		 * ) );
+		 * mw.log( output ); // <div><img src="&lt;"/></div>
+		 * ```
 		 *
-		 *     Html = mw.html;
-		 *     output = Html.element( 'div', {}, new Html.Raw(
-		 *         Html.element( 'img', { src: '<' } )
-		 *     ) );
-		 *     mw.log( output ); // <div><img src="&lt;"/></div>
-		 *
-		 * @namespace mw.html
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.html
 		 */
 		namespace html {
@@ -22,7 +20,7 @@ declare global {
 			 * Create an HTML element string, with safe escaping.
 			 *
 			 * @param {string} name The tag name.
-			 * @param {Object} [attrs] An object with members mapping element names to values
+			 * @param {Object.<string, string|number|boolean>} [attrs] An object with members mapping element names to values
 			 * @param {string|Raw|null} [contents=null] The contents of the element.
 			 *
 			 *  - string: Text to be escaped.
@@ -42,8 +40,10 @@ declare global {
 			 *
 			 * Converts special characters to HTML entities.
 			 *
-			 *     mw.html.escape( '< > \' & "' );
-			 *     // Returns &lt; &gt; &#039; &amp; &quot;
+			 * ```js
+			 * mw.html.escape( '< > \' & "' );
+			 * // Returns &lt; &gt; &#039; &amp; &quot;
+			 * ```
 			 *
 			 * @param {string} s The string to escape
 			 * @return {string} HTML
@@ -54,14 +54,16 @@ declare global {
 			/**
 			 * Wrapper object for raw HTML passed to {@link mw.html.element()}.
 			 *
-			 * @class mw.html.Raw
-			 * @constructor
 			 * @param {string} value
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.html.Raw-method-constructor
 			 */
 			class Raw<V extends string = string> {
 				constructor(value: V);
-				private value: V;
+
+				/**
+				 * @private
+				 */
+				value: V;
 			}
 		}
 	}

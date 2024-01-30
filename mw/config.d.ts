@@ -235,7 +235,7 @@ declare global {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgRedirectedFrom
 		 */
-		wgRedirectedFrom: string | null;
+		wgRedirectedFrom?: string;
 		/**
 		 * The full name of the page to which content actions and navigation links (e.g. a skin's tabs) apply. The AJAX watch function uses this to work correctly on special pages such as Special:MovePage and Special:WhatLinksHere.
 		 *
@@ -247,7 +247,7 @@ declare global {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgRelevantUserName
 		 */
-		wgRelevantUserName: string | null;
+		wgRelevantUserName?: string;
 		/**
 		 * Like wgIsProbablyEditable, but applied to the contextually relevant page name from wgRelevantPageName instead of strictly the current page being viewed. For example, when viewing a page "Special:MovePage/Example" this will indicate whether the subject page is editable.
 		 *
@@ -263,7 +263,7 @@ declare global {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgRestrictionEdit
 		 */
-		wgRestrictionEdit: string[] | null;
+		wgRestrictionEdit?: string[];
 		/**
 		 * If the page is movable at all (and is not a special page) and moving of the page is restricted to some user groups, the array contains the minimum user group a user must be in in order to move the page. For semi-moveprotected pages, it'd contain ["autoconfirmed"]; for fully moveprotected pages ["sysop"]. If there are no explicit restrictions, the value is [] (an array with no elements).
 		 *
@@ -295,7 +295,7 @@ declare global {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgUserEditCount
 		 */
-		wgUserEditCount: number | null;
+		wgUserEditCount?: number;
 		/**
 		 * An array containing all the (local) user groups the current user is a member of, or null for non-logged-in users. User groups are identified by the internal user group names, e.g. "sysop", "autoconfirmed", "bureaucrat", and so on. The default user group is named "*".
 		 *
@@ -307,7 +307,7 @@ declare global {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgUserId
 		 */
-		wgUserId: number | null;
+		wgUserId?: number;
 		/**
 		 * The language code for the user's interface language, as set in Special→Preferences (which may be overridden by a uselang= parameter in the URL).
 		 *
@@ -325,13 +325,13 @@ declare global {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgUserRegistration
 		 */
-		wgUserRegistration: number | null;
+		wgUserRegistration?: number;
 		/**
 		 * true if the current page is the main page of the wiki. Omitted entirely otherwise (defaulting to null in mw.config).
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgIsMainPage
 		 */
-		wgIsMainPage: true | null;
+		wgIsMainPage?: true;
 		/**
 		 * If the wiki has language variants, the language code of the user's preferred variant. If the wiki does not have variants, the variable is not configured (does not exist), i.e.:
 		 *
@@ -342,7 +342,7 @@ declare global {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgUserVariant
 		 */
-		wgUserVariant: string | null;
+		wgUserVariant?: string;
 		/**
 		 * "saved" if the user just saved this page. "created" if the user just created this page. "restored" if the user just restored this page by going to the history page, clicked on a timestamp link for an old revision, clicked on edit and then saved. null otherwise. Note that:
 		 *
@@ -354,20 +354,20 @@ declare global {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgPostEdit
 		 */
-		wgPostEdit: 'saved' | 'created' | 'restored' | null;
+		wgPostEdit?: 'saved' | 'created' | 'restored';
 		/**
 		 * Revision ID of the "old" revision when viewing a diff. Only available when viewing a revision comparison.
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgDiffOldId
 		 */
-		wgDiffOldId: number;
+		wgDiffOldId?: number;
 		/**
 		 * Revision ID of the "new" revision when viewing a diff. Only available when viewing a revision comparison.
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Interface/JavaScript#wgDiffNewId
 		 */
-		wgDiffNewId: number;
-		wgWikibaseItemId: string | null;
+		wgDiffNewId?: number;
+		wgWikibaseItemId?: string;
 
 		// @see https://github.com/wikimedia/mediawiki/blob/master/includes/ResourceLoader/ResourceLoader.php#L2259
 

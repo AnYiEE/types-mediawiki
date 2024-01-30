@@ -33,8 +33,6 @@ interface ParserDefaults {
 declare global {
 	namespace mw {
 		/**
-		 * @class mw.jqueryMsg
-		 * @singleton
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.jqueryMsg
 		 */
 		namespace jqueryMsg {
@@ -57,9 +55,9 @@ declare global {
 			 *
 			 * @param {Object} options parser options
 			 * @return {Function} Function The message formatter
-			 * @return {string} return.key Message key.
-			 * @return {any} return.replacements Optional variable replacements (variadically or an array).
-			 * @return {string} return.return Rendered HTML.
+			 * @returns {string} return.key Message key.
+			 * @returns {any} return.replacements Optional variable replacements (variadically or an array).
+			 * @returns {string} return.return Rendered HTML.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.jqueryMsg-method-getMessageFunction
 			 */
 			function getMessageFunction(options: Partial<ParserDefaults>): (key: string, replacements: any) => string;
@@ -82,9 +80,9 @@ declare global {
 			 *
 			 * @param {Object} options Parser options
 			 * @return {Function} Function suitable for assigning to jQuery plugin, such as jQuery#msg
-			 * @return {string} return.key Message key.
-			 * @return {any} return.replacements Optional variable replacements (variadically or an array).
-			 * @return {JQuery} return.return
+			 * @returns {string} return.key Message key.
+			 * @returns {any} return.replacements Optional variable replacements (variadically or an array).
+			 * @returns {JQuery} return.return
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.jqueryMsg-method-getPlugin
 			 */
 			function getPlugin(options: Partial<ParserDefaults>): (key: string, replacements: any) => JQuery;
