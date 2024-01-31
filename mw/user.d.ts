@@ -180,6 +180,30 @@ export interface User {
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user-method-getUserInfo
 	 */
 	getUserInfo(): JQuery.Promise<UserInfo>;
+
+	clientPrefs: {
+		/**
+		 * Retrieve the current value of the feature from the HTML document element
+		 *
+		 * @param {string} feature
+		 * @return {boolean|string} returns boolean if the feature is not recognized.
+		 *   returns string if a feature was found.
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user.clientPrefs-method-get
+		 */
+		get(feature: string): boolean | string;
+
+		/**
+		 * Change the class on the HTML document element, and save the value in a cookie
+		 *
+		 * @param {string} feature
+		 * @param {string} value
+		 * @return {boolean} True if feature was stored successfully, false if the value
+		 *   uses a forbidden character or the feature is not recognised
+		 *   e.g. a matching class was not defined on the HTML document element.
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user.clientPrefs-method-set
+		 */
+		set(feature: string, value: string): boolean;
+	};
 }
 
 declare global {
