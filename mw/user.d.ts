@@ -186,11 +186,11 @@ export interface User {
 		 * Retrieve the current value of the feature from the HTML document element
 		 *
 		 * @param {string} feature
-		 * @return {boolean|string} returns boolean if the feature is not recognized.
+		 * @return {false|string} returns false if the feature is not recognized.
 		 *   returns string if a feature was found.
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.user.clientPrefs-method-get
 		 */
-		get(feature: string): boolean | string;
+		get(feature: string): false | string;
 
 		/**
 		 * Change the class on the HTML document element, and save the value in a cookie
