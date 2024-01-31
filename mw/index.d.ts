@@ -16,7 +16,7 @@ import './language';
 import './loader';
 import './log';
 import './Map';
-import './message';
+import './Message';
 import './notification';
 import './RegExp';
 import './Rest';
