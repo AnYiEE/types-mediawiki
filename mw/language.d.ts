@@ -275,16 +275,6 @@ declare global {
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-preConvertPlural
 			 */
 			function preConvertPlural(forms: string[], count: number): string[];
-
-			/**
-			 * Replicate a string 'n' times.
-			 *
-			 * @private
-			 * @param {string} str The string to replicate
-			 * @param {number} num Number of times to replicate the string
-			 * @return {string}
-			 */
-			function replicate(str: string, num: number): string;
 		}
 	}
 }
