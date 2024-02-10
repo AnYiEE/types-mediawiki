@@ -28,12 +28,12 @@ devDependencies:
 
 packages:
 
-  /@definitelytyped/header-parser@0.2.2:
-    resolution: {integrity: sha512-j2HNFFHb8dqlzwsD2bmawwqjdlNZ2/4+7igF34JwsBtfhk9ve0ynUKVyB5W4V4gAvrhVOuQv8avfBMMaKDnefA==}
+  /@definitelytyped/header-parser@0.2.3:
+    resolution: {integrity: sha512-+Aqor10pJj+U8Dc+mG/2TXSw2xCvrQZAkEvB66L8k9ttUXjn/79Ne57HS7zwav1Qs3NEh75abugBUregtLBVUg==}
     engines: {node: '>=18.18.0'}
     dependencies:
       '@definitelytyped/typescript-versions': 0.1.0
-      '@definitelytyped/utils': 0.1.1
+      '@definitelytyped/utils': 0.1.2
       semver: 7.6.0
     dev: true
 
@@ -50,7 +50,7 @@ packages:
       typescript-5.1: /typescript@5.1.6
       typescript-5.2: /typescript@5.2.2
       typescript-5.3: /typescript@5.3.3
-      typescript-5.4: /typescript@5.4.0-dev.20240206
+      typescript-5.4: /typescript@5.4.0-dev.20240210
     dev: true
 
   /@definitelytyped/typescript-versions@0.1.0:
@@ -58,14 +58,14 @@ packages:
     engines: {node: '>=18.18.0'}
     dev: true
 
-  /@definitelytyped/utils@0.1.1:
-    resolution: {integrity: sha512-VCamUy7vNS4x4ZkSTMs/YpyvwDOoPSfJ6OzoHM2PrArGRpvP34z7Au5yauiGGlAOpW3S6JjLQKZaF91sHVUTEg==}
+  /@definitelytyped/utils@0.1.2:
+    resolution: {integrity: sha512-US2EZ26bkNEcrZsRQ8o3y8WG7pTvv/7ttRdP7TrzW3GI7oYRo2XGKO75DM7wX/9/13v9p3daha8AskwdYzos0Q==}
     engines: {node: '>=18.18.0'}
     dependencies:
       '@definitelytyped/typescript-packages': 0.1.0
       '@definitelytyped/typescript-versions': 0.1.0
       '@qiwi/npm-registry-client': 8.9.1
-      '@types/node': 18.19.14
+      '@types/node': 18.19.15
       cachedir: 2.4.0
       charm: 1.0.2
       minimatch: 9.0.3
@@ -98,8 +98,8 @@ packages:
       '@types/sizzle': 2.3.8
     dev: false
 
-  /@types/node@18.19.14:
-    resolution: {integrity: sha512-EnQ4Us2rmOS64nHDWr0XqAD8DsO6f3XR6lf9UIIrZQpUzPVdN/oPuEzfDWNHSyXLvoGgjuEm/sPwFGSSs35Wtg==}
+  /@types/node@18.19.15:
+    resolution: {integrity: sha512-AMZ2UWx+woHNfM11PyAEQmfSxi05jm9OlkxczuHeEqmvwPkYj6MWv44gbzDPefYOLysTOFyI3ziiy2ONmUZfpA==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -216,6 +216,12 @@ packages:
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
+
+  /bare-events@2.2.0:
+    resolution: {integrity: sha512-Yyyqff4PIFfSuthCZqLlPISTWHmnQxoPuAvkmgzsJEmG3CesdIv6Xweayl0JkCZJSB2yYIdJyEz97tpxNhgjbg==}
+    requiresBuild: true
+    dev: true
+    optional: true
 
   /bcrypt-pbkdf@1.0.2:
     resolution: {integrity: sha512-qeFIXtP4MSoi6NLqO12WfqARWWuCKi2Rn/9hJLEmtB5yTNr9DqFWkJRCf2qShWzPeAMRnOgCrq0sg/KLv5ES9w==}
@@ -429,7 +435,7 @@ packages:
     peerDependencies:
       typescript: '*'
     dependencies:
-      '@definitelytyped/header-parser': 0.2.2
+      '@definitelytyped/header-parser': 0.2.3
       command-exists: 1.2.9
       rimraf: 3.0.2
       semver: 6.3.1
@@ -445,9 +451,9 @@ packages:
     peerDependencies:
       typescript: '>= 3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.7.0-dev || >= 3.8.0-dev || >= 3.9.0-dev || >= 4.0.0-dev'
     dependencies:
-      '@definitelytyped/header-parser': 0.2.2
+      '@definitelytyped/header-parser': 0.2.3
       '@definitelytyped/typescript-versions': 0.1.0
-      '@definitelytyped/utils': 0.1.1
+      '@definitelytyped/utils': 0.1.2
       dts-critic: 3.3.11(typescript@4.9.5)
       fs-extra: 6.0.1
       json-stable-stringify: 1.1.1
@@ -1140,7 +1146,7 @@ packages:
     resolution: {integrity: sha512-kN9dJbvnySHULIluDHy32WHRUu3Og7B9sbY7tsFLctQkIqnMh3hErYgdMjTYuqmcXX+lK5T1lnUt3G7zNswmZA==}
     dependencies:
       spdx-expression-parse: 3.0.1
-      spdx-license-ids: 3.0.16
+      spdx-license-ids: 3.0.17
     dev: true
 
   /spdx-exceptions@2.4.0:
@@ -1151,11 +1157,11 @@ packages:
     resolution: {integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==}
     dependencies:
       spdx-exceptions: 2.4.0
-      spdx-license-ids: 3.0.16
+      spdx-license-ids: 3.0.17
     dev: true
 
-  /spdx-license-ids@3.0.16:
-    resolution: {integrity: sha512-eWN+LnM3GR6gPu35WxNgbGl8rmY1AEmoMDvL/QD6zYmPWgywxWqJWNdLGT+ke8dKNWrcYgYjPpG5gbTfghP8rw==}
+  /spdx-license-ids@3.0.17:
+    resolution: {integrity: sha512-sh8PWc/ftMqAAdFiBu6Fy6JUOYjqDJBJvIhpfDMyHrr0Rbp5liZqd4TjtQ/RgfLjKFZb+LMx5hpml5qOWy0qvg==}
     dev: true
 
   /sprintf-js@1.0.3:
@@ -1185,11 +1191,13 @@ packages:
       minipass: 3.3.6
     dev: true
 
-  /streamx@2.15.7:
-    resolution: {integrity: sha512-NPEKS5+yjyo597eafGbKW5ujh7Sm6lDLHZQd/lRSz6S0VarpADBJItqfB4PnwpS+472oob1GX5cCY9vzfJpHUA==}
+  /streamx@2.15.8:
+    resolution: {integrity: sha512-6pwMeMY/SuISiRsuS8TeIrAzyFbG5gGPHFQsYjUr/pbBadaL1PCWmzKw+CHZSwainfvcF6Si6cVLq4XTEwswFQ==}
     dependencies:
       fast-fifo: 1.3.2
       queue-tick: 1.0.1
+    optionalDependencies:
+      bare-events: 2.2.0
     dev: true
 
   /string-width@1.0.2:
@@ -1267,7 +1275,7 @@ packages:
     dependencies:
       b4a: 1.6.6
       fast-fifo: 1.3.2
-      streamx: 2.15.7
+      streamx: 2.15.8
     dev: true
 
   /tar@6.2.0:
@@ -1401,8 +1409,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.4.0-dev.20240206:
-    resolution: {integrity: sha512-8P1XYxDbG/AyGE5tB8+JpeiQfS5ye1BTvIVDZaHhoK9nJuCn4nkB0L66lvfwYB+46hA4rLo3vE3WkIToSYtqQA==}
+  /typescript@5.4.0-dev.20240210:
+    resolution: {integrity: sha512-2Gzli3tdbcXsjTYrQXJhqtevbqmk6soSQYu/n2x05Psj4YeFIcP/zGICTZx5UNF+la7n6+tVoj7dZNr0TQK6jg==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
