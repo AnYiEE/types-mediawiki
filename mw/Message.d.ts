@@ -6,7 +6,7 @@ declare global {
 		 * Shortcut for `new mw.Message( mw.messages, key, parameters )`.
 		 *
 		 * @param {string} key Key of message to get
-		 * @param {...Mixed} parameters Values for $N replacements
+		 * @param {...any} parameters Values for $N replacements
 		 * @return {Message}
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-message
 		 */
@@ -233,7 +233,7 @@ declare global {
 		 * Shortcut for `mw.message( key, parameters... ).text()`.
 		 *
 		 * @param {string} key Key of message to get
-		 * @param {...Mixed} parameters Values for $N replacements
+		 * @param {...any} parameters Values for $N replacements
 		 * @return {string}
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-msg
 		 */

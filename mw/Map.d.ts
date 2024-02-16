@@ -15,11 +15,10 @@ type PickOrDefault<V, S extends TypeOrArray<PropertyKey>, TD, TX = unknown> =
 		? {[P in K & PropertyKey]-?: GetOrDefault<V, P, TD, TX>}
 		: GetOrDefault<V, S & PropertyKey, TD, TX>;
 
-// `ExtensibleMap<V, TX>` is an alternative to `Map<V & { [k: string]: TX; }>`
-// but unlike the latter, ExtensibleMap provides additional overloads to improve selection
-// autocompletion and type checking.
+// `ExtensibleMap<V, TX>` is an alternative to `Map<V & Record<string, TX>>`, but unlike the latter
+// ExtensibleMap provides additional overloads to improve selection autocompletion and type checking.
 
-export interface ExtensibleMap<V extends Record<string, any>, TX = unknown> extends mw.Map<V> {
+export interface ExtensibleMap<V extends Record<string, any>, TX = unknown> extends mw.Map<V & Record<string, TX>> {
 	/**
 	 * Check if a given key exists in the map.
 	 *
@@ -45,7 +44,7 @@ export interface ExtensibleMap<V extends Record<string, any>, TX = unknown> exte
 	get<S extends TypeOrArray<string>, TD>(selection: S, fallback: TD): PickOrDefault<V, S, TD, TX>;
 	get<S extends TypeOrArray<keyof V>>(selection: S): PickOrDefault<V, S, null, TX>;
 	get<S extends TypeOrArray<string>>(selection: S): PickOrDefault<V, S, null, TX>;
-	get<T extends Record<string, any> = V | Record<string, TX>>(): T;
+	get(): V & Record<string, TX>;
 
 	/**
 	 * Set the value of one or more keys.
@@ -72,9 +71,6 @@ declare global {
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Map
 		 */
 		class Map<V extends Record<string, any> = any> {
-			/**
-			 * @private
-			 */
 			private values: V;
 
 			/**
@@ -99,7 +95,7 @@ declare global {
 			 */
 			get<S extends TypeOrArray<keyof V>, TD>(selection: S, fallback: TD): PickOrDefault<V, S, TD>;
 			get<S extends TypeOrArray<keyof V>>(selection: S): PickOrDefault<V, S, null>;
-			get<T extends V = V>(): T;
+			get(): V;
 
 			/**
 			 * Set the value of one or more keys.

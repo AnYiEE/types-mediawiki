@@ -1,5 +1,3 @@
-type FlipObject<T extends Record<PropertyKey, PropertyKey>> = {[K in keyof T as T[K]]: K};
-
 declare global {
 	namespace mw {
 		/**
@@ -112,6 +110,8 @@ declare global {
 			 * @return {number|string} Formatted number
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-convertNumber
 			 */
+			function convertNumber(num: number, integer: true): number;
+			function convertNumber(num: number, integer?: false): string;
 			function convertNumber(num: number, integer?: boolean): number | string;
 
 			/**
@@ -142,7 +142,8 @@ declare global {
 			 * @return {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-gender
 			 */
-			function gender<T extends string>(gender: string, forms: [T?, T?, T?]): T;
+			function gender<T extends string>(gender: string, forms: [T, T?, T?]): T;
+			function gender<T extends string = never>(gender: string, forms: [T?, T?, T?]): T | '';
 
 			/**
 			 * Convenience method for retrieving language data.
@@ -152,7 +153,7 @@ declare global {
 			 *
 			 * @param {string} langCode
 			 * @param {string} dataKey
-			 * @return {Mixed} Value stored in the mw.Map (or `undefined` if there is no map for the
+			 * @return {any} Value stored in the mw.Map (or `undefined` if there is no map for the
 			 *  specified langCode)
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-getData
 			 */
@@ -208,7 +209,7 @@ declare global {
 			 *
 			 * @param {string} langCode
 			 * @param {string|Object.<string, any>} dataKey Key or object of key/values
-			 * @param {Mixed} [value] Value for dataKey, omit if dataKey is an object
+			 * @param {any} [value] Value for dataKey, omit if dataKey is an object
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-setData
 			 */
 			function setData(langCode: string, dataKey: string, value: any): void;
@@ -220,10 +221,10 @@ declare global {
 			 * @private
 			 * @param {string[]} forms Number of forms given to convertPlural
 			 * @param {number} count Number of forms required
-			 * @return {string[]} Padded array of forms
+			 * @returns {string[]} Padded array of forms
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language-method-preConvertPlural
 			 */
-			function preConvertPlural(forms: string[], count: number): string[];
+			function preConvertPlural<T extends string[]>(forms: T, count: number): [...T, ...string[]];
 		}
 	}
 }

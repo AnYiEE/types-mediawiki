@@ -13,24 +13,24 @@ declare global {
 			 *
 			 * @param {string} key The key for the cookie
 			 * @param {string} [prefix] The prefix of the key. If undefined or null, `$wgCookiePrefix` is used
-			 * @param {Mixed} [defaultValue] A value to return if the cookie does not exist
-			 * @return {Mixed} If the cookie exists, the value of the cookie, otherwise `defaultValue`
+			 * @param {any} [defaultValue] A value to return if the cookie does not exist
+			 * @returns {any} If the cookie exists, the value of the cookie, otherwise `defaultValue`
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.cookie-method-get
 			 */
 			function get<D>(key: string, prefix: string | undefined | null, defaultValue: D): string | D;
-			function get(key: string, prefix?: string | null): string;
+			function get(key: string, prefix?: string | null): string | null;
 
 			/**
 			 * Get the value of a `SameSite` = `None` cookie, using the legacy `ss0-` prefix if needed.
 			 *
 			 * @param {string} key The key for the cookie
 			 * @param {string} [prefix] The prefix of the key. If undefined or null, `$wgCookiePrefix` is used
-			 * @param {Mixed} [defaultValue] A value to return if the cookie does not exist
-			 * @return {Mixed} If the cookie exists, the value of the cookie, otherwise `defaultValue`
+			 * @param {any} [defaultValue] A value to return if the cookie does not exist
+			 * @returns {any} If the cookie exists, the value of the cookie, otherwise `defaultValue`
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.cookie-method-getCrossSite
 			 */
 			function getCrossSite<D>(key: string, prefix: string | undefined | null, defaultValue: D): string | D;
-			function getCrossSite(key: string, prefix?: string | null): string;
+			function getCrossSite(key: string, prefix?: string | null): string | undefined;
 
 			/**
 			 * Set or delete a cookie.
@@ -42,9 +42,9 @@ declare global {
 			 * Without an expiry, this creates a session cookie. In a browser, session cookies persist for the lifetime of the browser *process*. Including across tabs, page views, and windows, until the browser itself is *fully* closed, or until the browser clears all storage for a given website. An exception to this is if the user evokes a "restore previous session" feature that some browsers have.
 			 *
 			 * @param {string} key
-			 * @param {string|null} value Value of cookie. If `value` is `null` then this method will instead remove a cookie by name of `key`
-			 * @param {Object|Date|number} [options] Options object, or expiry date
-			 * @param {Date|number|null} [options.expires] The expiry date of the cookie or lifetime in seconds. If `options.expires` is null or 0, then a session cookie is set
+			 * @param {string | null} value Value of cookie. If `value` is `null` then this method will instead remove a cookie by name of `key`
+			 * @param {Object | Date | number} [options] Options object, or expiry date
+			 * @param {Date | number | null} [options.expires] The expiry date of the cookie or lifetime in seconds. If `options.expires` is null or 0, then a session cookie is set
 			 * @param {string} [options.prefix] The prefix of the key
 			 * @param {string} [options.domain] The domain attribute of the cookie
 			 * @param {string} [options.path] The path attribute of the cookie
@@ -70,7 +70,6 @@ declare global {
 							secure: boolean;
 					  }>
 			): void;
-
 			/**
 			 * Cookie Plugin
 			 * Based on https://github.com/carhartl/jquery-cookie
