@@ -1,3 +1,38 @@
+type LogEntryType = 'deprecated' | 'log' | 'warn';
+
+interface Data {
+	debugLog: string[];
+	gitBranch: string | false;
+	gitRevision: string | false;
+	gitViewUrl: string | false;
+	includes: File[];
+	log: LogEntry[];
+	memory: string;
+	memoryPeak: string;
+	mwVersion: string;
+	phpVersion: string;
+	queries: Query[];
+	time: number;
+}
+
+interface File {
+	name: string;
+	size: string;
+}
+
+interface LogEntry {
+	caller: string;
+	msg: string;
+	type: LogEntryType;
+	typeText?: string;
+}
+
+interface Query {
+	function: string;
+	sql: string;
+	time: number;
+}
+
 declare global {
 	namespace mw {
 		/**
@@ -10,21 +45,21 @@ declare global {
 		 */
 		namespace Debug {
 			/**
-			 * Toolbar container element
+			 * Toolbar container element.
 			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-property-S-container
 			 */
 			const $container: JQuery;
 
 			/**
-			 * Object containing data for the debug toolbar
+			 * Object containing data for the debug toolbar.
 			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-property-data
 			 */
-			const data: Record<string, any>;
+			const data: Data;
 
 			/**
-			 * Build the console panel
+			 * Build the console panel.
 			 *
 			 * @return {JQuery} Console panel
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-method-buildConsoleTable
@@ -32,7 +67,7 @@ declare global {
 			function buildConsoleTable(): JQuery;
 
 			/**
-			 * Build legacy debug log pane
+			 * Build legacy debug log pane.
 			 *
 			 * @return {JQuery} Console panel
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-method-buildDebugLogTable
@@ -40,14 +75,14 @@ declare global {
 			function buildDebugLogTable(): JQuery;
 
 			/**
-			 * Construct the HTML for the debugging toolbar
+			 * Construct the HTML for the debugging toolbar.
 			 *
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-method-buildHtml
 			 */
 			function buildHtml(): void;
 
 			/**
-			 * Build included files pane
+			 * Build included files pane.
 			 *
 			 * @return {JQuery}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-method-buildIncludesPane
@@ -55,7 +90,7 @@ declare global {
 			function buildIncludesPane(): JQuery;
 
 			/**
-			 * Build query list pane
+			 * Build query list pane.
 			 *
 			 * @return {JQuery}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-method-buildQueryTable
@@ -63,7 +98,7 @@ declare global {
 			function buildQueryTable(): JQuery;
 
 			/**
-			 * Build request information pane
+			 * Build request information pane.
 			 *
 			 * @return {JQuery}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-method-buildRequestPane
@@ -71,23 +106,21 @@ declare global {
 			function buildRequestPane(): JQuery;
 
 			/**
-			 * Initialize the debugging pane
+			 * Initialize the debugging pane.
 			 *
 			 * Shouldn't be called before the document is ready
 			 * (since it binds to elements on the page).
 			 *
-			 * @param {Object} [data] Defaults to 'debugInfo' from mw.config
+			 * @param {Data} [data] Defaults to 'debugInfo' from {@link mw.config}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-method-init
 			 */
-			function init(data?: typeof Debug.data): void;
+			function init(data?: Data): void;
 
 			/**
-			 * Switch between panes
+			 * Switch between panes.
 			 *
 			 * Should be called with an HTMLElement as its thisArg,
 			 * because it's meant to be an event handler.
-			 *
-			 * TODO: Store cookie for last pane open.
 			 *
 			 * @param {JQuery.Event} e
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Debug-method-switchPane

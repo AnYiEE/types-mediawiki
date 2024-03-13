@@ -52,7 +52,7 @@ interface ModuleRegistryEntry {
 	version: string;
 }
 
-interface ResourceLoaderStoreStats {
+export interface ResourceLoaderStoreStats {
 	expired: number;
 	failed: number;
 	hits: number;

@@ -1,12 +1,14 @@
 import './Api';
 import './cldr';
 import './config';
+import './confirmCloseWindow';
 import './cookie';
 import './Debug';
+import './deflate';
 import './errorLogger';
 import './ForeignApi';
 import './ForeignRest';
-import './deflate';
+import './ForeignUpload';
 import './global';
 import './hook';
 import './html';
@@ -20,10 +22,12 @@ import './Message';
 import './notification';
 import './RegExp';
 import './Rest';
+import './searchSuggest';
 import './storage';
 import './String';
 import './template';
 import './Title';
+import './Upload';
 import './Uri';
 import './user';
 import './util';
@@ -80,58 +84,6 @@ declare global {
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/source/mediawiki.base.html#mw-property-libs
 		 */
 		const widgets: any;
-
-		/**
-		 * Prevent the closing of a window with a confirm message (the onbeforeunload event seems to
-		 * work in most browsers.)
-		 *
-		 * This supersedes any previous onbeforeunload handler. If there was a handler before, it is
-		 * restored when you execute the returned release() function.
-		 *
-		 *     var allowCloseWindow = mw.confirmCloseWindow();
-		 *     // ... do stuff that can't be interrupted ...
-		 *     allowCloseWindow.release();
-		 *
-		 * The second function returned is a trigger function to trigger the check and an alert
-		 * window manually, e.g.:
-		 *
-		 *     var allowCloseWindow = mw.confirmCloseWindow();
-		 *     // ... do stuff that can't be interrupted ...
-		 *     if ( allowCloseWindow.trigger() ) {
-		 *         // don't do anything (e.g. destroy the input field)
-		 *     } else {
-		 *         // do whatever you wanted to do
-		 *     }
-		 *
-		 * @param {Object} [options]
-		 * @param {string} [options.namespace] Optional jQuery event namespace, to allow loosely coupled
-		 *  external code to release your trigger. For example, the VisualEditor extension can use this
-		 *  remove the trigger registered by mediawiki.action.edit, without strong runtime coupling.
-		 * @param {Function} [options.test]
-		 * @param {boolean} [options.test.return=true] Whether to show the dialog to the user.
-		 * @return {Object} An object of functions to work with this module
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-confirmCloseWindow
-		 */
-		function confirmCloseWindow(options?: {namespace?: string; test?: (...args: any[]) => boolean}): {
-			/**
-			 * Remove the event listener and don't show an alert anymore, if the user wants to leave
-			 * the page.
-			 *
-			 * @ignore
-			 */
-			release(): void;
-			/**
-			 * Trigger the module's function manually.
-			 *
-			 * Check, if options.test() returns true and show an alert to the user if he/she want
-			 * to leave this page. Returns false, if options.test() returns false or the user
-			 * cancelled the alert window (~don't leave the page), true otherwise.
-			 *
-			 * @ignore
-			 * @returns {boolean}
-			 */
-			trigger(): boolean;
-		};
 
 		/**
 		 * Format a string. Replace $1, $2 ... $N with positional arguments.

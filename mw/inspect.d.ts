@@ -1,16 +1,95 @@
+import {ResourceLoaderStoreStats} from './loader';
+
+interface SelectorCounts {
+	/**
+	 * Number of matched selectors.
+	 */
+	matched: number;
+	/**
+	 * Total number of selectors.
+	 */
+	total: number;
+}
+
+interface ResourceLoaderCSSReport {
+	allSelectors: number;
+	matchedSelectors: number;
+	module: string;
+	percentMatched: `${number}%` | null;
+}
+
+interface ResourceLoaderSizeReport {
+	name: string;
+	size: string;
+	sizeInBytes: number;
+}
+
+interface ResourceLoaderStoreReport extends ResourceLoaderStoreStats {
+	enabled: boolean;
+	totalSize: string;
+	totalSizeInBytes: number;
+}
+
+interface ResourceLoaderTimeReport {
+	execute: number;
+	name: string;
+	script: number;
+	total: string;
+	totalInMs: number;
+}
+
+type ResourceLoaderReport = keyof ResourceLoaderReportMap;
+
+interface ResourceLoaderReportMap {
+	/**
+	 * For each module with styles, count the number of selectors, and
+	 * count how many match against some element currently in the DOM.
+	 */
+	css: ResourceLoaderCSSReport;
+
+	/**
+	 * Generate a breakdown of all loaded modules and their size in
+	 * kibibytes. Modules are ordered from largest to smallest.
+	 */
+	size: ResourceLoaderSizeReport;
+
+	/**
+	 * Report stats on mw.loader.store: the number of localStorage
+	 * cache hits and misses, the number of items purged from the
+	 * cache, and the total size of the module blob in localStorage.
+	 */
+	store: ResourceLoaderStoreReport;
+
+	/**
+	 * Generate a breakdown of all loaded modules and their time
+	 * spent during initialisation (measured in milliseconds).
+	 *
+	 * This timing data is collected by mw.loader.profiler.
+	 */
+	time: ResourceLoaderTimeReport;
+}
+
+interface Dependency {
+	requires: string[];
+	requiredBy: string[];
+}
+
 declare global {
 	namespace mw {
 		/**
-		 * Tools for inspecting page composition and performance.
+		 * Generate and print reports.
 		 *
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect
+		 * When invoked without arguments, prints all available reports.
+		 *
+		 * @param {...string} [reports] One or more of "size", "css", "store", or "time".
 		 */
-		const inspect: {
+		function inspect(...reports: ResourceLoaderReport[]): void;
+
+		namespace inspect {
 			/**
-			 * @inheritdoc {@link inspect.runReports}
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-inspect
+			 * @private
 			 */
-			(): void;
+			const reports: {[P in ResourceLoaderReport]: () => Array<ResourceLoaderReportMap[P]>};
 
 			/**
 			 * Given CSS source, count both the total number of selectors it
@@ -18,50 +97,40 @@ declare global {
 			 * document.
 			 *
 			 * @param {string} css CSS source
-			 * @returns {Object} Selector counts
-			 * @returns {number} return.selectors Total number of selectors
-			 * @returns {number} return.matched Number of matched selectors
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-auditSelectors
+			 * @returns {SelectorCounts} Selector counts
 			 */
-			auditSelectors(css: string): {
-				selectors: number;
-				matched: number;
-			};
+			function auditSelectors(css: string): SelectorCounts;
 
 			/**
 			 * Print tabular data to the console using console.table.
 			 *
-			 * @param {Array} data Tabular data represented as an array of objects
+			 * @param {any[]} data Tabular data represented as an array of objects
 			 *  with common properties.
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-dumpTable
 			 */
-			dumpTable: typeof console.table;
+			function dumpTable(data: any[]): void;
 
 			/**
 			 * Return a map of all dependency relationships between loaded modules.
 			 *
-			 * @returns {Object} Maps module names to objects. Each sub-object has
+			 * @returns {Object.<string, Dependency>} Maps module names to objects. Each sub-object has
 			 *  two properties, 'requires' and 'requiredBy'.
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-getDependencyGraph
 			 */
-			getDependencyGraph(): Record<string, {requires: string[]; requiredBy: string[]}>;
+			function getDependencyGraph(): Record<string, Dependency>;
 
 			/**
 			 * Get a list of all loaded ResourceLoader modules.
 			 *
-			 * @returns {Array} List of module names
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-getLoadedModules
+			 * @returns {string[]} List of module names
 			 */
-			getLoadedModules(): string[];
+			function getLoadedModules(): string[];
 
 			/**
 			 * Calculate the byte size of a ResourceLoader module.
 			 *
 			 * @param {string} moduleName The name of the module
 			 * @returns {number|null} Module size in bytes or null
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-getModuleSize
 			 */
-			getModuleSize(moduleName: string): number | null;
+			function getModuleSize(moduleName: string): number | null;
 
 			/**
 			 * Perform a string search across the JavaScript and CSS source code
@@ -69,66 +138,19 @@ declare global {
 			 * modules that matched.
 			 *
 			 * @param {string|RegExp} pattern String or regexp to match.
-			 * @returns {Array} Array of the names of modules that matched.
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-grep
+			 * @returns {string[]} Array of the names of modules that matched.
 			 */
-			grep(pattern: string | RegExp): string[];
+			function grep(pattern: string | RegExp): string[];
 
 			/**
 			 * Generate and print reports.
 			 *
 			 * When invoked without arguments, prints all available reports.
 			 *
-			 * @param {...string} [reports] One or more of "size", "css", "store", or "time".
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect-method-runReports
+			 * @param {...ResourceLoaderReport} [reports] One or more of "size", "css", "store", or "time".
 			 */
-			runReports(report?: string, ...reports: string[]): void;
-
-			/**
-			 * @private
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports
-			 */
-			reports: {
-				/**
-				 * For each module with styles, count the number of selectors, and
-				 * count how many match against some element currently in the DOM.
-				 *
-				 * @returns {Object[]} CSS reports
-				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports-method-css
-				 */
-				css(): any[];
-
-				/**
-				 * Generate a breakdown of all loaded modules and their size in
-				 * kibibytes. Modules are ordered from largest to smallest.
-				 *
-				 * @returns {Object[]} Size reports
-				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports-method-size
-				 */
-				size(): any[];
-
-				/**
-				 * Report stats on mw.loader.store: the number of localStorage
-				 * cache hits and misses, the number of items purged from the
-				 * cache, and the total size of the module blob in localStorage.
-				 *
-				 * @returns {Object[]} Store stats
-				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports-method-store
-				 */
-				store(): any[];
-
-				/**
-				 * Generate a breakdown of all loaded modules and their time
-				 * spent during initialisation (measured in milliseconds).
-				 *
-				 * This timing data is collected by mw.loader.profiler.
-				 *
-				 * @returns {Object[]} Table rows
-				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.inspect.reports-method-time
-				 */
-				time(): any[];
-			};
-		};
+			function runReports(...reports: ResourceLoaderReport[]): void;
+		}
 	}
 }
 

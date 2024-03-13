@@ -13,11 +13,11 @@ declare global {
 			 * that means it is the "other" form.
 			 *
 			 * @param {number} number
-			 * @param {Array} pluralRules
+			 * @param {string[]} pluralRules
 			 * @returns {number} plural form index
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.cldr-method-getPluralForm
 			 */
-			function getPluralForm(number: number, pluralRules: any[]): void;
+			function getPluralForm(number: number, pluralRules: string[]): number;
 		}
 	}
 }

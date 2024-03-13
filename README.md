@@ -69,5 +69,4 @@ Since it is just a type import, it doesn't generate any JavaScript. Hence, such 
 
 ## TODO
 
--   Add doc comments for `mw.ForeignUpload`, `mw.ForeignStructuredUpload`, `mw.GallerySlideshow`, `mw.special.ApiSandbox`, `mw.Upload` and `mw.jqueryMsg` private methods.
--   Add types for more jQuery plugins.
+-   Add doc comments for `mw.ForeignStructuredUpload`, `mw.GallerySlideshow`, `mw.special.ApiSandbox` and `mw.jqueryMsg` private methods.
