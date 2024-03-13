@@ -28,17 +28,17 @@ devDependencies:
 
 packages:
 
-  /@definitelytyped/header-parser@0.2.6:
-    resolution: {integrity: sha512-swTwxht2HdjY8N4Un1jSB+rqHx4wnD8pcg0rcJKBpLCz61rQbvTQ6v1Gm2nbLyZf1HIaR7sZsOmNzfuH26W/gA==}
+  /@definitelytyped/header-parser@0.2.8:
+    resolution: {integrity: sha512-EbwPQxkjJ2dG5F+kZy/D5eMvFeM3FBJ+A8oXy6eOr+8aoRBzS94PiSyfHStZHJzruHDG/Lo2v9+0nSGsPJiOdw==}
     engines: {node: '>=18.18.0'}
     dependencies:
-      '@definitelytyped/typescript-versions': 0.1.0
+      '@definitelytyped/typescript-versions': 0.1.1
       '@definitelytyped/utils': 0.1.5
       semver: 7.6.0
     dev: true
 
-  /@definitelytyped/typescript-versions@0.1.0:
-    resolution: {integrity: sha512-AR1R4oqlbtspNidSMPg5YIFpc37thVXeKxNIhWkYV4ZsZq3zFyBCvsTETZ9lqn0uxFO52B25A1y3xf1aWEIlWA==}
+  /@definitelytyped/typescript-versions@0.1.1:
+    resolution: {integrity: sha512-ku6f6K/bYW39K1UyAXcg9wYPcU3ojg8NbygnGrJK78Pyu+4aflaO34gk5f92aUrqJHr8fFG6gg4IjJZCPd5wxg==}
     engines: {node: '>=18.18.0'}
     dev: true
 
@@ -47,7 +47,7 @@ packages:
     engines: {node: '>=18.18.0'}
     dependencies:
       '@qiwi/npm-registry-client': 8.9.1
-      '@types/node': 18.19.20
+      '@types/node': 18.19.24
       cachedir: 2.4.0
       charm: 1.0.2
       minimatch: 9.0.3
@@ -80,8 +80,8 @@ packages:
       '@types/sizzle': 2.3.8
     dev: false
 
-  /@types/node@18.19.20:
-    resolution: {integrity: sha512-SKXZvI375jkpvAj8o+5U2518XQv76mAsixqfXiVyWyXZbVWQK25RurFovYpVIxVzul0rZoH58V/3SkEnm7s3qA==}
+  /@types/node@18.19.24:
+    resolution: {integrity: sha512-eghAz3gnbQbvnHqB+mgB2ZR3aH6RhdEmHGS48BnV75KceQPHqabkxKI0BbUSsqhqy2Ddhc2xD/VAR9ySZd57Lw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -199,8 +199,8 @@ packages:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
 
-  /bare-events@2.2.0:
-    resolution: {integrity: sha512-Yyyqff4PIFfSuthCZqLlPISTWHmnQxoPuAvkmgzsJEmG3CesdIv6Xweayl0JkCZJSB2yYIdJyEz97tpxNhgjbg==}
+  /bare-events@2.2.1:
+    resolution: {integrity: sha512-9GYPpsPFvrWBkelIhOhTWtkeZxVxZOdb3VnFTCzlOo3OjvmTvzLoZFUT8kNFACx0vJej6QPney1Cf9BvzCNE/A==}
     requiresBuild: true
     dev: true
     optional: true
@@ -250,7 +250,7 @@ packages:
       es-errors: 1.3.0
       function-bind: 1.1.2
       get-intrinsic: 1.2.4
-      set-function-length: 1.2.1
+      set-function-length: 1.2.2
     dev: true
 
   /camelcase@5.3.1:
@@ -417,7 +417,7 @@ packages:
     peerDependencies:
       typescript: '*'
     dependencies:
-      '@definitelytyped/header-parser': 0.2.6
+      '@definitelytyped/header-parser': 0.2.8
       command-exists: 1.2.9
       rimraf: 3.0.2
       semver: 6.3.1
@@ -433,8 +433,8 @@ packages:
     peerDependencies:
       typescript: '>= 3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.7.0-dev || >= 3.8.0-dev || >= 3.9.0-dev || >= 4.0.0-dev'
     dependencies:
-      '@definitelytyped/header-parser': 0.2.6
-      '@definitelytyped/typescript-versions': 0.1.0
+      '@definitelytyped/header-parser': 0.2.8
+      '@definitelytyped/typescript-versions': 0.1.1
       '@definitelytyped/utils': 0.1.5
       dts-critic: 3.3.11(typescript@4.9.5)
       fs-extra: 6.0.1
@@ -578,7 +578,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.3
       has-symbols: 1.0.3
-      hasown: 2.0.1
+      hasown: 2.0.2
     dev: true
 
   /getpass@0.1.7:
@@ -656,8 +656,8 @@ packages:
     dev: true
     optional: true
 
-  /hasown@2.0.1:
-    resolution: {integrity: sha512-1/th4MHjnwncwXsIW6QMzlvYL9kG5e/CpVvLRZe4XPa8TOUNbCELqmvhDmnkNsAjwaG4+I8gJJL0JBvTTLO9qA==}
+  /hasown@2.0.2:
+    resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
@@ -693,7 +693,7 @@ packages:
   /is-core-module@2.13.1:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
     dependencies:
-      hasown: 2.0.1
+      hasown: 2.0.2
     dev: true
 
   /is-fullwidth-code-point@1.0.0:
@@ -1109,8 +1109,8 @@ packages:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
     dev: true
 
-  /set-function-length@1.2.1:
-    resolution: {integrity: sha512-j4t6ccc+VsKwYHso+kElc5neZpjtq9EnRICFZtWyBsLojhmeF/ZBd/elqm22WJh/BziDe/SBiOeAt0m2mfLD0g==}
+  /set-function-length@1.2.2:
+    resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
     engines: {node: '>= 0.4'}
     dependencies:
       define-data-property: 1.1.4
@@ -1186,7 +1186,7 @@ packages:
       fast-fifo: 1.3.2
       queue-tick: 1.0.1
     optionalDependencies:
-      bare-events: 2.2.0
+      bare-events: 2.2.1
     dev: true
 
   /string-width@1.0.2:
