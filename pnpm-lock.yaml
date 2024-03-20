@@ -47,7 +47,7 @@ packages:
     engines: {node: '>=18.18.0'}
     dependencies:
       '@qiwi/npm-registry-client': 8.9.1
-      '@types/node': 18.19.24
+      '@types/node': 18.19.26
       cachedir: 2.4.0
       charm: 1.0.2
       minimatch: 9.0.3
@@ -80,8 +80,8 @@ packages:
       '@types/sizzle': 2.3.8
     dev: false
 
-  /@types/node@18.19.24:
-    resolution: {integrity: sha512-eghAz3gnbQbvnHqB+mgB2ZR3aH6RhdEmHGS48BnV75KceQPHqabkxKI0BbUSsqhqy2Ddhc2xD/VAR9ySZd57Lw==}
+  /@types/node@18.19.26:
+    resolution: {integrity: sha512-+wiMJsIwLOYCvUqSdKTrfkS8mpTp+MPINe6+Np4TAGFWWRWiBQ5kSq9nZGCSPkzx9mvT+uEukzpX4MOSCydcvw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
