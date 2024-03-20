@@ -40,11 +40,11 @@ export interface ExtensibleMap<V extends Record<string, any>, TX = unknown> exte
 	 * an object of key/values. If no selection is passed, a new object with all key/values is returned.
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Map-method-get
 	 */
-	get<S extends TypeOrArray<keyof V>, TD>(selection: S, fallback: TD): PickOrDefault<V, S, TD, TX>;
-	get<S extends TypeOrArray<string>, TD>(selection: S, fallback: TD): PickOrDefault<V, S, TD, TX>;
+	get(): V & Record<string, TX>;
 	get<S extends TypeOrArray<keyof V>>(selection: S): PickOrDefault<V, S, null, TX>;
 	get<S extends TypeOrArray<string>>(selection: S): PickOrDefault<V, S, null, TX>;
-	get(): V & Record<string, TX>;
+	get<S extends TypeOrArray<keyof V>, TD>(selection: S, fallback: TD): PickOrDefault<V, S, TD, TX>;
+	get<S extends TypeOrArray<string>, TD>(selection: S, fallback: TD): PickOrDefault<V, S, TD, TX>;
 
 	/**
 	 * Set the value of one or more keys.
@@ -93,9 +93,9 @@ declare global {
 			 * an object of key/values. If no selection is passed, a new object with all key/values is returned.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Map-method-get
 			 */
-			get<S extends TypeOrArray<keyof V>, TD>(selection: S, fallback: TD): PickOrDefault<V, S, TD>;
-			get<S extends TypeOrArray<keyof V>>(selection: S): PickOrDefault<V, S, null>;
 			get(): V;
+			get<S extends TypeOrArray<keyof V>>(selection: S): PickOrDefault<V, S, null>;
+			get<S extends TypeOrArray<keyof V>, TD>(selection: S, fallback: TD): PickOrDefault<V, S, TD>;
 
 			/**
 			 * Set the value of one or more keys.
