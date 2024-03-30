@@ -30,13 +30,161 @@ export type ApiLegacyTokenType =
 	| 'protect'
 	| 'unblock';
 
+// AUTOMATICALLY GENERATED FROM HERE:
+
 export interface ApiParams {
-	action: string;
+	action?:
+		| 'abusefiltercheckmatch'
+		| 'abusefilterchecksyntax'
+		| 'abusefilterevalexpression'
+		| 'abusefilterunblockautopromote'
+		| 'abuselogprivatedetails'
+		| 'acquiretempusername'
+		| 'antispoof'
+		| 'block'
+		| 'centralauthtoken'
+		| 'centralnoticecdncacheupdatebanner'
+		| 'centralnoticechoicedata'
+		| 'centralnoticequerycampaign'
+		| 'changeauthenticationdata'
+		| 'changecontentmodel'
+		| 'checktoken'
+		| 'cirrus-config-dump'
+		| 'cirrus-mapping-dump'
+		| 'cirrus-profiles-dump'
+		| 'cirrus-settings-dump'
+		| 'clearhasmsg'
+		| 'clientlogin'
+		| 'compare'
+		| 'createaccount'
+		| 'createlocalaccount'
+		| 'cxdelete'
+		| 'cxsuggestionlist'
+		| 'cxtoken'
+		| 'delete'
+		| 'deleteglobalaccount'
+		| 'discussiontoolsedit'
+		| 'discussiontoolsfindcomment'
+		| 'discussiontoolsgetsubscriptions'
+		| 'discussiontoolssubscribe'
+		| 'echomarkread'
+		| 'echomarkseen'
+		| 'echomute'
+		| 'edit'
+		| 'editmassmessagelist'
+		| 'emailuser'
+		| 'expandtemplates'
+		| 'featuredfeed'
+		| 'feedcontributions'
+		| 'feedrecentchanges'
+		| 'feedwatchlist'
+		| 'filerevert'
+		| 'flagconfig'
+		| 'globalblock'
+		| 'globalpreferenceoverrides'
+		| 'globalpreferences'
+		| 'globaluserrights'
+		| 'growthmanagementorlist'
+		| 'growthmentordashboardupdatedata'
+		| 'growthsetmenteestatus'
+		| 'growthsetmentor'
+		| 'growthstarmentee'
+		| 'help'
+		| 'homepagequestionstore'
+		| 'imagerotate'
+		| 'import'
+		| 'jsonconfig'
+		| 'languagesearch'
+		| 'linkaccount'
+		| 'login'
+		| 'logout'
+		| 'managetags'
+		| 'massmessage'
+		| 'mergehistory'
+		| 'move'
+		| 'opensearch'
+		| 'options'
+		| 'pagetriageaction'
+		| 'pagetriagelist'
+		| 'pagetriagestats'
+		| 'pagetriagetagcopyvio'
+		| 'pagetriagetagging'
+		| 'paraminfo'
+		| 'parse'
+		| 'patrol'
+		| 'protect'
+		| 'purge'
+		| 'query'
+		| 'removeauthenticationdata'
+		| 'resetpassword'
+		| 'review'
+		| 'revisiondelete'
+		| 'rollback'
+		| 'rsd'
+		| 'setglobalaccountstatus'
+		| 'setnotificationtimestamp'
+		| 'setpagelanguage'
+		| 'shortenurl'
+		| 'sitematrix'
+		| 'spamblacklist'
+		| 'stabilize'
+		| 'streamconfigs'
+		| 'strikevote'
+		| 'sxdelete'
+		| 'tag'
+		| 'templatedata'
+		| 'thank'
+		| 'titleblacklist'
+		| 'torblock'
+		| 'transcodereset'
+		| 'unblock'
+		| 'undelete'
+		| 'unlinkaccount'
+		| 'upload'
+		| 'userrights'
+		| 'validatepassword'
+		| 'watch'
+		| 'webapp-manifest'
+		| 'webauthn'
+		| 'wikilove'
+		| 'bouncehandler'
+		| 'categorytree'
+		| 'collection'
+		| 'cspreport'
+		| 'cxcheckunreviewed'
+		| 'cxpublish'
+		| 'cxpublishsection'
+		| 'cxsave'
+		| 'cxsplit'
+		| 'discussiontoolscompare'
+		| 'discussiontoolspageinfo'
+		| 'discussiontoolspreview'
+		| 'echopushsubscriptions'
+		| 'editcheckreferenceurl'
+		| 'fancycaptchareload'
+		| 'growthinvalidateimagerecommendation'
+		| 'growthinvalidatepersonalizedpraisesuggestion'
+		| 'helppanelquestionposter'
+		| 'jsondata'
+		| 'oathvalidate'
+		| 'parser-migration'
+		| 'readinglists'
+		| 'sanitize-mapdata'
+		| 'scribunto-console'
+		| 'securepollauth'
+		| 'stashedit'
+		| 'sxsave'
+		| 'timedtext'
+		| 'ulslocalization'
+		| 'ulssetlang'
+		| 'visualeditor'
+		| 'visualeditoredit'
+		| 'wikimediaeventsblockededit';
 	format?: 'json' | 'jsonfm' | 'none' | 'php' | 'phpfm' | 'rawfm' | 'xml' | 'xmlfm';
 	maxlag?: number;
 	smaxage?: number;
 	maxage?: number;
-	assert?: 'user' | 'bot' | 'anon';
+	assert?: 'anon' | 'bot' | 'user';
 	assertuser?: string;
 	requestid?: string;
 	servedby?: boolean;
@@ -44,13 +192,12 @@ export interface ApiParams {
 	responselanginfo?: boolean;
 	origin?: string;
 	uselang?: string;
+	variant?: string;
 	errorformat?: 'bc' | 'html' | 'none' | 'plaintext' | 'raw' | 'wikitext';
 	errorlang?: string;
 	errorsuselocal?: boolean;
 	centralauthtoken?: string;
 }
-
-// AUTOMATICALLY GENERATED FROM HERE:
 
 export interface AbuseFilterApiCheckMatchParams extends ApiParams {
 	action: 'abusefiltercheckmatch';
@@ -246,6 +393,94 @@ export interface CollectionApiCollectionParams extends ApiParams {
 		| 'suggestundoarticleaction';
 }
 
+export interface CollectionApiAddArticleParams extends CollectionApiCollectionParams {
+	submodule: 'addarticle';
+	namespace: number;
+	title: string;
+	oldid?: number;
+}
+
+export interface CollectionApiAddCategoryParams extends CollectionApiCollectionParams {
+	submodule: 'addcategory';
+	title?: string;
+}
+
+export interface CollectionApiAddChapterParams extends CollectionApiCollectionParams {
+	submodule: 'addchapter';
+	chaptername?: string;
+}
+
+export interface CollectionApiClearCollectionParams extends CollectionApiCollectionParams {
+	submodule: 'clearcollection';
+}
+
+export interface CollectionApiGetBookCreatorBoxContentParams extends CollectionApiCollectionParams {
+	submodule: 'getbookcreatorboxcontent';
+	hint?: string;
+	oldid?: number;
+	pagename?: string;
+}
+
+export interface CollectionApiGetCollectionParams extends CollectionApiCollectionParams {
+	submodule: 'getcollection';
+}
+
+export interface CollectionApiGetPopupDataParams extends CollectionApiCollectionParams {
+	submodule: 'getpopupdata';
+	title: string;
+}
+
+export interface CollectionApiPostCollectionParams extends CollectionApiCollectionParams {
+	submodule: 'postcollection';
+	collection?: string;
+}
+
+export interface CollectionApiRemoveArticleParams extends CollectionApiCollectionParams {
+	submodule: 'removearticle';
+	namespace: number;
+	title: string;
+	oldid?: number;
+}
+
+export interface CollectionApiRemoveItemParams extends CollectionApiCollectionParams {
+	submodule: 'removeitem';
+	index?: number;
+}
+
+export interface CollectionApiRenameChapterParams extends CollectionApiCollectionParams {
+	submodule: 'renamechapter';
+	index: number;
+	chaptername: string;
+}
+
+export interface CollectionApiSetSortingParams extends CollectionApiCollectionParams {
+	submodule: 'setsorting';
+	items: number | number[];
+}
+
+export interface CollectionApiSetTitlesParams extends CollectionApiCollectionParams {
+	submodule: 'settitles';
+	title: string;
+	subtitle?: string;
+	settings?: string;
+}
+
+export interface CollectionApiSortItemsParams extends CollectionApiCollectionParams {
+	submodule: 'sortitems';
+}
+
+export interface CollectionApiSuggestArticleActionParams extends CollectionApiCollectionParams {
+	submodule: 'suggestarticleaction';
+	suggestaction: 'add' | 'ban' | 'remove';
+	title: string;
+}
+
+export interface CollectionApiSuggestUndoArticleActionParams extends CollectionApiCollectionParams {
+	submodule: 'suggestundoarticleaction';
+	lastaction: 'add' | 'ban' | 'remove';
+	title: string;
+}
+
 export interface ApiComparePagesParams extends ApiParams {
 	action: 'compare';
 	fromtitle?: string;
@@ -272,7 +507,6 @@ export interface ApiComparePagesParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
-		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -305,7 +539,6 @@ export interface ApiComparePagesParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
-		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -342,6 +575,10 @@ export interface ApiCSPReportParams extends ApiParams {
 	action: 'cspreport';
 	reportonly?: boolean;
 	source?: string;
+}
+
+export interface ContentTranslationActionApiContentTranslationUnreviewedCheckParams extends ApiParams {
+	action: 'cxcheckunreviewed';
 }
 
 export interface ContentTranslationActionApiContentTranslationDeleteParams extends ApiParams {
@@ -544,6 +781,20 @@ export interface NotificationsPushApiEchoPushSubscriptionsParams extends ApiPara
 	token?: string;
 }
 
+export interface NotificationsPushApiEchoPushSubscriptionsCreateParams
+	extends NotificationsPushApiEchoPushSubscriptionsParams {
+	command: 'create';
+	provider: 'apns' | 'fcm';
+	providertoken: string;
+	topic?: string;
+}
+
+export interface NotificationsPushApiEchoPushSubscriptionsDeleteParams
+	extends NotificationsPushApiEchoPushSubscriptionsParams {
+	command: 'delete';
+	providertoken: string | string[];
+}
+
 export interface ApiEditPageParams extends ApiParams {
 	action: 'edit';
 	title?: string;
@@ -590,7 +841,6 @@ export interface ApiEditPageParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
-		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -659,7 +909,6 @@ export interface ApiExpandTemplatesParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
-		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -686,7 +935,7 @@ export interface ConfirmEditFancyCaptchaApiFancyCaptchaReloadParams extends ApiP
 export interface FeaturedFeedsApiFeaturedFeedsParams extends ApiParams {
 	action: 'featuredfeed';
 	feedformat?: 'atom' | 'rss';
-	feed: 'featured' | 'potd' | 'raw' | 'wikimag';
+	feed: 'featured' | 'onthisday' | 'potd';
 	language?: string;
 }
 
@@ -761,46 +1010,8 @@ export interface ApiFileRevertParams extends ApiParams {
 	token?: string;
 }
 
-export interface FlowApiFlowParams extends ApiParams {
-	action: 'flow';
-	submodule:
-		| 'edit-header'
-		| 'edit-post'
-		| 'edit-title'
-		| 'edit-topic-summary'
-		| 'lock-topic'
-		| 'moderate-post'
-		| 'moderate-topic'
-		| 'new-topic'
-		| 'reply'
-		| 'undo-edit-header'
-		| 'undo-edit-post'
-		| 'undo-edit-topic-summary'
-		| 'view-header'
-		| 'view-post'
-		| 'view-post-history'
-		| 'view-topic'
-		| 'view-topic-history'
-		| 'view-topic-summary'
-		| 'view-topiclist'
-		| 'close-open-topic';
-	page?: string;
-	token?: string;
-}
-
-export interface FlowApiParsoidUtilsFlowParams extends ApiParams {
-	action: 'flow-parsoid-utils';
-	from: 'html' | 'wikitext';
-	to: 'html' | 'wikitext';
-	content: string;
-	title?: string;
-	pageid?: number;
-}
-
-export interface ThanksApiFlowThankParams extends ApiParams {
-	action: 'flowthank';
-	postid: string;
-	token?: string;
+export interface ApiFlagConfigParams extends ApiParams {
+	action: 'flagconfig';
 }
 
 export interface GlobalBlockingApiGlobalBlockParams extends ApiParams {
@@ -987,89 +1198,7 @@ export interface ApiImportParams extends ApiParams {
 	summary?: string;
 	xml?: upload;
 	interwikiprefix?: string;
-	interwikisource?:
-		| 'af'
-		| 'ang'
-		| 'ar'
-		| 'ast'
-		| 'bg'
-		| 'br'
-		| 'ca'
-		| 'co'
-		| 'commons'
-		| 'cs'
-		| 'csb'
-		| 'da'
-		| 'de'
-		| 'el'
-		| 'en'
-		| 'eo'
-		| 'es'
-		| 'et'
-		| 'fa'
-		| 'fi'
-		| 'fy'
-		| 'ga'
-		| 'gl'
-		| 'gn'
-		| 'gu'
-		| 'he'
-		| 'hi'
-		| 'hr'
-		| 'hsb'
-		| 'hu'
-		| 'hy'
-		| 'ia'
-		| 'id'
-		| 'ie'
-		| 'io'
-		| 'is'
-		| 'it'
-		| 'ja'
-		| 'kk'
-		| 'ko'
-		| 'ku'
-		| 'la'
-		| 'li'
-		| 'lo'
-		| 'lt'
-		| 'meta'
-		| 'ml'
-		| 'n'
-		| 'nds'
-		| 'nl'
-		| 'no'
-		| 'oc'
-		| 'pl'
-		| 'pt'
-		| 'q'
-		| 'ro'
-		| 'ru'
-		| 's'
-		| 'scn'
-		| 'simple'
-		| 'sk'
-		| 'sl'
-		| 'species'
-		| 'sq'
-		| 'sr'
-		| 'st'
-		| 'sv'
-		| 'sw'
-		| 'ta'
-		| 'te'
-		| 'th'
-		| 'tr'
-		| 'tt'
-		| 'uk'
-		| 'ur'
-		| 'v'
-		| 'vi'
-		| 'vo'
-		| 'w'
-		| 'wikt'
-		| 'zh'
-		| 'zhminnan';
+	interwikisource?: 'commons' | 'de' | 'es' | 'fr' | 'it' | 'meta' | 'nost' | 'outreachwiki' | 'pl' | 'test2wiki';
 	interwikipage?: string;
 	fullhistory?: boolean;
 	templates?: boolean;
@@ -1078,6 +1207,14 @@ export interface ApiImportParams extends ApiParams {
 	rootpage?: string;
 	tags?: string | string[];
 	token?: string;
+}
+
+export interface ApiFormatJsonParams extends ApiParams {
+	format: 'json';
+	callback?: string;
+	utf8?: boolean;
+	ascii?: boolean;
+	formatversion?: '1' | '2' | 'latest';
 }
 
 export interface JsonConfigJCApiParams extends ApiParams {
@@ -1091,6 +1228,15 @@ export interface JsonConfigJCApiParams extends ApiParams {
 export interface JsonConfigJCDataApiParams extends ApiParams {
 	action: 'jsondata';
 	title: string;
+}
+
+export interface ApiFormatJsonFMParams extends ApiParams {
+	format: 'jsonfm';
+	wrappedhtml?: boolean;
+	callback?: string;
+	utf8?: boolean;
+	ascii?: boolean;
+	formatversion?: '1' | '2' | 'latest';
 }
 
 export interface UniversalLanguageSelectorApiLanguageSearchParams extends ApiParams {
@@ -1168,6 +1314,10 @@ export interface ApiMoveParams extends ApiParams {
 	token?: string;
 }
 
+export interface ApiFormatNoneParams extends ApiParams {
+	format: 'none';
+}
+
 export interface OATHAuthApiModuleApiOATHValidateParams extends ApiParams {
 	action: 'oathvalidate';
 	user?: string;
@@ -1197,6 +1347,107 @@ export interface ApiOptionsParams extends ApiParams {
 	optionname?: string;
 	optionvalue?: string;
 	token?: string;
+}
+
+export interface PageTriageApiPageTriageActionParams extends ApiParams {
+	action: 'pagetriageaction';
+	pageid: number;
+	reviewed?: '0' | '1';
+	enqueue?: boolean;
+	token?: string;
+	note?: string;
+	skipnotif?: boolean;
+	tags?: string | string[];
+}
+
+export interface PageTriageApiPageTriageListParams extends ApiParams {
+	action: 'pagetriagelist';
+	show_predicted_class_stub?: boolean;
+	show_predicted_class_start?: boolean;
+	show_predicted_class_c?: boolean;
+	show_predicted_class_b?: boolean;
+	show_predicted_class_good?: boolean;
+	show_predicted_class_featured?: boolean;
+	show_predicted_issues_vandalism?: boolean;
+	show_predicted_issues_spam?: boolean;
+	show_predicted_issues_attack?: boolean;
+	show_predicted_issues_none?: boolean;
+	show_predicted_issues_copyvio?: boolean;
+	showbots?: boolean;
+	showautopatrolled?: boolean;
+	showredirs?: boolean;
+	showothers?: boolean;
+	showreviewed?: boolean;
+	showunreviewed?: boolean;
+	showdeleted?: boolean;
+	namespace?: number;
+	afc_state?: number;
+	no_category?: boolean;
+	unreferenced?: boolean;
+	no_inbound_links?: boolean;
+	recreated?: boolean;
+	non_autoconfirmed_users?: boolean;
+	learners?: boolean;
+	blocked_users?: boolean;
+	username?: string;
+	date_range_from?: timestamp;
+	date_range_to?: timestamp;
+	page_id?: number;
+	limit?: number;
+	offset?: number;
+	pageoffset?: number;
+	dir?: 'newestfirst' | 'newestreview' | 'oldestfirst' | 'oldestreview';
+}
+
+export interface PageTriageApiPageTriageStatsParams extends ApiParams {
+	action: 'pagetriagestats';
+	show_predicted_class_stub?: boolean;
+	show_predicted_class_start?: boolean;
+	show_predicted_class_c?: boolean;
+	show_predicted_class_b?: boolean;
+	show_predicted_class_good?: boolean;
+	show_predicted_class_featured?: boolean;
+	show_predicted_issues_vandalism?: boolean;
+	show_predicted_issues_spam?: boolean;
+	show_predicted_issues_attack?: boolean;
+	show_predicted_issues_none?: boolean;
+	show_predicted_issues_copyvio?: boolean;
+	showbots?: boolean;
+	showautopatrolled?: boolean;
+	showredirs?: boolean;
+	showothers?: boolean;
+	showreviewed?: boolean;
+	showunreviewed?: boolean;
+	showdeleted?: boolean;
+	namespace?: number;
+	afc_state?: number;
+	no_category?: boolean;
+	unreferenced?: boolean;
+	no_inbound_links?: boolean;
+	recreated?: boolean;
+	non_autoconfirmed_users?: boolean;
+	learners?: boolean;
+	blocked_users?: boolean;
+	username?: string;
+	date_range_from?: timestamp;
+	date_range_to?: timestamp;
+}
+
+export interface PageTriageApiPageTriageTagCopyvioParams extends ApiParams {
+	action: 'pagetriagetagcopyvio';
+	revid: number;
+	untag?: boolean;
+	token?: string;
+}
+
+export interface PageTriageApiPageTriageTaggingParams extends ApiParams {
+	action: 'pagetriagetagging';
+	pageid: number;
+	token?: string;
+	wikitext: string;
+	deletion?: boolean;
+	note?: string;
+	taglist: string | string[];
 }
 
 export interface ApiParamInfoParams extends ApiParams {
@@ -1254,7 +1505,7 @@ export interface ApiParamInfoParams extends ApiParams {
 		| 'filearchive'
 		| 'filerepoinfo'
 		| 'fileusage'
-		| 'flowinfo'
+		| 'flagged'
 		| 'gadgetcategories'
 		| 'gadgets'
 		| 'geosearch'
@@ -1277,6 +1528,7 @@ export interface ApiParamInfoParams extends ApiParams {
 		| 'images'
 		| 'imageusage'
 		| 'info'
+		| 'isreviewed'
 		| 'iwbacklinks'
 		| 'iwlinks'
 		| 'langbacklinks'
@@ -1294,6 +1546,7 @@ export interface ApiParamInfoParams extends ApiParams {
 		| 'mystashedfiles'
 		| 'notifications'
 		| 'oath'
+		| 'oldreviewedpages'
 		| 'ores'
 		| 'pageassessments'
 		| 'pageimages'
@@ -1412,7 +1665,6 @@ export interface ApiParseParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
-		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -1430,7 +1682,6 @@ export interface ApiParseParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
-		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -1463,6 +1714,17 @@ export interface ApiPatrolParams extends ApiParams {
 	revid?: number;
 	tags?: string | string[];
 	token?: string;
+}
+
+export interface ApiFormatPhpParams extends ApiParams {
+	format: 'php';
+	formatversion?: '1' | '2' | 'latest';
+}
+
+export interface ApiFormatPhpFMParams extends ApiParams {
+	format: 'phpfm';
+	wrappedhtml?: boolean;
+	formatversion?: '1' | '2' | 'latest';
 }
 
 export interface ApiProtectParams extends ApiParams {
@@ -1516,6 +1778,7 @@ export interface ApiPurgeParams extends ApiParams {
 		| 'links'
 		| 'linkshere'
 		| 'mostviewed'
+		| 'oldreviewedpages'
 		| 'pageswithprop'
 		| 'prefixsearch'
 		| 'projectpages'
@@ -1552,11 +1815,13 @@ export interface ApiQueryParams extends ApiParams {
 		| 'extlinks'
 		| 'extracts'
 		| 'fileusage'
+		| 'flagged'
 		| 'globalusage'
 		| 'growthimagesuggestiondata'
 		| 'imageinfo'
 		| 'images'
 		| 'info'
+		| 'isreviewed'
 		| 'iwlinks'
 		| 'langlinks'
 		| 'langlinkscount'
@@ -1576,7 +1841,6 @@ export interface ApiQueryParams extends ApiParams {
 		| 'transcodestatus'
 		| 'videoinfo'
 		| 'wbentityusage'
-		| 'flowinfo'
 		| 'description'
 		| 'mapdata'
 	>;
@@ -1627,6 +1891,7 @@ export interface ApiQueryParams extends ApiParams {
 		| 'logevents'
 		| 'mostviewed'
 		| 'mystashedfiles'
+		| 'oldreviewedpages'
 		| 'pagepropnames'
 		| 'pageswithprop'
 		| 'prefixsearch'
@@ -1712,6 +1977,7 @@ export interface ApiQueryParams extends ApiParams {
 		| 'links'
 		| 'linkshere'
 		| 'mostviewed'
+		| 'oldreviewedpages'
 		| 'pageswithprop'
 		| 'prefixsearch'
 		| 'projectpages'
@@ -1731,1180 +1997,6 @@ export interface ApiQueryParams extends ApiParams {
 		| 'readinglistentries';
 	redirects?: boolean;
 	converttitles?: boolean;
-}
-
-export interface ReadingListsApiReadingListsParams extends ApiParams {
-	action: 'readinglists';
-	command: 'create' | 'createentry' | 'delete' | 'deleteentry' | 'setup' | 'teardown' | 'update';
-	token?: string;
-}
-
-export interface ApiRemoveAuthenticationDataParams extends ApiParams {
-	action: 'removeauthenticationdata';
-	request: string;
-	token?: string;
-}
-
-export interface ApiResetPasswordParams extends ApiParams {
-	action: 'resetpassword';
-	user?: string;
-	email?: string;
-	token?: string;
-}
-
-export interface ApiRevisionDeleteParams extends ApiParams {
-	action: 'revisiondelete';
-	type: 'archive' | 'filearchive' | 'logging' | 'oldimage' | 'revision';
-	target?: string;
-	ids: string | string[];
-	hide?: OneOrMore<'comment' | 'content' | 'user'>;
-	show?: OneOrMore<'comment' | 'content' | 'user'>;
-	suppress?: 'no' | 'nochange' | 'yes';
-	reason?: string;
-	tags?: string | string[];
-	token?: string;
-}
-
-export interface ApiRollbackParams extends ApiParams {
-	action: 'rollback';
-	title?: string;
-	pageid?: number;
-	tags?: string | string[];
-	user: string;
-	summary?: string;
-	markbot?: boolean;
-	watchlist?: 'nochange' | 'preferences' | 'unwatch' | 'watch';
-	watchlistexpiry?: expiry;
-	token?: string;
-}
-
-export interface ApiRsdParams extends ApiParams {
-	action: 'rsd';
-}
-
-export interface KartographerApiSanitizeMapDataParams extends ApiParams {
-	action: 'sanitize-mapdata';
-	title?: string;
-	text: string;
-}
-
-export interface ScribuntoApiScribuntoConsoleParams extends ApiParams {
-	action: 'scribunto-console';
-	title?: string;
-	content?: string;
-	session?: number;
-	question: string;
-	clear?: boolean;
-	token?: string;
-}
-
-export interface SecurePollApiSecurePollAuthParams extends ApiParams {
-	action: 'securepollauth';
-	token?: string;
-	id: number;
-}
-
-export interface CentralAuthApiSetGlobalAccountStatusParams extends ApiParams {
-	action: 'setglobalaccountstatus';
-	user: string;
-	locked?: '' | 'lock' | 'unlock';
-	hidden?: '' | 'lists' | 'suppressed';
-	reason?: string;
-	statecheck?: string;
-	token?: string;
-}
-
-export interface ApiSetNotificationTimestampParams extends ApiParams {
-	action: 'setnotificationtimestamp';
-	entirewatchlist?: boolean;
-	timestamp?: timestamp;
-	torevid?: number;
-	newerthanrevid?: number;
-	continue?: string;
-	titles?: string | string[];
-	pageids?: number | number[];
-	revids?: number | number[];
-	generator?:
-		| 'allcategories'
-		| 'alldeletedrevisions'
-		| 'allfileusages'
-		| 'allimages'
-		| 'alllinks'
-		| 'allpages'
-		| 'allredirects'
-		| 'allrevisions'
-		| 'alltransclusions'
-		| 'backlinks'
-		| 'categories'
-		| 'categorymembers'
-		| 'contenttranslation'
-		| 'contenttranslationsuggestions'
-		| 'deletedrevisions'
-		| 'duplicatefiles'
-		| 'embeddedin'
-		| 'exturlusage'
-		| 'fileusage'
-		| 'geosearch'
-		| 'images'
-		| 'imageusage'
-		| 'iwbacklinks'
-		| 'langbacklinks'
-		| 'links'
-		| 'linkshere'
-		| 'mostviewed'
-		| 'pageswithprop'
-		| 'prefixsearch'
-		| 'projectpages'
-		| 'protectedtitles'
-		| 'querypage'
-		| 'random'
-		| 'recentchanges'
-		| 'redirects'
-		| 'revisions'
-		| 'search'
-		| 'templates'
-		| 'transcludedin'
-		| 'watchlist'
-		| 'watchlistraw'
-		| 'wblistentityusage'
-		| 'growthtasks'
-		| 'readinglistentries';
-	redirects?: boolean;
-	converttitles?: boolean;
-	token?: string;
-}
-
-export interface ApiSetPageLanguageParams extends ApiParams {
-	action: 'setpagelanguage';
-	title?: string;
-	pageid?: number;
-	lang:
-		| 'aae'
-		| 'ab'
-		| 'abs'
-		| 'ace'
-		| 'acm'
-		| 'ady'
-		| 'ady-cyrl'
-		| 'aeb'
-		| 'aeb-arab'
-		| 'aeb-latn'
-		| 'af'
-		| 'aln'
-		| 'alt'
-		| 'am'
-		| 'ami'
-		| 'an'
-		| 'ang'
-		| 'ann'
-		| 'anp'
-		| 'ar'
-		| 'arc'
-		| 'arn'
-		| 'arq'
-		| 'ary'
-		| 'arz'
-		| 'as'
-		| 'ase'
-		| 'ast'
-		| 'atj'
-		| 'av'
-		| 'avk'
-		| 'awa'
-		| 'ay'
-		| 'az'
-		| 'azb'
-		| 'ba'
-		| 'ban'
-		| 'ban-bali'
-		| 'bar'
-		| 'bbc'
-		| 'bbc-latn'
-		| 'bcc'
-		| 'bci'
-		| 'bcl'
-		| 'bdr'
-		| 'be'
-		| 'be-tarask'
-		| 'bew'
-		| 'bg'
-		| 'bgn'
-		| 'bh'
-		| 'bho'
-		| 'bi'
-		| 'bjn'
-		| 'blk'
-		| 'bm'
-		| 'bn'
-		| 'bo'
-		| 'bpy'
-		| 'bqi'
-		| 'br'
-		| 'brh'
-		| 'bs'
-		| 'btm'
-		| 'bto'
-		| 'bug'
-		| 'bxr'
-		| 'ca'
-		| 'cbk-zam'
-		| 'cdo'
-		| 'ce'
-		| 'ceb'
-		| 'ch'
-		| 'chn'
-		| 'chr'
-		| 'chy'
-		| 'ckb'
-		| 'co'
-		| 'cps'
-		| 'cpx'
-		| 'cpx-hans'
-		| 'cpx-hant'
-		| 'cr'
-		| 'crh'
-		| 'crh-cyrl'
-		| 'crh-latn'
-		| 'crh-ro'
-		| 'cs'
-		| 'csb'
-		| 'cu'
-		| 'cv'
-		| 'cy'
-		| 'da'
-		| 'dag'
-		| 'de'
-		| 'de-at'
-		| 'de-ch'
-		| 'de-formal'
-		| 'default'
-		| 'dga'
-		| 'din'
-		| 'diq'
-		| 'dsb'
-		| 'dtp'
-		| 'dty'
-		| 'dv'
-		| 'dz'
-		| 'ee'
-		| 'efi'
-		| 'egl'
-		| 'el'
-		| 'eml'
-		| 'en'
-		| 'en-ca'
-		| 'en-gb'
-		| 'eo'
-		| 'es'
-		| 'es-formal'
-		| 'et'
-		| 'eu'
-		| 'ext'
-		| 'fa'
-		| 'fat'
-		| 'ff'
-		| 'fi'
-		| 'fit'
-		| 'fj'
-		| 'fo'
-		| 'fon'
-		| 'fr'
-		| 'frc'
-		| 'frp'
-		| 'frr'
-		| 'fur'
-		| 'fy'
-		| 'ga'
-		| 'gaa'
-		| 'gag'
-		| 'gan'
-		| 'gan-hans'
-		| 'gan-hant'
-		| 'gcf'
-		| 'gcr'
-		| 'gd'
-		| 'gl'
-		| 'gld'
-		| 'glk'
-		| 'gn'
-		| 'gom'
-		| 'gom-deva'
-		| 'gom-latn'
-		| 'gor'
-		| 'got'
-		| 'gpe'
-		| 'grc'
-		| 'gsw'
-		| 'gu'
-		| 'guc'
-		| 'gur'
-		| 'guw'
-		| 'gv'
-		| 'ha'
-		| 'hak'
-		| 'haw'
-		| 'he'
-		| 'hi'
-		| 'hif'
-		| 'hif-latn'
-		| 'hil'
-		| 'hno'
-		| 'hr'
-		| 'hrx'
-		| 'hsb'
-		| 'hsn'
-		| 'ht'
-		| 'hu'
-		| 'hu-formal'
-		| 'hy'
-		| 'hyw'
-		| 'ia'
-		| 'ibb'
-		| 'id'
-		| 'ie'
-		| 'ig'
-		| 'igl'
-		| 'ii'
-		| 'ik'
-		| 'ike-cans'
-		| 'ike-latn'
-		| 'ilo'
-		| 'inh'
-		| 'io'
-		| 'is'
-		| 'it'
-		| 'iu'
-		| 'ja'
-		| 'jam'
-		| 'jbo'
-		| 'jut'
-		| 'jv'
-		| 'ka'
-		| 'kaa'
-		| 'kab'
-		| 'kai'
-		| 'kbd'
-		| 'kbd-cyrl'
-		| 'kbp'
-		| 'kcg'
-		| 'kea'
-		| 'kg'
-		| 'kge'
-		| 'khw'
-		| 'ki'
-		| 'kiu'
-		| 'kjh'
-		| 'kjp'
-		| 'kk'
-		| 'kk-arab'
-		| 'kk-cn'
-		| 'kk-cyrl'
-		| 'kk-kz'
-		| 'kk-latn'
-		| 'kk-tr'
-		| 'kl'
-		| 'km'
-		| 'kn'
-		| 'ko'
-		| 'ko-kp'
-		| 'koi'
-		| 'kr'
-		| 'krc'
-		| 'kri'
-		| 'krj'
-		| 'krl'
-		| 'ks'
-		| 'ks-arab'
-		| 'ks-deva'
-		| 'ksh'
-		| 'ksw'
-		| 'ku'
-		| 'ku-arab'
-		| 'ku-latn'
-		| 'kum'
-		| 'kus'
-		| 'kv'
-		| 'kw'
-		| 'ky'
-		| 'la'
-		| 'lad'
-		| 'lb'
-		| 'lbe'
-		| 'lez'
-		| 'lfn'
-		| 'lg'
-		| 'li'
-		| 'lij'
-		| 'liv'
-		| 'lki'
-		| 'lld'
-		| 'lmo'
-		| 'ln'
-		| 'lo'
-		| 'loz'
-		| 'lrc'
-		| 'lt'
-		| 'ltg'
-		| 'lus'
-		| 'luz'
-		| 'lv'
-		| 'lzh'
-		| 'lzz'
-		| 'mad'
-		| 'mag'
-		| 'mai'
-		| 'map-bms'
-		| 'mdf'
-		| 'mg'
-		| 'mhr'
-		| 'mi'
-		| 'min'
-		| 'mk'
-		| 'ml'
-		| 'mn'
-		| 'mnc'
-		| 'mnc-mong'
-		| 'mni'
-		| 'mnw'
-		| 'mo'
-		| 'mos'
-		| 'mr'
-		| 'mrh'
-		| 'mrj'
-		| 'ms'
-		| 'ms-arab'
-		| 'mt'
-		| 'mwl'
-		| 'my'
-		| 'myv'
-		| 'mzn'
-		| 'na'
-		| 'nah'
-		| 'nan'
-		| 'nap'
-		| 'nb'
-		| 'nds'
-		| 'nds-nl'
-		| 'ne'
-		| 'new'
-		| 'nia'
-		| 'nit'
-		| 'niu'
-		| 'nl'
-		| 'nl-informal'
-		| 'nmz'
-		| 'nn'
-		| 'nod'
-		| 'nog'
-		| 'nov'
-		| 'nqo'
-		| 'nrm'
-		| 'nso'
-		| 'nv'
-		| 'ny'
-		| 'nyn'
-		| 'nyo'
-		| 'nys'
-		| 'oc'
-		| 'ojb'
-		| 'olo'
-		| 'om'
-		| 'or'
-		| 'os'
-		| 'pa'
-		| 'pag'
-		| 'pam'
-		| 'pap'
-		| 'pcd'
-		| 'pcm'
-		| 'pdc'
-		| 'pdt'
-		| 'pfl'
-		| 'pi'
-		| 'pih'
-		| 'pl'
-		| 'pms'
-		| 'pnb'
-		| 'pnt'
-		| 'prg'
-		| 'ps'
-		| 'pt'
-		| 'pt-br'
-		| 'pwn'
-		| 'qu'
-		| 'qug'
-		| 'rgn'
-		| 'rif'
-		| 'rki'
-		| 'rm'
-		| 'rmc'
-		| 'rmy'
-		| 'rn'
-		| 'ro'
-		| 'roa-tara'
-		| 'rsk'
-		| 'ru'
-		| 'rue'
-		| 'rup'
-		| 'ruq'
-		| 'ruq-cyrl'
-		| 'ruq-latn'
-		| 'rut'
-		| 'rw'
-		| 'ryu'
-		| 'sa'
-		| 'sah'
-		| 'sat'
-		| 'sc'
-		| 'scn'
-		| 'sco'
-		| 'sd'
-		| 'sdc'
-		| 'sdh'
-		| 'se'
-		| 'se-fi'
-		| 'se-no'
-		| 'se-se'
-		| 'sei'
-		| 'ses'
-		| 'sg'
-		| 'sgs'
-		| 'sh'
-		| 'sh-cyrl'
-		| 'sh-latn'
-		| 'shi'
-		| 'shn'
-		| 'shy'
-		| 'shy-latn'
-		| 'si'
-		| 'sjd'
-		| 'sje'
-		| 'sk'
-		| 'skr'
-		| 'skr-arab'
-		| 'sl'
-		| 'sli'
-		| 'sm'
-		| 'sma'
-		| 'smn'
-		| 'sms'
-		| 'sn'
-		| 'so'
-		| 'sq'
-		| 'sr'
-		| 'sr-ec'
-		| 'sr-el'
-		| 'srn'
-		| 'sro'
-		| 'ss'
-		| 'st'
-		| 'stq'
-		| 'sty'
-		| 'su'
-		| 'sv'
-		| 'sw'
-		| 'syl'
-		| 'szl'
-		| 'szy'
-		| 'ta'
-		| 'tay'
-		| 'tcy'
-		| 'tdd'
-		| 'te'
-		| 'tet'
-		| 'tg'
-		| 'tg-cyrl'
-		| 'tg-latn'
-		| 'th'
-		| 'ti'
-		| 'tk'
-		| 'tl'
-		| 'tly'
-		| 'tn'
-		| 'to'
-		| 'tok'
-		| 'tpi'
-		| 'tr'
-		| 'tru'
-		| 'trv'
-		| 'ts'
-		| 'tt'
-		| 'tt-cyrl'
-		| 'tt-latn'
-		| 'ttj'
-		| 'tum'
-		| 'tw'
-		| 'ty'
-		| 'tyv'
-		| 'tzm'
-		| 'udm'
-		| 'ug'
-		| 'ug-arab'
-		| 'ug-latn'
-		| 'uk'
-		| 'ur'
-		| 'uz'
-		| 've'
-		| 'vec'
-		| 'vep'
-		| 'vi'
-		| 'vls'
-		| 'vmf'
-		| 'vmw'
-		| 'vo'
-		| 'vot'
-		| 'vro'
-		| 'wa'
-		| 'wal'
-		| 'war'
-		| 'wls'
-		| 'wo'
-		| 'wuu'
-		| 'wuu-hans'
-		| 'wuu-hant'
-		| 'xal'
-		| 'xh'
-		| 'xmf'
-		| 'xsy'
-		| 'yi'
-		| 'yo'
-		| 'yrl'
-		| 'yue'
-		| 'yue-hans'
-		| 'yue-hant'
-		| 'za'
-		| 'zea'
-		| 'zgh'
-		| 'zh'
-		| 'zh-cn'
-		| 'zh-hans'
-		| 'zh-hant'
-		| 'zh-hk'
-		| 'zh-mo'
-		| 'zh-my'
-		| 'zh-sg'
-		| 'zh-tw'
-		| 'zu';
-	reason?: string;
-	tags?: string | string[];
-	token?: string;
-}
-
-export interface UrlShortenerApiShortenUrlParams extends ApiParams {
-	action: 'shortenurl';
-	url: string;
-	qrcode?: boolean;
-}
-
-export interface SiteMatrixApiSiteMatrixParams extends ApiParams {
-	action: 'sitematrix';
-	smtype?: OneOrMore<'language' | 'special'>;
-	smstate?: OneOrMore<'all' | 'closed' | 'fishbowl' | 'nonglobal' | 'private'>;
-	smlangprop?: OneOrMore<'code' | 'dir' | 'localname' | 'name' | 'site'>;
-	smsiteprop?: OneOrMore<'code' | 'dbname' | 'lang' | 'sitename' | 'url'>;
-	smlimit?: limit;
-	smcontinue?: string;
-}
-
-export interface SpamBlacklistApiSpamBlacklistParams extends ApiParams {
-	action: 'spamblacklist';
-	url: string | string[];
-}
-
-export interface ApiStashEditParams extends ApiParams {
-	action: 'stashedit';
-	title: string;
-	section?: string;
-	sectiontitle?: string;
-	text?: string;
-	stashedtexthash?: string;
-	summary?: string;
-	contentmodel:
-		| 'GadgetDefinition'
-		| 'JsonSchema'
-		| 'MassMessageListContent'
-		| 'Scribunto'
-		| 'SecurePoll'
-		| 'css'
-		| 'flow-board'
-		| 'javascript'
-		| 'json'
-		| 'sanitized-css'
-		| 'text'
-		| 'unknown'
-		| 'wikitext';
-	contentformat:
-		| 'application/json'
-		| 'application/octet-stream'
-		| 'application/unknown'
-		| 'application/x-binary'
-		| 'text/css'
-		| 'text/javascript'
-		| 'text/plain'
-		| 'text/unknown'
-		| 'text/x-wiki'
-		| 'unknown/unknown';
-	baserevid: number;
-	token?: string;
-}
-
-export interface EventStreamConfigApiStreamConfigsParams extends ApiParams {
-	action: 'streamconfigs';
-	streams?: string | string[];
-	constraints?: string | string[];
-	all_settings?: boolean;
-}
-
-export interface SecurePollApiStrikeVoteParams extends ApiParams {
-	action: 'strikevote';
-	option: 'strike' | 'unstrike';
-	reason: string;
-	voteid: number;
-	token?: string;
-}
-
-export interface ContentTranslationActionApiSectionTranslationDeleteParams extends ApiParams {
-	action: 'sxdelete';
-	sectiontranslationid: number;
-	translationid: number;
-	sectionid: string;
-	token?: string;
-}
-
-export interface ContentTranslationActionApiSectionTranslationSaveParams extends ApiParams {
-	action: 'sxsave';
-	sourcelanguage: string;
-	targetlanguage: string;
-	sourcetitle: string;
-	targettitle: string;
-	content: string;
-	sourcerevision: number;
-	sourcesectiontitle: string;
-	targetsectiontitle: string;
-	sectionid: string;
-	issandbox?: boolean;
-	progress: string;
-	token?: string;
-}
-
-export interface ApiTagParams extends ApiParams {
-	action: 'tag';
-	rcid?: number | number[];
-	revid?: number | number[];
-	logid?: number | number[];
-	add?: OneOrMore<
-		| '0xBlockMessage'
-		| 'AWB'
-		| 'Adiutor'
-		| 'BandeauxCategories'
-		| 'BandeauxEbauches'
-		| 'BandeauxPortails'
-		| 'C-helper'
-		| 'CopyvioIP'
-		| 'HotCats'
-		| 'LiveRC'
-		| 'PaStec'
-		| 'PaletteDeluxe'
-		| 'ProveIt'
-		| 'PublierBrouillon'
-		| 'RenommageCategorie'
-		| 'Test balise'
-		| 'WPCleaner'
-		| 'delete'
-		| 'huggle'
-		| 'paidedits'
-		| 'retrait bandeau maintenance'
-		| 'spamblock'
-		| 'wikimooc2017'
-		| 'wmrc'
-	>;
-	remove?: string | string[];
-	reason?: string;
-	tags?: string | string[];
-	token?: string;
-}
-
-export interface TemplateDataApiTemplateDataParams extends ApiParams {
-	action: 'templatedata';
-	includeMissingTitles?: boolean;
-	doNotIgnoreMissingTitles?: boolean;
-	lang?: string;
-	titles?: string | string[];
-	pageids?: number | number[];
-	revids?: number | number[];
-	generator?:
-		| 'allcategories'
-		| 'alldeletedrevisions'
-		| 'allfileusages'
-		| 'allimages'
-		| 'alllinks'
-		| 'allpages'
-		| 'allredirects'
-		| 'allrevisions'
-		| 'alltransclusions'
-		| 'backlinks'
-		| 'categories'
-		| 'categorymembers'
-		| 'contenttranslation'
-		| 'contenttranslationsuggestions'
-		| 'deletedrevisions'
-		| 'duplicatefiles'
-		| 'embeddedin'
-		| 'exturlusage'
-		| 'fileusage'
-		| 'geosearch'
-		| 'images'
-		| 'imageusage'
-		| 'iwbacklinks'
-		| 'langbacklinks'
-		| 'links'
-		| 'linkshere'
-		| 'mostviewed'
-		| 'pageswithprop'
-		| 'prefixsearch'
-		| 'projectpages'
-		| 'protectedtitles'
-		| 'querypage'
-		| 'random'
-		| 'recentchanges'
-		| 'redirects'
-		| 'revisions'
-		| 'search'
-		| 'templates'
-		| 'transcludedin'
-		| 'watchlist'
-		| 'watchlistraw'
-		| 'wblistentityusage'
-		| 'growthtasks'
-		| 'readinglistentries';
-	redirects?: boolean;
-	converttitles?: boolean;
-}
-
-export interface ThanksApiCoreThankParams extends ApiParams {
-	action: 'thank';
-	rev?: number;
-	log?: number;
-	token?: string;
-	source?: string;
-}
-
-export interface MediaWikiTimedMediaHandlerApiTimedTextParams extends ApiParams {
-	action: 'timedtext';
-	title?: string;
-	pageid?: number;
-	trackformat: 'srt' | 'vtt';
-	lang?: string;
-}
-
-export interface TitleBlacklistApiTitleBlacklistParams extends ApiParams {
-	action: 'titleblacklist';
-	tbtitle: string;
-	tbaction?: 'create' | 'createpage' | 'createtalk' | 'edit' | 'move' | 'new-account' | 'upload';
-	tbnooverride?: boolean;
-}
-
-export interface TorBlockApiTorBlockParams extends ApiParams {
-	action: 'torblock';
-	ip: string;
-}
-
-export interface MediaWikiTimedMediaHandlerApiTranscodeResetParams extends ApiParams {
-	action: 'transcodereset';
-	title: string;
-	transcodekey?: string;
-	token?: string;
-}
-
-export interface UniversalLanguageSelectorApiULSLocalizationParams extends ApiParams {
-	action: 'ulslocalization';
-	language: string;
-}
-
-export interface UniversalLanguageSelectorApiULSSetLanguageParams extends ApiParams {
-	action: 'ulssetlang';
-	languagecode: string;
-	token?: string;
-}
-
-export interface ApiUnblockParams extends ApiParams {
-	action: 'unblock';
-	id?: number;
-	user?: string;
-	userid?: number;
-	reason?: string;
-	tags?: string | string[];
-	watchuser?: boolean;
-	watchlistexpiry?: expiry;
-	token?: string;
-}
-
-export interface ApiUndeleteParams extends ApiParams {
-	action: 'undelete';
-	title: string;
-	reason?: string;
-	tags?: string | string[];
-	timestamps?: timestamp | timestamp[];
-	fileids?: number | number[];
-	undeletetalk?: boolean;
-	watchlist?: 'nochange' | 'preferences' | 'unwatch' | 'watch';
-	watchlistexpiry?: expiry;
-	token?: string;
-}
-
-export interface ApiQueryUnlinkAccountParams extends ApiParams {
-	action: 'unlinkaccount';
-	request: string;
-	token?: string;
-}
-
-export interface ApiUploadParams extends ApiParams {
-	action: 'upload';
-	filename?: string;
-	comment?: string;
-	tags?: string | string[];
-	text?: string;
-	watch?: boolean;
-	watchlist?: 'nochange' | 'preferences' | 'watch';
-	watchlistexpiry?: expiry;
-	ignorewarnings?: boolean;
-	file?: upload;
-	url?: string;
-	filekey?: string;
-	sessionkey?: string;
-	stash?: boolean;
-	filesize?: number;
-	offset?: number;
-	chunk?: upload;
-	async?: boolean;
-	checkstatus?: boolean;
-	token?: string;
-}
-
-export interface ApiUserrightsParams extends ApiParams {
-	action: 'userrights';
-	user?: string;
-	userid?: number;
-	add?: OneOrMore<
-		| 'abusefilter'
-		| 'accountcreator'
-		| 'bot'
-		| 'bureaucrat'
-		| 'checkuser'
-		| 'confirmed'
-		| 'flow-bot'
-		| 'import'
-		| 'interface-admin'
-		| 'ipblock-exempt'
-		| 'no-ipinfo'
-		| 'rollbacker'
-		| 'steward'
-		| 'suppress'
-		| 'sysop'
-		| 'transwiki'
-	>;
-	expiry?: string | string[];
-	remove?: OneOrMore<
-		| 'abusefilter'
-		| 'accountcreator'
-		| 'bot'
-		| 'bureaucrat'
-		| 'checkuser'
-		| 'confirmed'
-		| 'flow-bot'
-		| 'import'
-		| 'interface-admin'
-		| 'ipblock-exempt'
-		| 'no-ipinfo'
-		| 'rollbacker'
-		| 'steward'
-		| 'suppress'
-		| 'sysop'
-		| 'transwiki'
-	>;
-	reason?: string;
-	token?: string;
-	tags?: string | string[];
-	watchuser?: boolean;
-	watchlistexpiry?: expiry;
-}
-
-export interface ApiValidatePasswordParams extends ApiParams {
-	action: 'validatepassword';
-	password: password;
-	user?: string;
-	email?: string;
-	realname?: string;
-}
-
-export interface VisualEditorApiVisualEditorParams extends ApiParams {
-	action: 'visualeditor';
-	page: string;
-	badetag?: string;
-	format?: 'json' | 'jsonfm';
-	paction: 'metadata' | 'parse' | 'parsefragment' | 'templatesused' | 'wikitext';
-	wikitext?: string;
-	section?: string;
-	stash?: boolean;
-	oldid?: number;
-	editintro?: string;
-	pst?: boolean;
-	preload?: string;
-	preloadparams?: string | string[];
-}
-
-export interface VisualEditorApiVisualEditorEditParams extends ApiParams {
-	action: 'visualeditoredit';
-	paction: 'diff' | 'save' | 'serialize' | 'serializeforcache';
-	page: string;
-	token?: string;
-	wikitext?: string;
-	section?: string;
-	sectiontitle?: string;
-	basetimestamp?: timestamp;
-	starttimestamp?: timestamp;
-	oldid?: number;
-	minor?: string;
-	watchlist?: string;
-	html?: string;
-	etag?: string;
-	summary?: string;
-	captchaid?: string;
-	captchaword?: string;
-	cachekey?: string;
-	nocontent?: boolean;
-	returnto?: string;
-	returntoquery?: string;
-	returntoanchor?: string;
-	useskin?: string;
-	tags?: string | string[];
-	plugins?: string | string[];
-	mobileformat?: boolean;
-}
-
-export interface ApiWatchParams extends ApiParams {
-	action: 'watch';
-	title?: string;
-	expiry?: expiry;
-	unwatch?: boolean;
-	continue?: string;
-	titles?: string | string[];
-	pageids?: number | number[];
-	revids?: number | number[];
-	generator?:
-		| 'allcategories'
-		| 'alldeletedrevisions'
-		| 'allfileusages'
-		| 'allimages'
-		| 'alllinks'
-		| 'allpages'
-		| 'allredirects'
-		| 'allrevisions'
-		| 'alltransclusions'
-		| 'backlinks'
-		| 'categories'
-		| 'categorymembers'
-		| 'contenttranslation'
-		| 'contenttranslationsuggestions'
-		| 'deletedrevisions'
-		| 'duplicatefiles'
-		| 'embeddedin'
-		| 'exturlusage'
-		| 'fileusage'
-		| 'geosearch'
-		| 'images'
-		| 'imageusage'
-		| 'iwbacklinks'
-		| 'langbacklinks'
-		| 'links'
-		| 'linkshere'
-		| 'mostviewed'
-		| 'pageswithprop'
-		| 'prefixsearch'
-		| 'projectpages'
-		| 'protectedtitles'
-		| 'querypage'
-		| 'random'
-		| 'recentchanges'
-		| 'redirects'
-		| 'revisions'
-		| 'search'
-		| 'templates'
-		| 'transcludedin'
-		| 'watchlist'
-		| 'watchlistraw'
-		| 'wblistentityusage'
-		| 'growthtasks'
-		| 'readinglistentries';
-	redirects?: boolean;
-	converttitles?: boolean;
-	token?: string;
-}
-
-export interface MobileFrontendApiWebappManifestParams extends ApiParams {
-	action: 'webapp-manifest';
-}
-
-export interface WebAuthnApiWebAuthnParams extends ApiParams {
-	action: 'webauthn';
-	func: 'getAuthInfo' | 'getRegisterInfo';
-}
-
-export interface WikimediaEventsApiWikimediaEventsBlockedEditParams extends ApiParams {
-	action: 'wikimediaeventsblockededit';
-	page: string;
-	interface: 'discussiontools' | 'mobilefrontend' | 'other' | 'visualeditor' | 'wikieditor';
-	platform: 'desktop' | 'mobile';
-}
-
-export interface ApiFormatJsonParams extends ApiParams {
-	format: 'json';
-	callback?: string;
-	utf8?: boolean;
-	ascii?: boolean;
-	formatversion?: '1' | '2' | 'latest';
-}
-
-export interface ApiFormatJsonFMParams extends ApiParams {
-	format: 'jsonfm';
-	wrappedhtml?: boolean;
-	callback?: string;
-	utf8?: boolean;
-	ascii?: boolean;
-	formatversion?: '1' | '2' | 'latest';
-}
-
-export interface ApiFormatNoneParams extends ApiParams {
-	format: 'none';
-}
-
-export interface ApiFormatPhpParams extends ApiParams {
-	format: 'php';
-	formatversion?: '1' | '2' | 'latest';
-}
-
-export interface ApiFormatPhpFMParams extends ApiParams {
-	format: 'phpfm';
-	wrappedhtml?: boolean;
-	formatversion?: '1' | '2' | 'latest';
-}
-
-export interface ApiFormatRawFMParams extends ApiParams {
-	format: 'rawfm';
-	wrappedhtml?: boolean;
-}
-
-export interface ApiFormatXmlParams extends ApiParams {
-	format: 'xml';
-	xslt?: string;
-	includexmlnamespace?: boolean;
-}
-
-export interface ApiFormatXmlFMParams extends ApiParams {
-	format: 'xmlfm';
-	wrappedhtml?: boolean;
-	xslt?: string;
-	includexmlnamespace?: boolean;
 }
 
 export interface AbuseFilterApiQueryAbuseFiltersParams extends ApiQueryParams {
@@ -3094,7 +2186,7 @@ export interface ApiQueryAllPagesParams extends ApiQueryParams {
 	apminsize?: number;
 	apmaxsize?: number;
 	apprtype?: OneOrMore<'edit' | 'move' | 'upload'>;
-	apprlevel?: OneOrMore<'' | 'autoconfirmed' | 'editextendedsemiprotected' | 'sysop'>;
+	apprlevel?: OneOrMore<'' | 'autoconfirmed' | 'extendedconfirmed' | 'sysop' | 'templateeditor'>;
 	apprfiltercascade?: 'all' | 'cascading' | 'noncascading';
 	apprexpiry?: 'all' | 'definite' | 'indefinite';
 	aplimit?: limit;
@@ -3182,38 +2274,64 @@ export interface ApiQueryAllUsersParams extends ApiQueryParams {
 	audir?: 'ascending' | 'descending';
 	augroup?: OneOrMore<
 		| 'abusefilter'
+		| 'abusefilter-helper'
 		| 'accountcreator'
+		| 'autoreviewer'
 		| 'bot'
 		| 'bureaucrat'
 		| 'checkuser'
 		| 'confirmed'
-		| 'flow-bot'
+		| 'copyviobot'
+		| 'eventcoordinator'
+		| 'extendedconfirmed'
+		| 'extendedmover'
+		| 'filemover'
+		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'massmessage-sender'
 		| 'no-ipinfo'
+		| 'patroller'
+		| 'push-subscription-manager'
+		| 'researcher'
+		| 'reviewer'
 		| 'rollbacker'
 		| 'steward'
 		| 'suppress'
 		| 'sysop'
+		| 'templateeditor'
 		| 'transwiki'
 	>;
 	auexcludegroup?: OneOrMore<
 		| 'abusefilter'
+		| 'abusefilter-helper'
 		| 'accountcreator'
+		| 'autoreviewer'
 		| 'bot'
 		| 'bureaucrat'
 		| 'checkuser'
 		| 'confirmed'
-		| 'flow-bot'
+		| 'copyviobot'
+		| 'eventcoordinator'
+		| 'extendedconfirmed'
+		| 'extendedmover'
+		| 'filemover'
+		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'massmessage-sender'
 		| 'no-ipinfo'
+		| 'patroller'
+		| 'push-subscription-manager'
+		| 'researcher'
+		| 'reviewer'
 		| 'rollbacker'
 		| 'steward'
 		| 'suppress'
 		| 'sysop'
+		| 'templateeditor'
 		| 'transwiki'
 	>;
 	aurights?: OneOrMore<
@@ -3264,6 +2382,7 @@ export interface ApiQueryAllUsersParams extends ApiQueryParams {
 		| 'confirmemail'
 		| 'createaccount'
 		| 'createpage'
+		| 'createpagemainns'
 		| 'createtalk'
 		| 'delete'
 		| 'delete-redirect'
@@ -3300,9 +2419,7 @@ export interface ApiQueryAllUsersParams extends ApiQueryParams {
 		| 'flow-create-board'
 		| 'flow-delete'
 		| 'flow-edit-post'
-		| 'flow-edit-title'
 		| 'flow-hide'
-		| 'flow-lock'
 		| 'flow-suppress'
 		| 'globalblock'
 		| 'globalblock-exempt'
@@ -3357,6 +2474,9 @@ export interface ApiQueryAllUsersParams extends ApiQueryParams {
 		| 'override-antispoof'
 		| 'override-export-depth'
 		| 'pagelang'
+		| 'pagetriage-copyvio'
+		| 'pagetriage-mark-action'
+		| 'pagetriage-tagging-action'
 		| 'patrol'
 		| 'patrolmarks'
 		| 'protect'
@@ -3601,38 +2721,64 @@ export interface ContentTranslationActionApiQueryContentTranslationSuggestionsPa
 export interface ApiQueryContributorsParams extends ApiQueryParams {
 	pcgroup?: OneOrMore<
 		| 'abusefilter'
+		| 'abusefilter-helper'
 		| 'accountcreator'
+		| 'autoreviewer'
 		| 'bot'
 		| 'bureaucrat'
 		| 'checkuser'
 		| 'confirmed'
-		| 'flow-bot'
+		| 'copyviobot'
+		| 'eventcoordinator'
+		| 'extendedconfirmed'
+		| 'extendedmover'
+		| 'filemover'
+		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'massmessage-sender'
 		| 'no-ipinfo'
+		| 'patroller'
+		| 'push-subscription-manager'
+		| 'researcher'
+		| 'reviewer'
 		| 'rollbacker'
 		| 'steward'
 		| 'suppress'
 		| 'sysop'
+		| 'templateeditor'
 		| 'transwiki'
 	>;
 	pcexcludegroup?: OneOrMore<
 		| 'abusefilter'
+		| 'abusefilter-helper'
 		| 'accountcreator'
+		| 'autoreviewer'
 		| 'bot'
 		| 'bureaucrat'
 		| 'checkuser'
 		| 'confirmed'
-		| 'flow-bot'
+		| 'copyviobot'
+		| 'eventcoordinator'
+		| 'extendedconfirmed'
+		| 'extendedmover'
+		| 'filemover'
+		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'massmessage-sender'
 		| 'no-ipinfo'
+		| 'patroller'
+		| 'push-subscription-manager'
+		| 'researcher'
+		| 'reviewer'
 		| 'rollbacker'
 		| 'steward'
 		| 'suppress'
 		| 'sysop'
+		| 'templateeditor'
 		| 'transwiki'
 	>;
 	pcrights?: OneOrMore<
@@ -3679,6 +2825,7 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'collectionsaveasuserpage'
 		| 'createaccount'
 		| 'createpage'
+		| 'createpagemainns'
 		| 'createtalk'
 		| 'delete'
 		| 'delete-redirect'
@@ -3715,9 +2862,7 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'flow-create-board'
 		| 'flow-delete'
 		| 'flow-edit-post'
-		| 'flow-edit-title'
 		| 'flow-hide'
-		| 'flow-lock'
 		| 'flow-suppress'
 		| 'globalblock'
 		| 'globalblock-exempt'
@@ -3767,6 +2912,7 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'override-antispoof'
 		| 'override-export-depth'
 		| 'pagelang'
+		| 'pagetriage-copyvio'
 		| 'patrol'
 		| 'patrolmarks'
 		| 'protect'
@@ -3860,6 +3006,7 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'collectionsaveasuserpage'
 		| 'createaccount'
 		| 'createpage'
+		| 'createpagemainns'
 		| 'createtalk'
 		| 'delete'
 		| 'delete-redirect'
@@ -3896,9 +3043,7 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'flow-create-board'
 		| 'flow-delete'
 		| 'flow-edit-post'
-		| 'flow-edit-title'
 		| 'flow-hide'
-		| 'flow-lock'
 		| 'flow-suppress'
 		| 'globalblock'
 		| 'globalblock-exempt'
@@ -3948,6 +3093,7 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'override-antispoof'
 		| 'override-export-depth'
 		| 'pagelang'
+		| 'pagetriage-copyvio'
 		| 'patrol'
 		| 'patrolmarks'
 		| 'protect'
@@ -4271,7 +3417,7 @@ export interface ApiQueryFileUsageParams extends ApiQueryParams {
 }
 
 // tslint:disable-next-line:no-empty-interface
-export interface FlowApiQueryPropFlowInfoParams extends ApiQueryParams {}
+export interface ApiQueryFlaggedParams extends ApiQueryParams {}
 
 export interface GadgetsApiQueryGadgetCategoriesParams extends ApiQueryParams {
 	gcprop?: OneOrMore<'members' | 'name' | 'title'>;
@@ -4415,31 +3561,14 @@ export interface GrowthExperimentsApiQueryMentorMenteeParams extends ApiQueryPar
 export interface GrowthExperimentsApiQueryMentorStatusParams extends ApiQueryParams {}
 
 export interface GrowthExperimentsApiQueryNextSuggestedTaskTypeParams extends ApiQueryParams {
-	gnsttactivetasktype:
-		| 'copyedit'
-		| 'expand'
-		| 'image-recommendation'
-		| 'link-recommendation'
-		| 'links'
-		| 'references'
-		| 'section-image-recommendation'
-		| 'update';
+	gnsttactivetasktype: 'copyedit' | 'expand' | 'links' | 'references' | 'update';
 }
 
 // tslint:disable-next-line:no-empty-interface
 export interface GrowthExperimentsApiQueryStarredMenteesParams extends ApiQueryParams {}
 
 export interface GrowthExperimentsApiQueryGrowthTasksParams extends ApiQueryParams {
-	gttasktypes?: OneOrMore<
-		| 'copyedit'
-		| 'expand'
-		| 'image-recommendation'
-		| 'link-recommendation'
-		| 'links'
-		| 'references'
-		| 'section-image-recommendation'
-		| 'update'
-	>;
+	gttasktypes?: OneOrMore<'copyedit' | 'expand' | 'links' | 'references' | 'update'>;
 	gttopics?: OneOrMore<
 		| 'africa'
 		| 'architecture'
@@ -4576,6 +3705,9 @@ export interface ApiQueryInfoParams extends ApiQueryParams {
 	incontinue?: string;
 }
 
+// tslint:disable-next-line:no-empty-interface
+export interface PageTriageApiIsReviewedParams extends ApiQueryParams {}
+
 export interface ApiQueryIWBacklinksParams extends ApiQueryParams {
 	iwblprefix?: string;
 	iwbltitle?: string;
@@ -4662,7 +3794,7 @@ export interface MediaWikiLinterApiQueryLintErrorsParams extends ApiQueryParams 
 		| 'unclosed-quotes-in-heading'
 		| 'wikilink-in-extlink'
 	>;
-	'lntinvisible-categories'?: OneOrMore<'large-tables'>;
+	'lntinvisible-categories'?: OneOrMore<'large-tables' | 'night-mode-unaware-background-color'>;
 	lntlimit?: limit;
 	lntnamespace?: namespace | namespace[];
 	lntpageid?: number | number[];
@@ -4700,11 +3832,15 @@ export interface ApiQueryLogEventsParams extends ApiQueryParams {
 		| 'move'
 		| 'newusers'
 		| 'oath'
+		| 'pagetriage-copyvio'
+		| 'pagetriage-curation'
 		| 'patrol'
 		| 'protect'
 		| 'renameuser'
+		| 'review'
 		| 'rights'
 		| 'spamblacklist'
+		| 'stable'
 		| 'suppress'
 		| 'tag'
 		| 'thanks'
@@ -4731,18 +3867,10 @@ export interface ApiQueryLogEventsParams extends ApiQueryParams {
 		| 'delete/delete_redir'
 		| 'delete/delete_redir2'
 		| 'delete/event'
-		| 'delete/flow-delete-post'
-		| 'delete/flow-delete-topic'
-		| 'delete/flow-restore-post'
-		| 'delete/flow-restore-topic'
 		| 'delete/restore'
 		| 'delete/revision'
-		| 'gblblock/dwhitelist'
-		| 'gblblock/gblock'
-		| 'gblblock/gblock2'
+		| 'gblblock/*'
 		| 'gblblock/gunblock'
-		| 'gblblock/modify'
-		| 'gblblock/whitelist'
 		| 'gblrename/merge'
 		| 'gblrename/promote'
 		| 'gblrename/rename'
@@ -4771,12 +3899,9 @@ export interface ApiQueryLogEventsParams extends ApiQueryParams {
 		| 'growthexperiments/setmentor'
 		| 'growthexperiments/setmentor-no-previous-mentor'
 		| 'import/interwiki'
-		| 'import/lqt-to-flow-topic'
 		| 'import/upload'
 		| 'interwiki/*'
 		| 'ipinfo/*'
-		| 'lock/flow-lock-topic'
-		| 'lock/flow-restore-topic'
 		| 'managetags/activate'
 		| 'managetags/create'
 		| 'managetags/deactivate'
@@ -4797,6 +3922,17 @@ export interface ApiQueryLogEventsParams extends ApiQueryParams {
 		| 'newusers/forcecreatelocal'
 		| 'newusers/newusers'
 		| 'oath/*'
+		| 'pagetriage-copyvio/delete'
+		| 'pagetriage-copyvio/insert'
+		| 'pagetriage-curation/delete'
+		| 'pagetriage-curation/enqueue'
+		| 'pagetriage-curation/reviewed'
+		| 'pagetriage-curation/reviewed-article'
+		| 'pagetriage-curation/reviewed-redirect'
+		| 'pagetriage-curation/tag'
+		| 'pagetriage-curation/unreviewed'
+		| 'pagetriage-curation/unreviewed-article'
+		| 'pagetriage-curation/unreviewed-redirect'
 		| 'patrol/autopatrol'
 		| 'patrol/patrol'
 		| 'protect/modify'
@@ -4804,19 +3940,30 @@ export interface ApiQueryLogEventsParams extends ApiQueryParams {
 		| 'protect/protect'
 		| 'protect/unprotect'
 		| 'renameuser/renameuser'
+		| 'review/approve'
+		| 'review/approve-a'
+		| 'review/approve-i'
+		| 'review/approve-ia'
+		| 'review/approve2'
+		| 'review/approve2-a'
+		| 'review/approve2-i'
+		| 'review/approve2-ia'
+		| 'review/unapprove'
+		| 'review/unapprove2'
 		| 'rights/autopromote'
 		| 'rights/blockautopromote'
+		| 'rights/erevoke'
 		| 'rights/restoreautopromote'
 		| 'rights/rights'
 		| 'spamblacklist/*'
+		| 'stable/config'
+		| 'stable/modify'
+		| 'stable/move_stable'
+		| 'stable/reset'
 		| 'suppress/block'
 		| 'suppress/cadelete'
 		| 'suppress/delete'
 		| 'suppress/event'
-		| 'suppress/flow-restore-post'
-		| 'suppress/flow-restore-topic'
-		| 'suppress/flow-suppress-post'
-		| 'suppress/flow-suppress-topic'
 		| 'suppress/hide-afl'
 		| 'suppress/reblock'
 		| 'suppress/revision'
@@ -4889,12 +4036,25 @@ export interface OATHAuthApiModuleApiQueryOATHParams extends ApiQueryParams {
 	oathreason?: string;
 }
 
+export interface ApiQueryOldreviewedpagesParams extends ApiQueryParams {
+	orstart?: timestamp;
+	orend?: timestamp;
+	ordir?: 'newer' | 'older';
+	ormaxsize?: number;
+	orfilterwatched?: 'all' | 'watched';
+	ornamespace?: namespace | namespace[];
+	orcategory?: string;
+	orfilterredir?: 'all' | 'nonredirects' | 'redirects';
+	orlimit?: limit;
+}
+
 // tslint:disable-next-line:no-empty-interface
 export interface ORESHooksApiQueryORESParams extends ApiQueryParams {}
 
 export interface PageAssessmentsApiQueryPageAssessmentsParams extends ApiQueryParams {
 	pacontinue?: string;
 	palimit?: limit;
+	pasubprojects?: boolean;
 }
 
 export interface PageImagesApiQueryPageImagesParams extends ApiQueryParams {
@@ -5537,12 +4697,13 @@ export interface PageAssessmentsApiQueryProjectPagesParams extends ApiQueryParam
 	wppcontinue?: string;
 }
 
-// tslint:disable-next-line:no-empty-interface
-export interface PageAssessmentsApiQueryProjectsParams extends ApiQueryParams {}
+export interface PageAssessmentsApiQueryProjectsParams extends ApiQueryParams {
+	pjsubprojects?: boolean;
+}
 
 export interface ApiQueryProtectedTitlesParams extends ApiQueryParams {
 	ptnamespace?: namespace | namespace[];
-	ptlevel?: OneOrMore<'autoconfirmed' | 'editextendedsemiprotected' | 'sysop'>;
+	ptlevel?: OneOrMore<'autoconfirmed' | 'extendedconfirmed' | 'sysop' | 'templateeditor'>;
 	ptlimit?: limit;
 	ptdir?: 'newer' | 'older';
 	ptstart?: timestamp;
@@ -5687,6 +4848,7 @@ export interface ApiQueryRevisionsParams extends ApiQueryParams {
 		| 'comment'
 		| 'content'
 		| 'contentmodel'
+		| 'flagged'
 		| 'flags'
 		| 'ids'
 		| 'oresscores'
@@ -6105,6 +5267,1251 @@ export interface CentralAuthApiQueryWikiSetsParams extends ApiQueryParams {
 	wsprop?: OneOrMore<'type' | 'wikisincluded' | 'wikisnotincluded'>;
 	wslimit?: limit;
 	wsorderbyname?: boolean;
+}
+
+export interface ApiFormatRawFMParams extends ApiParams {
+	format: 'rawfm';
+	wrappedhtml?: boolean;
+}
+
+export interface ReadingListsApiReadingListsParams extends ApiParams {
+	action: 'readinglists';
+	command: 'create' | 'createentry' | 'delete' | 'deleteentry' | 'setup' | 'teardown' | 'update';
+	token?: string;
+}
+
+export interface ReadingListsApiReadingListsCreateParams extends ReadingListsApiQueryReadingListsParams {
+	command: 'create';
+	name?: string;
+	description?: string;
+	batch?: string;
+}
+
+export interface ReadingListsApiReadingListsCreateEntryParams
+	extends Omit<ReadingListsApiQueryReadingListsParams, 'list'> {
+	command: 'createentry';
+	list: number;
+	project?: string;
+	title?: string;
+	batch?: string;
+}
+
+export interface ReadingListsApiReadingListsDeleteParams extends Omit<ReadingListsApiQueryReadingListsParams, 'list'> {
+	command: 'delete';
+	list?: number;
+	batch?: string;
+}
+
+export interface ReadingListsApiReadingListsDeleteEntryParams extends ReadingListsApiQueryReadingListsParams {
+	command: 'deleteentry';
+	entry?: number;
+	batch?: string;
+}
+
+export interface ReadingListsApiReadingListsSetupParams extends ReadingListsApiQueryReadingListsParams {
+	command: 'setup';
+}
+
+export interface ReadingListsApiReadingListsTeardownParams extends ReadingListsApiQueryReadingListsParams {
+	command: 'teardown';
+}
+
+export interface ReadingListsApiReadingListsUpdateParams extends Omit<ReadingListsApiQueryReadingListsParams, 'list'> {
+	command: 'update';
+	list?: number;
+	name?: string;
+	description?: string;
+	batch?: string;
+}
+
+export interface ApiRemoveAuthenticationDataParams extends ApiParams {
+	action: 'removeauthenticationdata';
+	request: string;
+	token?: string;
+}
+
+export interface ApiResetPasswordParams extends ApiParams {
+	action: 'resetpassword';
+	user?: string;
+	email?: string;
+	token?: string;
+}
+
+export interface ApiReviewParams extends ApiParams {
+	action: 'review';
+	revid?: string;
+	comment?: string;
+	unapprove?: boolean;
+	token?: string;
+}
+
+export interface ApiRevisionDeleteParams extends ApiParams {
+	action: 'revisiondelete';
+	type: 'archive' | 'filearchive' | 'logging' | 'oldimage' | 'revision';
+	target?: string;
+	ids: string | string[];
+	hide?: OneOrMore<'comment' | 'content' | 'user'>;
+	show?: OneOrMore<'comment' | 'content' | 'user'>;
+	suppress?: 'no' | 'nochange' | 'yes';
+	reason?: string;
+	tags?: string | string[];
+	token?: string;
+}
+
+export interface ApiRollbackParams extends ApiParams {
+	action: 'rollback';
+	title?: string;
+	pageid?: number;
+	tags?: string | string[];
+	user: string;
+	summary?: string;
+	markbot?: boolean;
+	watchlist?: 'nochange' | 'preferences' | 'unwatch' | 'watch';
+	watchlistexpiry?: expiry;
+	token?: string;
+}
+
+export interface ApiRsdParams extends ApiParams {
+	action: 'rsd';
+}
+
+export interface KartographerApiSanitizeMapDataParams extends ApiParams {
+	action: 'sanitize-mapdata';
+	title?: string;
+	text: string;
+}
+
+export interface ScribuntoApiScribuntoConsoleParams extends ApiParams {
+	action: 'scribunto-console';
+	title?: string;
+	content?: string;
+	session?: number;
+	question: string;
+	clear?: boolean;
+	token?: string;
+}
+
+export interface SecurePollApiSecurePollAuthParams extends ApiParams {
+	action: 'securepollauth';
+	token?: string;
+	id: number;
+}
+
+export interface CentralAuthApiSetGlobalAccountStatusParams extends ApiParams {
+	action: 'setglobalaccountstatus';
+	user: string;
+	locked?: '' | 'lock' | 'unlock';
+	hidden?: '' | 'lists' | 'suppressed';
+	reason?: string;
+	statecheck?: string;
+	token?: string;
+}
+
+export interface ApiSetNotificationTimestampParams extends ApiParams {
+	action: 'setnotificationtimestamp';
+	entirewatchlist?: boolean;
+	timestamp?: timestamp;
+	torevid?: number;
+	newerthanrevid?: number;
+	continue?: string;
+	titles?: string | string[];
+	pageids?: number | number[];
+	revids?: number | number[];
+	generator?:
+		| 'allcategories'
+		| 'alldeletedrevisions'
+		| 'allfileusages'
+		| 'allimages'
+		| 'alllinks'
+		| 'allpages'
+		| 'allredirects'
+		| 'allrevisions'
+		| 'alltransclusions'
+		| 'backlinks'
+		| 'categories'
+		| 'categorymembers'
+		| 'contenttranslation'
+		| 'contenttranslationsuggestions'
+		| 'deletedrevisions'
+		| 'duplicatefiles'
+		| 'embeddedin'
+		| 'exturlusage'
+		| 'fileusage'
+		| 'geosearch'
+		| 'images'
+		| 'imageusage'
+		| 'iwbacklinks'
+		| 'langbacklinks'
+		| 'links'
+		| 'linkshere'
+		| 'mostviewed'
+		| 'oldreviewedpages'
+		| 'pageswithprop'
+		| 'prefixsearch'
+		| 'projectpages'
+		| 'protectedtitles'
+		| 'querypage'
+		| 'random'
+		| 'recentchanges'
+		| 'redirects'
+		| 'revisions'
+		| 'search'
+		| 'templates'
+		| 'transcludedin'
+		| 'watchlist'
+		| 'watchlistraw'
+		| 'wblistentityusage'
+		| 'growthtasks'
+		| 'readinglistentries';
+	redirects?: boolean;
+	converttitles?: boolean;
+	token?: string;
+}
+
+export interface ApiSetPageLanguageParams extends ApiParams {
+	action: 'setpagelanguage';
+	title?: string;
+	pageid?: number;
+	lang:
+		| 'aae'
+		| 'ab'
+		| 'abs'
+		| 'ace'
+		| 'acm'
+		| 'ady'
+		| 'ady-cyrl'
+		| 'aeb'
+		| 'aeb-arab'
+		| 'aeb-latn'
+		| 'af'
+		| 'aln'
+		| 'alt'
+		| 'am'
+		| 'ami'
+		| 'an'
+		| 'ang'
+		| 'ann'
+		| 'anp'
+		| 'ar'
+		| 'arc'
+		| 'arn'
+		| 'arq'
+		| 'ary'
+		| 'arz'
+		| 'as'
+		| 'ase'
+		| 'ast'
+		| 'atj'
+		| 'av'
+		| 'avk'
+		| 'awa'
+		| 'ay'
+		| 'az'
+		| 'azb'
+		| 'ba'
+		| 'ban'
+		| 'ban-bali'
+		| 'bar'
+		| 'bbc'
+		| 'bbc-latn'
+		| 'bcc'
+		| 'bci'
+		| 'bcl'
+		| 'bdr'
+		| 'be'
+		| 'be-tarask'
+		| 'bew'
+		| 'bg'
+		| 'bgn'
+		| 'bh'
+		| 'bho'
+		| 'bi'
+		| 'bjn'
+		| 'blk'
+		| 'bm'
+		| 'bn'
+		| 'bo'
+		| 'bpy'
+		| 'bqi'
+		| 'br'
+		| 'brh'
+		| 'bs'
+		| 'btm'
+		| 'bto'
+		| 'bug'
+		| 'bxr'
+		| 'ca'
+		| 'cbk-zam'
+		| 'cdo'
+		| 'ce'
+		| 'ceb'
+		| 'ch'
+		| 'chn'
+		| 'chr'
+		| 'chy'
+		| 'ckb'
+		| 'co'
+		| 'cps'
+		| 'cpx'
+		| 'cpx-hans'
+		| 'cpx-hant'
+		| 'cr'
+		| 'crh'
+		| 'crh-cyrl'
+		| 'crh-latn'
+		| 'crh-ro'
+		| 'cs'
+		| 'csb'
+		| 'cu'
+		| 'cv'
+		| 'cy'
+		| 'da'
+		| 'dag'
+		| 'de'
+		| 'de-at'
+		| 'de-ch'
+		| 'de-formal'
+		| 'default'
+		| 'dga'
+		| 'din'
+		| 'diq'
+		| 'dsb'
+		| 'dtp'
+		| 'dty'
+		| 'dv'
+		| 'dz'
+		| 'ee'
+		| 'efi'
+		| 'egl'
+		| 'el'
+		| 'eml'
+		| 'en'
+		| 'en-ca'
+		| 'en-gb'
+		| 'eo'
+		| 'es'
+		| 'es-formal'
+		| 'et'
+		| 'eu'
+		| 'ext'
+		| 'fa'
+		| 'fat'
+		| 'ff'
+		| 'fi'
+		| 'fit'
+		| 'fj'
+		| 'fo'
+		| 'fon'
+		| 'fr'
+		| 'frc'
+		| 'frp'
+		| 'frr'
+		| 'fur'
+		| 'fy'
+		| 'ga'
+		| 'gaa'
+		| 'gag'
+		| 'gan'
+		| 'gan-hans'
+		| 'gan-hant'
+		| 'gcf'
+		| 'gcr'
+		| 'gd'
+		| 'gl'
+		| 'gld'
+		| 'glk'
+		| 'gn'
+		| 'gom'
+		| 'gom-deva'
+		| 'gom-latn'
+		| 'gor'
+		| 'got'
+		| 'gpe'
+		| 'grc'
+		| 'gsw'
+		| 'gu'
+		| 'guc'
+		| 'gur'
+		| 'guw'
+		| 'gv'
+		| 'ha'
+		| 'hak'
+		| 'haw'
+		| 'he'
+		| 'hi'
+		| 'hif'
+		| 'hif-latn'
+		| 'hil'
+		| 'hno'
+		| 'hr'
+		| 'hrx'
+		| 'hsb'
+		| 'hsn'
+		| 'ht'
+		| 'hu'
+		| 'hu-formal'
+		| 'hy'
+		| 'hyw'
+		| 'ia'
+		| 'ibb'
+		| 'id'
+		| 'ie'
+		| 'ig'
+		| 'igl'
+		| 'ii'
+		| 'ik'
+		| 'ike-cans'
+		| 'ike-latn'
+		| 'ilo'
+		| 'inh'
+		| 'io'
+		| 'is'
+		| 'it'
+		| 'iu'
+		| 'ja'
+		| 'jam'
+		| 'jbo'
+		| 'jut'
+		| 'jv'
+		| 'ka'
+		| 'kaa'
+		| 'kab'
+		| 'kai'
+		| 'kbd'
+		| 'kbd-cyrl'
+		| 'kbp'
+		| 'kcg'
+		| 'kea'
+		| 'kg'
+		| 'kge'
+		| 'khw'
+		| 'ki'
+		| 'kiu'
+		| 'kjh'
+		| 'kjp'
+		| 'kk'
+		| 'kk-arab'
+		| 'kk-cn'
+		| 'kk-cyrl'
+		| 'kk-kz'
+		| 'kk-latn'
+		| 'kk-tr'
+		| 'kl'
+		| 'km'
+		| 'kn'
+		| 'ko'
+		| 'ko-kp'
+		| 'koi'
+		| 'kr'
+		| 'krc'
+		| 'kri'
+		| 'krj'
+		| 'krl'
+		| 'ks'
+		| 'ks-arab'
+		| 'ks-deva'
+		| 'ksh'
+		| 'ksw'
+		| 'ku'
+		| 'ku-arab'
+		| 'ku-latn'
+		| 'kum'
+		| 'kus'
+		| 'kv'
+		| 'kw'
+		| 'ky'
+		| 'la'
+		| 'lad'
+		| 'lb'
+		| 'lbe'
+		| 'lez'
+		| 'lfn'
+		| 'lg'
+		| 'li'
+		| 'lij'
+		| 'liv'
+		| 'lki'
+		| 'lld'
+		| 'lmo'
+		| 'ln'
+		| 'lo'
+		| 'loz'
+		| 'lrc'
+		| 'lt'
+		| 'ltg'
+		| 'lus'
+		| 'luz'
+		| 'lv'
+		| 'lzh'
+		| 'lzz'
+		| 'mad'
+		| 'mag'
+		| 'mai'
+		| 'map-bms'
+		| 'mdf'
+		| 'mg'
+		| 'mhr'
+		| 'mi'
+		| 'min'
+		| 'mk'
+		| 'ml'
+		| 'mn'
+		| 'mnc'
+		| 'mnc-mong'
+		| 'mni'
+		| 'mnw'
+		| 'mo'
+		| 'mos'
+		| 'mr'
+		| 'mrh'
+		| 'mrj'
+		| 'ms'
+		| 'ms-arab'
+		| 'mt'
+		| 'mwl'
+		| 'my'
+		| 'myv'
+		| 'mzn'
+		| 'na'
+		| 'nah'
+		| 'nan'
+		| 'nap'
+		| 'nb'
+		| 'nds'
+		| 'nds-nl'
+		| 'ne'
+		| 'new'
+		| 'nia'
+		| 'nit'
+		| 'niu'
+		| 'nl'
+		| 'nl-informal'
+		| 'nmz'
+		| 'nn'
+		| 'nod'
+		| 'nog'
+		| 'nov'
+		| 'nqo'
+		| 'nrm'
+		| 'nso'
+		| 'nv'
+		| 'ny'
+		| 'nyn'
+		| 'nyo'
+		| 'nys'
+		| 'oc'
+		| 'ojb'
+		| 'olo'
+		| 'om'
+		| 'or'
+		| 'os'
+		| 'pa'
+		| 'pag'
+		| 'pam'
+		| 'pap'
+		| 'pcd'
+		| 'pcm'
+		| 'pdc'
+		| 'pdt'
+		| 'pfl'
+		| 'pi'
+		| 'pih'
+		| 'pl'
+		| 'pms'
+		| 'pnb'
+		| 'pnt'
+		| 'prg'
+		| 'ps'
+		| 'pt'
+		| 'pt-br'
+		| 'pwn'
+		| 'qu'
+		| 'qug'
+		| 'rgn'
+		| 'rif'
+		| 'rki'
+		| 'rm'
+		| 'rmc'
+		| 'rmy'
+		| 'rn'
+		| 'ro'
+		| 'roa-tara'
+		| 'rsk'
+		| 'ru'
+		| 'rue'
+		| 'rup'
+		| 'ruq'
+		| 'ruq-cyrl'
+		| 'ruq-latn'
+		| 'rut'
+		| 'rw'
+		| 'ryu'
+		| 'sa'
+		| 'sah'
+		| 'sat'
+		| 'sc'
+		| 'scn'
+		| 'sco'
+		| 'sd'
+		| 'sdc'
+		| 'sdh'
+		| 'se'
+		| 'se-fi'
+		| 'se-no'
+		| 'se-se'
+		| 'sei'
+		| 'ses'
+		| 'sg'
+		| 'sgs'
+		| 'sh'
+		| 'sh-cyrl'
+		| 'sh-latn'
+		| 'shi'
+		| 'shn'
+		| 'shy'
+		| 'shy-latn'
+		| 'si'
+		| 'sjd'
+		| 'sje'
+		| 'sk'
+		| 'skr'
+		| 'skr-arab'
+		| 'sl'
+		| 'sli'
+		| 'sm'
+		| 'sma'
+		| 'smn'
+		| 'sms'
+		| 'sn'
+		| 'so'
+		| 'sq'
+		| 'sr'
+		| 'sr-ec'
+		| 'sr-el'
+		| 'srn'
+		| 'sro'
+		| 'ss'
+		| 'st'
+		| 'stq'
+		| 'sty'
+		| 'su'
+		| 'sv'
+		| 'sw'
+		| 'syl'
+		| 'szl'
+		| 'szy'
+		| 'ta'
+		| 'tay'
+		| 'tcy'
+		| 'tdd'
+		| 'te'
+		| 'tet'
+		| 'tg'
+		| 'tg-cyrl'
+		| 'tg-latn'
+		| 'th'
+		| 'ti'
+		| 'tk'
+		| 'tl'
+		| 'tly'
+		| 'tn'
+		| 'to'
+		| 'tok'
+		| 'tpi'
+		| 'tr'
+		| 'tru'
+		| 'trv'
+		| 'ts'
+		| 'tt'
+		| 'tt-cyrl'
+		| 'tt-latn'
+		| 'ttj'
+		| 'tum'
+		| 'tw'
+		| 'ty'
+		| 'tyv'
+		| 'tzm'
+		| 'udm'
+		| 'ug'
+		| 'ug-arab'
+		| 'ug-latn'
+		| 'uk'
+		| 'ur'
+		| 'uz'
+		| 've'
+		| 'vec'
+		| 'vep'
+		| 'vi'
+		| 'vls'
+		| 'vmf'
+		| 'vmw'
+		| 'vo'
+		| 'vot'
+		| 'vro'
+		| 'wa'
+		| 'wal'
+		| 'war'
+		| 'wls'
+		| 'wo'
+		| 'wuu'
+		| 'wuu-hans'
+		| 'wuu-hant'
+		| 'xal'
+		| 'xh'
+		| 'xmf'
+		| 'xsy'
+		| 'yi'
+		| 'yo'
+		| 'yrl'
+		| 'yue'
+		| 'yue-hans'
+		| 'yue-hant'
+		| 'za'
+		| 'zea'
+		| 'zgh'
+		| 'zh'
+		| 'zh-cn'
+		| 'zh-hans'
+		| 'zh-hant'
+		| 'zh-hk'
+		| 'zh-mo'
+		| 'zh-my'
+		| 'zh-sg'
+		| 'zh-tw'
+		| 'zu';
+	reason?: string;
+	tags?: string | string[];
+	token?: string;
+}
+
+export interface UrlShortenerApiShortenUrlParams extends ApiParams {
+	action: 'shortenurl';
+	url: string;
+	qrcode?: boolean;
+}
+
+export interface SiteMatrixApiSiteMatrixParams extends ApiParams {
+	action: 'sitematrix';
+	smtype?: OneOrMore<'language' | 'special'>;
+	smstate?: OneOrMore<'all' | 'closed' | 'fishbowl' | 'nonglobal' | 'private'>;
+	smlangprop?: OneOrMore<'code' | 'dir' | 'localname' | 'name' | 'site'>;
+	smsiteprop?: OneOrMore<'code' | 'dbname' | 'lang' | 'sitename' | 'url'>;
+	smlimit?: limit;
+	smcontinue?: string;
+}
+
+export interface SpamBlacklistApiSpamBlacklistParams extends ApiParams {
+	action: 'spamblacklist';
+	url: string | string[];
+}
+
+export interface ApiStabilizeProtectParams extends ApiParams {
+	action: 'stabilize';
+	protectlevel?: 'autoconfirmed' | 'none';
+	expiry?: string;
+	reason?: string;
+	title: string;
+	token?: string;
+}
+
+export interface ApiStashEditParams extends ApiParams {
+	action: 'stashedit';
+	title: string;
+	section?: string;
+	sectiontitle?: string;
+	text?: string;
+	stashedtexthash?: string;
+	summary?: string;
+	contentmodel:
+		| 'GadgetDefinition'
+		| 'JsonSchema'
+		| 'MassMessageListContent'
+		| 'Scribunto'
+		| 'SecurePoll'
+		| 'css'
+		| 'javascript'
+		| 'json'
+		| 'sanitized-css'
+		| 'text'
+		| 'unknown'
+		| 'wikitext';
+	contentformat:
+		| 'application/json'
+		| 'application/octet-stream'
+		| 'application/unknown'
+		| 'application/x-binary'
+		| 'text/css'
+		| 'text/javascript'
+		| 'text/plain'
+		| 'text/unknown'
+		| 'text/x-wiki'
+		| 'unknown/unknown';
+	baserevid: number;
+	token?: string;
+}
+
+export interface EventStreamConfigApiStreamConfigsParams extends ApiParams {
+	action: 'streamconfigs';
+	streams?: string | string[];
+	constraints?: string | string[];
+	all_settings?: boolean;
+}
+
+export interface SecurePollApiStrikeVoteParams extends ApiParams {
+	action: 'strikevote';
+	option: 'strike' | 'unstrike';
+	reason: string;
+	voteid: number;
+	token?: string;
+}
+
+export interface ContentTranslationActionApiSectionTranslationDeleteParams extends ApiParams {
+	action: 'sxdelete';
+	sectiontranslationid: number;
+	translationid: number;
+	sectionid: string;
+	token?: string;
+}
+
+export interface ContentTranslationActionApiSectionTranslationSaveParams extends ApiParams {
+	action: 'sxsave';
+	sourcelanguage: string;
+	targetlanguage: string;
+	sourcetitle: string;
+	targettitle: string;
+	content: string;
+	sourcerevision: number;
+	sourcesectiontitle: string;
+	targetsectiontitle: string;
+	sectionid: string;
+	issandbox?: boolean;
+	progress: string;
+	token?: string;
+}
+
+export interface ApiTagParams extends ApiParams {
+	action: 'tag';
+	rcid?: number | number[];
+	revid?: number | number[];
+	logid?: number | number[];
+	add?: OneOrMore<
+		| 'AWB'
+		| 'AntiVandal script'
+		| 'Deputy'
+		| 'Newcomer task'
+		| 'ProveIt edit'
+		| 'RedWarn'
+		| 'STiki'
+		| 'Single use'
+		| 'Ultraviolet'
+		| 'WPCleaner'
+		| 'WikiLoop Battlefield'
+		| 'bot trial'
+		| 'convenient-discussions'
+		| 'editProtectedHelper'
+		| 'fixed lint errors'
+		| 'huggle'
+		| 'large non-free file'
+		| 'moveToDraft'
+		| 'new user moving page out of userspace'
+		| 'possible birth or death date change'
+		| 'pronoun-change'
+		| 'self-published-blog'
+		| 'self-published source'
+		| 'shortdesc helper'
+		| 'talk banner shell conversion'
+		| 'twinkle'
+	>;
+	remove?: string | string[];
+	reason?: string;
+	tags?: string | string[];
+	token?: string;
+}
+
+export interface TemplateDataApiTemplateDataParams extends ApiParams {
+	action: 'templatedata';
+	includeMissingTitles?: boolean;
+	doNotIgnoreMissingTitles?: boolean;
+	lang?: string;
+	titles?: string | string[];
+	pageids?: number | number[];
+	revids?: number | number[];
+	generator?:
+		| 'allcategories'
+		| 'alldeletedrevisions'
+		| 'allfileusages'
+		| 'allimages'
+		| 'alllinks'
+		| 'allpages'
+		| 'allredirects'
+		| 'allrevisions'
+		| 'alltransclusions'
+		| 'backlinks'
+		| 'categories'
+		| 'categorymembers'
+		| 'contenttranslation'
+		| 'contenttranslationsuggestions'
+		| 'deletedrevisions'
+		| 'duplicatefiles'
+		| 'embeddedin'
+		| 'exturlusage'
+		| 'fileusage'
+		| 'geosearch'
+		| 'images'
+		| 'imageusage'
+		| 'iwbacklinks'
+		| 'langbacklinks'
+		| 'links'
+		| 'linkshere'
+		| 'mostviewed'
+		| 'oldreviewedpages'
+		| 'pageswithprop'
+		| 'prefixsearch'
+		| 'projectpages'
+		| 'protectedtitles'
+		| 'querypage'
+		| 'random'
+		| 'recentchanges'
+		| 'redirects'
+		| 'revisions'
+		| 'search'
+		| 'templates'
+		| 'transcludedin'
+		| 'watchlist'
+		| 'watchlistraw'
+		| 'wblistentityusage'
+		| 'growthtasks'
+		| 'readinglistentries';
+	redirects?: boolean;
+	converttitles?: boolean;
+}
+
+export interface ThanksApiCoreThankParams extends ApiParams {
+	action: 'thank';
+	rev?: number;
+	log?: number;
+	token?: string;
+	source?: string;
+}
+
+export interface MediaWikiTimedMediaHandlerApiTimedTextParams extends ApiParams {
+	action: 'timedtext';
+	title?: string;
+	pageid?: number;
+	trackformat: 'srt' | 'vtt';
+	lang?: string;
+}
+
+export interface TitleBlacklistApiTitleBlacklistParams extends ApiParams {
+	action: 'titleblacklist';
+	tbtitle: string;
+	tbaction?: 'create' | 'createpage' | 'createtalk' | 'edit' | 'move' | 'new-account' | 'upload';
+	tbnooverride?: boolean;
+}
+
+export interface TorBlockApiTorBlockParams extends ApiParams {
+	action: 'torblock';
+	ip: string;
+}
+
+export interface MediaWikiTimedMediaHandlerApiTranscodeResetParams extends ApiParams {
+	action: 'transcodereset';
+	title: string;
+	transcodekey?: string;
+	token?: string;
+}
+
+export interface UniversalLanguageSelectorApiULSLocalizationParams extends ApiParams {
+	action: 'ulslocalization';
+	language: string;
+}
+
+export interface UniversalLanguageSelectorApiULSSetLanguageParams extends ApiParams {
+	action: 'ulssetlang';
+	languagecode: string;
+	token?: string;
+}
+
+export interface ApiUnblockParams extends ApiParams {
+	action: 'unblock';
+	id?: number;
+	user?: string;
+	userid?: number;
+	reason?: string;
+	tags?: string | string[];
+	watchuser?: boolean;
+	watchlistexpiry?: expiry;
+	token?: string;
+}
+
+export interface ApiUndeleteParams extends ApiParams {
+	action: 'undelete';
+	title: string;
+	reason?: string;
+	tags?: string | string[];
+	timestamps?: timestamp | timestamp[];
+	fileids?: number | number[];
+	undeletetalk?: boolean;
+	watchlist?: 'nochange' | 'preferences' | 'unwatch' | 'watch';
+	watchlistexpiry?: expiry;
+	token?: string;
+}
+
+export interface ApiQueryUnlinkAccountParams extends ApiParams {
+	action: 'unlinkaccount';
+	request: string;
+	token?: string;
+}
+
+export interface ApiUploadParams extends ApiParams {
+	action: 'upload';
+	filename?: string;
+	comment?: string;
+	tags?: string | string[];
+	text?: string;
+	watch?: boolean;
+	watchlist?: 'nochange' | 'preferences' | 'watch';
+	watchlistexpiry?: expiry;
+	ignorewarnings?: boolean;
+	file?: upload;
+	url?: string;
+	filekey?: string;
+	sessionkey?: string;
+	stash?: boolean;
+	filesize?: number;
+	offset?: number;
+	chunk?: upload;
+	async?: boolean;
+	checkstatus?: boolean;
+	token?: string;
+}
+
+export interface ApiUserrightsParams extends ApiParams {
+	action: 'userrights';
+	user?: string;
+	userid?: number;
+	add?: OneOrMore<
+		| 'abusefilter'
+		| 'abusefilter-helper'
+		| 'accountcreator'
+		| 'autoreviewer'
+		| 'bot'
+		| 'bureaucrat'
+		| 'checkuser'
+		| 'confirmed'
+		| 'copyviobot'
+		| 'eventcoordinator'
+		| 'extendedconfirmed'
+		| 'extendedmover'
+		| 'filemover'
+		| 'founder'
+		| 'import'
+		| 'interface-admin'
+		| 'ipblock-exempt'
+		| 'massmessage-sender'
+		| 'no-ipinfo'
+		| 'patroller'
+		| 'push-subscription-manager'
+		| 'researcher'
+		| 'reviewer'
+		| 'rollbacker'
+		| 'steward'
+		| 'suppress'
+		| 'sysop'
+		| 'templateeditor'
+		| 'transwiki'
+	>;
+	expiry?: string | string[];
+	remove?: OneOrMore<
+		| 'abusefilter'
+		| 'abusefilter-helper'
+		| 'accountcreator'
+		| 'autoreviewer'
+		| 'bot'
+		| 'bureaucrat'
+		| 'checkuser'
+		| 'confirmed'
+		| 'copyviobot'
+		| 'eventcoordinator'
+		| 'extendedconfirmed'
+		| 'extendedmover'
+		| 'filemover'
+		| 'founder'
+		| 'import'
+		| 'interface-admin'
+		| 'ipblock-exempt'
+		| 'massmessage-sender'
+		| 'no-ipinfo'
+		| 'patroller'
+		| 'push-subscription-manager'
+		| 'researcher'
+		| 'reviewer'
+		| 'rollbacker'
+		| 'steward'
+		| 'suppress'
+		| 'sysop'
+		| 'templateeditor'
+		| 'transwiki'
+	>;
+	reason?: string;
+	token?: string;
+	tags?: string | string[];
+	watchuser?: boolean;
+	watchlistexpiry?: expiry;
+}
+
+export interface ApiValidatePasswordParams extends ApiParams {
+	action: 'validatepassword';
+	password: password;
+	user?: string;
+	email?: string;
+	realname?: string;
+}
+
+export interface VisualEditorApiVisualEditorParams extends ApiParams {
+	action: 'visualeditor';
+	page: string;
+	badetag?: string;
+	format?: 'json' | 'jsonfm';
+	paction: 'metadata' | 'parse' | 'parsefragment' | 'templatesused' | 'wikitext';
+	wikitext?: string;
+	section?: string;
+	stash?: boolean;
+	oldid?: number;
+	editintro?: string;
+	pst?: boolean;
+	preload?: string;
+	preloadparams?: string | string[];
+}
+
+export interface VisualEditorApiVisualEditorEditParams extends ApiParams {
+	action: 'visualeditoredit';
+	paction: 'diff' | 'save' | 'serialize' | 'serializeforcache';
+	page: string;
+	token?: string;
+	wikitext?: string;
+	section?: string;
+	sectiontitle?: string;
+	basetimestamp?: timestamp;
+	starttimestamp?: timestamp;
+	oldid?: number;
+	minor?: string;
+	watchlist?: string;
+	html?: string;
+	etag?: string;
+	summary?: string;
+	captchaid?: string;
+	captchaword?: string;
+	cachekey?: string;
+	nocontent?: boolean;
+	returnto?: string;
+	returntoquery?: string;
+	returntoanchor?: string;
+	useskin?: string;
+	tags?: string | string[];
+	plugins?: string | string[];
+	mobileformat?: boolean;
+}
+
+export interface ApiWatchParams extends ApiParams {
+	action: 'watch';
+	title?: string;
+	expiry?: expiry;
+	unwatch?: boolean;
+	continue?: string;
+	titles?: string | string[];
+	pageids?: number | number[];
+	revids?: number | number[];
+	generator?:
+		| 'allcategories'
+		| 'alldeletedrevisions'
+		| 'allfileusages'
+		| 'allimages'
+		| 'alllinks'
+		| 'allpages'
+		| 'allredirects'
+		| 'allrevisions'
+		| 'alltransclusions'
+		| 'backlinks'
+		| 'categories'
+		| 'categorymembers'
+		| 'contenttranslation'
+		| 'contenttranslationsuggestions'
+		| 'deletedrevisions'
+		| 'duplicatefiles'
+		| 'embeddedin'
+		| 'exturlusage'
+		| 'fileusage'
+		| 'geosearch'
+		| 'images'
+		| 'imageusage'
+		| 'iwbacklinks'
+		| 'langbacklinks'
+		| 'links'
+		| 'linkshere'
+		| 'mostviewed'
+		| 'oldreviewedpages'
+		| 'pageswithprop'
+		| 'prefixsearch'
+		| 'projectpages'
+		| 'protectedtitles'
+		| 'querypage'
+		| 'random'
+		| 'recentchanges'
+		| 'redirects'
+		| 'revisions'
+		| 'search'
+		| 'templates'
+		| 'transcludedin'
+		| 'watchlist'
+		| 'watchlistraw'
+		| 'wblistentityusage'
+		| 'growthtasks'
+		| 'readinglistentries';
+	redirects?: boolean;
+	converttitles?: boolean;
+	token?: string;
+}
+
+export interface MobileFrontendApiWebappManifestParams extends ApiParams {
+	action: 'webapp-manifest';
+}
+
+export interface WebAuthnApiWebAuthnParams extends ApiParams {
+	action: 'webauthn';
+	func: 'getAuthInfo' | 'getRegisterInfo';
+}
+
+export interface WikiLoveApiWikiLoveParams extends ApiParams {
+	action: 'wikilove';
+	title: string;
+	text: string;
+	message?: string;
+	token?: string;
+	subject: string;
+	type?: string;
+	email?: string;
+	tags?: string | string[];
+}
+
+export interface WikimediaEventsApiWikimediaEventsBlockedEditParams extends ApiParams {
+	action: 'wikimediaeventsblockededit';
+	page: string;
+	interface: 'discussiontools' | 'mobilefrontend' | 'other' | 'visualeditor' | 'wikieditor';
+	platform: 'desktop' | 'mobile';
+}
+
+export interface ApiFormatXmlParams extends ApiParams {
+	format: 'xml';
+	xslt?: string;
+	includexmlnamespace?: boolean;
+}
+
+export interface ApiFormatXmlFMParams extends ApiParams {
+	format: 'xmlfm';
+	wrappedhtml?: boolean;
+	xslt?: string;
+	includexmlnamespace?: boolean;
 }
 
 export {};
