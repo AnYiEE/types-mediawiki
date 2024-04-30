@@ -16,7 +16,9 @@ interface Experiment {
 declare global {
 	namespace mw {
 		/**
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.experiments
+		 * Provides an API for bucketing users in experiments.
+		 *
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.experiments.html
 		 */
 		namespace experiments {
 			/**
@@ -41,7 +43,6 @@ declare global {
 			 *     }
 			 * }
 			 * ```
-			 *
 			 * @param {Experiment} experiment
 			 * @param {string} experiment.name The name of the experiment
 			 * @param {boolean} experiment.enabled Whether or not the experiment is
@@ -51,8 +52,8 @@ declare global {
 			 *  that the user will be assigned to that bucket
 			 * @param {string} token A token that uniquely identifies the user for the
 			 *  duration of the experiment
-			 * @return {string|undefined} The bucket
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.experiments-method-getBucket
+			 * @returns {string|undefined} The bucket
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.experiments.html#.getBucket
 			 */
 			function getBucket(experiment: Experiment, token: string): string | undefined;
 		}

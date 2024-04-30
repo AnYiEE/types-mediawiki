@@ -5,7 +5,8 @@ declare global {
 
 	interface JQuery {
 		/**
-		 * Create a sortable table with multi-column sorting capabilities
+		 * Create a sortable table with multi-column sorting capabilities.
+		 * Provided by `jquery.tablesorter` ResourceLoader module.
 		 *
 		 * ```js
 		 * // Create a simple tablesorter interface
@@ -14,6 +15,10 @@ declare global {
 		 * // Create a tablesorter interface, initially sorting on the first and second column
 		 * $( 'table' ).tablesorter( { sortList: [ { 0: 'desc' }, { 1: 'asc' } ] } );
 		 * ```
+		 *
+		 * @param {Partial<Options>} settings
+		 * @returns {JQuery}
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/jQueryPlugins.html#.tablesorter
 		 */
 		tablesorter(this: JQuery<HTMLTableElement>, settings?: Partial<Options>): this;
 	}
@@ -73,6 +78,9 @@ interface TableSorter {
 	getParsers(): Parser[];
 }
 
+/**
+ * @see https://doc.wikimedia.org/mediawiki-core/master/js/jQueryPlugins.html#~TableSorterOptions
+ */
 interface Options {
 	/**
 	 * Boolean flag indicating iftablesorter should cancel
@@ -118,6 +126,7 @@ interface Options {
 	/**
 	 * An array containing objects specifying sorting. By passing more
 	 * than one object, multi-sorting will be applied. Object structure:
+	 *
 	 * ```
 	 * { <Integer column index>: <String 'asc' or 'desc'> }
 	 * ```

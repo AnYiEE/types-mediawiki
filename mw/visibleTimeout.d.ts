@@ -23,7 +23,7 @@ declare global {
 			 *
 			 * @param {Function} fn Callback
 			 * @param {number} delay Time left, in milliseconds.
-			 * @return {number} A positive integer value which identifies the timer. This
+			 * @returns {number} A positive integer value which identifies the timer. This
 			 *  value can be passed to clear() to cancel the timeout.
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.visibleTimeout-method-set
 			 */

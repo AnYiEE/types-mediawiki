@@ -1,62 +1,11 @@
-interface NotificationOptions {
-	/**
-	 * A boolean indicating whether the notification should automatically
-	 * be hidden after shown. Or if it should persist.
-	 */
-	autoHide: boolean;
-
-	/**
-	 * Key to {@link mw.notification.autoHideSeconds} for number of seconds for timeout of auto-hide
-	 * notifications.
-	 */
-	autoHideSeconds: 'long' | 'short';
-
-	/**
-	 * An optional string. When a notification is tagged only one message
-	 * with that tag will be displayed. Trying to display a new notification
-	 * with the same tag as one already being displayed will cause the other
-	 * notification to be closed and this new notification to open up inside
-	 * the same place as the previous notification.
-	 */
-	tag: string | null;
-
-	/**
-	 * An optional title for the notification. Will be displayed above the
-	 * content. Usually in bold.
-	 */
-	title: string | null;
-
-	/**
-	 * An optional string for the type of the message used for styling:
-	 * Examples: 'info', 'warn', 'error', 'success'.
-	 */
-	type: 'error' | 'info' | 'success' | 'warn' | null;
-
-	/**
-	 * A boolean indicating if the autoHide timeout should be based on
-	 * time the page was visible to user. Or if it should use wall clock time.
-	 */
-	visibleTimeout: boolean;
-
-	/**
-	 * HTML ID to set on the notification element.
-	 */
-	id: string | false;
-
-	/**
-	 * CSS class names in the form of a single string or
-	 * array of strings, to be set on the notification element.
-	 */
-	classes: string | string[] | false;
-}
-
 /**
- * A Notification object for 1 message.
+ * Describes a notification. See {@link mw.notification mw.notification module}. A Notification object for 1 message.
  *
  * The constructor is not publicly accessible; use {@link mw.notification.notify} instead.
- * This does not insert anything into the document (see {@link start}).
+ * This does not insert anything into the document. To add to document use
+ * {@link mw.notification.notify}.
  *
- * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Notification_
+ * @see https://doc.wikimedia.org/mediawiki-core/master/js/Notification.html
  */
 interface Notification {
 	$notification: JQuery;
@@ -72,14 +21,14 @@ interface Notification {
 	/**
 	 * Close the notification.
 	 *
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Notification_-method-close
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/Notification.html#close
 	 */
 	close(): void;
 
 	/**
-	 * Pause any running auto-hide timer for this notification
+	 * Pause any running auto-hide timer for this notification.
 	 *
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Notification_-method-pause
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/Notification.html#pause
 	 */
 	pause(): void;
 
@@ -88,7 +37,7 @@ interface Notification {
 	 * Does nothing if autoHide is disabled.
 	 * Either to resume from pause or to make the first start.
 	 *
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Notification_-method-resume
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/Notification.html#pause
 	 */
 	resume(): void;
 
@@ -100,7 +49,6 @@ interface Notification {
 	 * handles the fadeIn animations and replacement transitions, and starts autoHide timers.
 	 *
 	 * @private
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Notification_-method-start
 	 */
 	start(): void;
 }
@@ -108,21 +56,23 @@ interface Notification {
 declare global {
 	namespace mw {
 		/**
-		 * Display a notification message to the user.
+		 * Convenience method for loading and accessing the {@link mw.notification.notify mw.notification module}.
 		 *
 		 * @param {HTMLElement|HTMLElement[]|JQuery|Message|string} message
-		 * @param {Partial<NotificationOptions>} [options] The options to use for the notification.
-		 *  See {@link NotificationOptions defaults} for details.
-		 * @return {JQuery.Promise<Notification>} Notification object
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-notify
+		 * @param {Partial<notification.NotificationOptions>} [options] The options to use for the notification.
+		 *  See {@link notification.defaults the defaults}.
+		 * @returns {JQuery.Promise<Notification>} Notification object
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html#.notify
 		 */
 		function notify(
-			message: HTMLElement | HTMLElement[] | JQuery | Message | string,
-			options?: Partial<NotificationOptions>
+			message: string | Message | JQuery | HTMLElement | HTMLElement[],
+			options?: Partial<notification.NotificationOptions>
 		): JQuery.Promise<Notification>;
 
 		/**
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification
+		 * Library for sending notifications to end users.
+		 *
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.notification.html
 		 */
 		namespace notification {
 			/**
@@ -134,14 +84,22 @@ declare global {
 			 * This basically represents the minimal number of notifications the user should
 			 * be able to process during the {@link notification.defaults default} {@link autoHideSeconds} time.
 			 *
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification-property-autoHideLimit
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.notification.html#.autoHideLimit
 			 */
 			const autoHideLimit: number;
 
 			/**
-			 * The defaults for notify options parameter.
+			 * @private
+			 */
+			const autoHideSeconds: {
+				short: number;
+				long: number;
+			};
+
+			/**
+			 * The defaults for {@link notify} options parameter.
 			 *
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification-property-defaults
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.notification.html#.defaults
 			 */
 			const defaults: NotificationOptions;
 
@@ -149,21 +107,21 @@ declare global {
 			 * Display a notification message to the user.
 			 *
 			 * @param {HTMLElement|HTMLElement[]|JQuery|Message|string} message
-			 * @param {Partial<NotificationOptions>} [options] The options to use for the notification.
-			 *  See {@link NotificationOptions defaults} for details.
-			 * @return {Notification} Notification object
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification-method-notify
+			 * @param {NotificationOptions} [options] The options to use for the notification.
+			 *  Options not specified default to the values in {@link defaults}.
+			 * @returns {Notification} Notification object
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.notification.html#.notify
 			 */
 			function notify(
-				message: HTMLElement | HTMLElement[] | JQuery | Message | string,
-				options?: Partial<NotificationOptions>
+				message: string | Message | JQuery | HTMLElement | HTMLElement[],
+				options?: NotificationOptions
 			): Notification;
 
 			/**
 			 * Pause auto-hide timers for all notifications.
 			 * Notifications will not auto-hide until resume is called.
 			 *
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification-method-pause
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.notification.html#.pause
 			 */
 			function pause(): void;
 
@@ -171,18 +129,63 @@ declare global {
 			 * Resume any paused auto-hide timers from the beginning.
 			 * Only the first {@link autoHideLimit} timers will be resumed.
 			 *
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification-method-resume
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.notification.html#.resume
 			 */
 			function resume(): void;
 
 			/**
-			 * @private
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.notification-property-autoHideSeconds
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.notification.html#.NotificationOptions
 			 */
-			const autoHideSeconds: {
-				short: number;
-				long: number;
-			};
+			interface NotificationOptions {
+				/**
+				 * Whether the notification should automatically
+				 * be hidden after shown. Or if it should persist.
+				 */
+				autoHide?: boolean;
+
+				/**
+				 * Key to {@link autoHideSeconds} for number of seconds for timeout of auto-hide
+				 * notifications.
+				 */
+				autoHideSeconds?: 'long' | 'short';
+
+				/**
+				 * CSS class names to be set on the notification element.
+				 */
+				classes?: string | string[] | false;
+
+				/**
+				 * HTML ID to set on the notification element.
+				 */
+				id?: string | false;
+
+				/**
+				 * An optional string. When a notification is tagged only one message
+				 * with that tag will be displayed. Trying to display a new notification
+				 * with the same tag as one already being displayed will cause the other
+				 * notification to be closed and this new notification to open up inside
+				 * the same place as the previous notification.
+				 */
+				tag?: string | null;
+
+				/**
+				 * An optional title for the notification. Will be displayed above the
+				 * content. Usually in bold.
+				 */
+				title?: string | null;
+
+				/**
+				 * An optional string for the type of the message used for styling.
+				 * Examples: `info`, `warn`, `error`, `success`.
+				 */
+				type?: 'error' | 'info' | 'success' | 'warn' | null;
+
+				/**
+				 * A boolean indicating if the autoHide timeout should be based on
+				 * time the page was visible to user. Or if it should use wall clock time.
+				 */
+				visibleTimeout?: boolean;
+			}
 		}
 	}
 }

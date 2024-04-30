@@ -8,7 +8,7 @@ declare global {
 			 * Calculate the byte length of a string (accounting for UTF-8).
 			 *
 			 * @param {string} str
-			 * @return {number}
+			 * @returns {number}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-byteLength
 			 */
 			function byteLength(str: string): number;
@@ -20,7 +20,7 @@ declare global {
 			 * @param {number} offset Offset to extract the character
 			 * @param {boolean} [backwards] Use backwards direction to detect UTF-16 surrogates,
 			 *                              defaults to false
-			 * @return {string}
+			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-charAt
 			 */
 			function charAt(string: string, offset: number, backwards?: boolean): string;
@@ -29,7 +29,7 @@ declare global {
 			 * Calculate the character length of a string (accounting for UTF-16 surrogates).
 			 *
 			 * @param {string} str
-			 * @return {number}
+			 * @returns {number}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-codePointLength
 			 */
 			function codePointLength(str: string): number;
@@ -38,7 +38,7 @@ declare global {
 			 * Lowercase the first character. Support UTF-16 surrogates for characters outside of BMP.
 			 *
 			 * @param {string} string
-			 * @return {string}
+			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-lcFirst
 			 */
 			function lcFirst(string: string): string;
@@ -55,7 +55,7 @@ declare global {
 			 * @param {string} newVal New value that may have to be trimmed down.
 			 * @param {number} byteLimit Number of bytes the value may be in size.
 			 * @param {Function} [filterFunction] Function to call on the string before assessing the length.
-			 * @return {Object}
+			 * @returns {Object}
 			 * @returns {string} return.newVal
 			 * @returns {boolean} return.trimmed
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-trimByteLength
@@ -82,7 +82,7 @@ declare global {
 			 * @param {string} newVal New value that may have to be trimmed down.
 			 * @param {number} codePointLimit Number of characters the value may be in size.
 			 * @param {Function} [filterFunction] Function to call on the string before assessing the length.
-			 * @return {Object}
+			 * @returns {Object}
 			 * @returns {string} return.newVal
 			 * @returns {boolean} return.trimmed
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-trimCodePointLength
@@ -101,7 +101,7 @@ declare global {
 			 * Uppercase the first character. Support UTF-16 surrogates for characters outside of BMP.
 			 *
 			 * @param {string} string
-			 * @return {string}
+			 * @returns {string}
 			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.String-method-ucFirst
 			 */
 			function ucFirst(string: string): string;

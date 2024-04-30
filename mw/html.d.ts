@@ -1,7 +1,7 @@
 declare global {
 	namespace mw {
 		/**
-		 * HTML construction helper functions
+		 * HTML construction helper functions.
 		 *
 		 * @example
 		 * ```js
@@ -13,8 +13,7 @@ declare global {
 		 * ) );
 		 * mw.log( output ); // <div><img src="&lt;"/></div>
 		 * ```
-		 *
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.html
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html.html
 		 */
 		namespace html {
 			/**
@@ -27,12 +26,12 @@ declare global {
 			 *  - string: Text to be escaped.
 			 *  - null: The element is treated as void with short closing form, e.g. `<br/>`.
 			 *  - this.Raw: The raw value is directly included.
-			 * @return {string} HTML
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.html-method-element
+			 * @returns {string} HTML
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html.html#.element
 			 */
 			function element(
 				name: string,
-				attrs?: Record<string, boolean | number | string>,
+				attrs?: Record<string, string | number | boolean>,
 				contents?: string | Raw | null
 			): string;
 
@@ -41,24 +40,32 @@ declare global {
 			 *
 			 * Converts special characters to HTML entities.
 			 *
+			 * @example
 			 * ```js
 			 * mw.html.escape( '< > \' & "' );
 			 * // Returns &lt; &gt; &#039; &amp; &quot;
 			 * ```
-			 *
 			 * @param {string} s The string to escape
-			 * @return {string} HTML
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.html-method-escape
+			 * @returns {string} HTML
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html.html#.escape
 			 */
 			function escape(s: string): string;
 
 			/**
-			 * Wrapper object for raw HTML passed to {@link mw.html.element()}.
+			 * Wrapper object for raw HTML. Can be used with {@link mw.html.element}.
 			 *
-			 * @param {string} value
-			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.html.Raw-method-constructor
+			 * @example
+			 * ```js
+			 * const raw = new mw.html.Raw( 'Text' );
+			 * mw.html.element( 'div', { class: 'html' }, raw );
+			 * ```
+			 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html.Raw.html
 			 */
 			class Raw<V extends string = string> {
+				/**
+				 * @param {string} value
+				 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html.Raw.html#Raw
+				 */
 				constructor(value: V);
 
 				/**

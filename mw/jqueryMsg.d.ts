@@ -54,7 +54,7 @@ declare global {
 			 *    somefunction( a, [b, c, d] )
 			 *
 			 * @param {Object} options parser options
-			 * @return {Function} Function The message formatter
+			 * @returns {Function} Function The message formatter
 			 * @returns {string} return.key Message key.
 			 * @returns {any} return.replacements Optional variable replacements (variadically or an array).
 			 * @returns {string} return.return Rendered HTML.
@@ -79,7 +79,7 @@ declare global {
 			 * We append to 'this', which in a jQuery plugin context will be the selected elements.
 			 *
 			 * @param {Object} options Parser options
-			 * @return {Function} Function suitable for assigning to jQuery plugin, such as jQuery#msg
+			 * @returns {Function} Function suitable for assigning to jQuery plugin, such as jQuery#msg
 			 * @returns {string} return.key Message key.
 			 * @returns {any} return.replacements Optional variable replacements (variadically or an array).
 			 * @returns {JQuery} return.return

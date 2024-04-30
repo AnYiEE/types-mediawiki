@@ -4,13 +4,12 @@ declare global {
 	 *
 	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/global
 	 */
-
 	/**
 	 * Schedule a function to run once the page is ready (DOM loaded).
 	 *
 	 * @since 1.5.8
 	 * @param {Function} fn
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/global-method-addOnloadHook
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/window.html#.addOnloadHook
 	 */
 	function addOnloadHook(fn: () => void): void;
 
@@ -22,16 +21,18 @@ declare global {
 	 *
 	 * @since 1.12.2
 	 * @param {string} title
-	 * @return {HTMLScriptElement|null} Script tag, or null if it was already imported before
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/global-method-importScript
+	 * @returns {HTMLScriptElement|null} Script tag, or null if it was already imported before
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/window.html#.importScript
 	 */
 	function importScript(title: string): HTMLScriptElement | null;
 
 	/**
+	 * Import a script using an absolute URI.
+	 *
 	 * @since 1.12.2
 	 * @param {string} url
-	 * @return {HTMLScriptElement|null} Script tag, or null if it was already imported before
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/global-method-importScriptURI
+	 * @returns {HTMLScriptElement|null} Script tag, or null if it was already imported before
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/window.html#.importScriptURI
 	 */
 	function importScriptURI(url: string): HTMLScriptElement | null;
 
@@ -40,17 +41,19 @@ declare global {
 	 *
 	 * @since 1.12.2
 	 * @param {string} title
-	 * @return {HTMLLinkElement} Link tag
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/global-method-importStylesheet
+	 * @returns {HTMLLinkElement} Link tag
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/window.html#.importStylesheet
 	 */
 	function importStylesheet(title: string): HTMLLinkElement;
 
 	/**
+	 * Import a stylesheet using an absolute URI.
+	 *
 	 * @since 1.12.2
 	 * @param {string} url
 	 * @param {string} media
-	 * @return {HTMLLinkElement} Link tag
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/global-method-importStylesheetURI
+	 * @returns {HTMLLinkElement} Link tag
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/window.html#.importStylesheetURI
 	 */
 	function importStylesheetURI(url: string, media: string): HTMLLinkElement;
 }
