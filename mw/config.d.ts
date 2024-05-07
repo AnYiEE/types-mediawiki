@@ -145,7 +145,7 @@ declare global {
 		 */
 		wgVersion: string;
 		/**
-		 * The action performed, e.g. "edit" for edit pages, or "view" for page views. See Manual:Parameters to index.php#Actions.
+		 * The action performed, e.g. "edit" for edit pages, or "view" for page views. See {@link https://www.mediawiki.org/wiki/Manual:Parameters_to_index.php#Actions Manual:Parameters to index.php}.
 		 *
 		 * @see https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Interface/JavaScript#wgAction
 		 */
@@ -195,7 +195,7 @@ declare global {
 		 */
 		wgIsProbablyEditable: boolean;
 		/**
-		 * true if the page is a redirect to a wiki page using #REDIRECT [[Target page name]]. It is false for anything else (normal pages, special pages, most generated pages, etc.).
+		 * true if the page is a redirect to a wiki page using `#REDIRECT [[Target page name]]`. It is false for anything else (normal pages, special pages, most generated pages, etc.).
 		 *
 		 * @see https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Interface/JavaScript#wgIsRedirect
 		 */
@@ -207,7 +207,7 @@ declare global {
 		 */
 		wgNamespaceNumber: number;
 		/**
-		 * Language code of the page content language (according to $context->getTitle()->getPageLanguage())
+		 * Language code of the page content language (according to `$context->getTitle()->getPageLanguage()`)
 		 *
 		 * @see https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Interface/JavaScript#wgPageContentLanguage
 		 */

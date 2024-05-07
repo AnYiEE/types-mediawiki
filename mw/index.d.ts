@@ -35,6 +35,15 @@ import './user';
 import './util';
 import './visibleTimeout';
 
+interface IdleCallbackOptions {
+	/**
+	 * If set, the callback will be scheduled for
+	 * immediate execution after this amount of time (in milliseconds) if it didn't run
+	 * by that time.
+	 */
+	timeout?: number;
+}
+
 type ObjectAnalyticEventData = Record<string, any>;
 type AnalyticEventData = ObjectAnalyticEventData | number | string | undefined;
 
@@ -63,18 +72,14 @@ declare global {
 	/**
 	 * Base library for MediaWiki.
 	 *
-	 * Exposed globally as `mw`, with `mediaWiki` as alias.
-	 *
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html
 	 */
 	const mediaWiki: typeof mw;
 
 	/**
 	 * Base library for MediaWiki.
 	 *
-	 * Exposed globally as `mw`, with `mediaWiki` as alias.
-	 *
-	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw
+	 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html
 	 */
 	namespace mw {
 		/**
@@ -179,17 +184,12 @@ declare global {
 		 * - {@link https://developers.google.com/web/updates/2015/08/using-requestidlecallback}
 		 *
 		 * @param {Function} callback
-		 * @param {Object} [options]
-		 * @param {number} [options.timeout] If set, the callback will be scheduled for
-		 *  immediate execution after this amount of time (in milliseconds) if it didn't run
-		 *  by that time.
+		 * @param {IdleCallbackOptions} [options]
 		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/mw.html#.requestIdleCallback
 		 */
 		function requestIdleCallbackInternal(
 			callback: (arg: {didTimeout: boolean; timeRemaining: () => number}) => any,
-			options?: {
-				timeout?: number;
-			}
+			options?: IdleCallbackOptions
 		): void;
 		const requestIdleCallback: typeof requestIdleCallbackInternal;
 
@@ -220,7 +220,6 @@ declare global {
 		 * even while `mediawiki.base` and `mw.track` are still in-flight.
 		 *
 		 * @private
-		 * @param {string} topic Topic name
 		 * @param {ErrorAnalyticEventData} data Data describing the event, encoded as an object; see {@link errorLogger.logError}
 		 */
 		function trackError(topic: string, data: ErrorAnalyticEventData): void;
