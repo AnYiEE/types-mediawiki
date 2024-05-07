@@ -3,7 +3,7 @@
 	"version": "2.13.0",
 	"description": "TypeScript definitions for MediaWiki JS interface",
 	"scripts": {
-		"lint": "dtslint --localTs node_modules/typescript/lib .",
+		"test": "tsd",
 		"format": "prettier --write ."
 	},
 	"author": {
@@ -32,17 +32,27 @@
 		"index.d.ts",
 		"api_params",
 		"mw",
-		"jquery"
+		"jquery",
+		"vue"
 	],
 	"types": "index.d.ts",
 	"devDependencies": {
-		"dtslint": "^4.2.1",
 		"prettier": "^3.2.5",
+		"tsd": "^0.31.0",
 		"tslint-config-prettier": "^1.18.0",
-		"typescript": "^4.9.5"
+		"typescript": "^5.4.5"
 	},
 	"peerDependencies": {
 		"@types/jquery": "^3.0.0",
-		"@types/oojs-ui": "*"
+		"@types/oojs-ui": "*",
+		"vue": "3.3.9"
+	},
+	"tsd": {
+		"compilerOptions": {
+			"typeRoots": [
+				"./node_modules/@types",
+				"."
+			]
+		}
 	}
 }
