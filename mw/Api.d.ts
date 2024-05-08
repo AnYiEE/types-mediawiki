@@ -1,20 +1,29 @@
 import {
+	ApiParams,
 	ApiAssert,
-	ApiEditPageParams,
+	ApiEditPageParams as _ApiEditPageParams,
 	ApiLegacyTokenType,
-	ApiParseParams,
-	ApiQueryAllMessagesParams,
-	ApiQueryTokensParams,
-	ApiRollbackParams,
+	ApiParseParams as _ApiParseParams,
+	ApiQueryAllMessagesParams as _ApiQueryAllMessagesParams,
+	ApiQueryTokensParams as _ApiQueryTokensParams,
+	ApiRollbackParams as _ApiRollbackParams,
 	ApiTokenType,
-	ApiUploadParams,
+	ApiUploadParams as _ApiUploadParams,
 } from '../api_params';
 import {TitleLike} from './Title';
+
+type MakeActionOptional<T> = T extends {action: infer U} ? Omit<T, 'action'> & {action?: U} : never;
+type ApiEditPageParams = MakeActionOptional<_ApiEditPageParams>;
+type ApiParseParams = MakeActionOptional<_ApiParseParams>;
+type ApiQueryAllMessagesParams = MakeActionOptional<_ApiQueryAllMessagesParams>;
+type ApiQueryTokensParams = MakeActionOptional<_ApiQueryTokensParams>;
+type ApiRollbackParams = MakeActionOptional<_ApiRollbackParams>;
+type ApiUploadParams = MakeActionOptional<_ApiUploadParams>;
 
 type TypeOrArray<T> = T extends any ? T | T[] : never; // T[] would be a mixed array
 type ReplaceValue<T extends U | U[], U, V> = T extends U[] ? V[] : V;
 
-type UnknownApiParams = Record<string, string | string[] | boolean | number | number[]>;
+type UnknownApiParams = Record<string, string | string[] | boolean | number | number[]> | ApiParams;
 
 export type ApiResponse = Record<string, any>; // it will always be a JSON object, the rest is uncertain ...
 
