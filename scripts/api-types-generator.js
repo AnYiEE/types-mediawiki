@@ -451,11 +451,7 @@ function formatInterface(interface) {
 	if (interface.props.length) {
 		lines = [`export interface ${name} {`, ...interface.props.map(formatProperty).map(indent), '}'];
 	} else {
-		lines = ['// tslint:disable-next-line:no-empty-interface', `export interface ${name} {}`];
-	}
-
-	if (interface.name.match(/^I[^a-z]/)) {
-		lines.unshift('// tslint:disable-next-line:interface-name');
+		lines = [`export interface ${name} {}`];
 	}
 
 	return lines;

@@ -75,7 +75,6 @@ interface Options {
 	wrapperCallback($interface: JQuery): JQuery;
 }
 
-// tslint:disable-next-line:interface-name
 interface I18N {
 	/**
 	 * Text to use for the confirmation question.

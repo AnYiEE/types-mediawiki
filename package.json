@@ -39,7 +39,6 @@
 	"devDependencies": {
 		"prettier": "^3.2.5",
 		"tsd": "^0.31.0",
-		"tslint-config-prettier": "^1.18.0",
 		"typescript": "^5.4.5"
 	},
 	"peerDependencies": {
