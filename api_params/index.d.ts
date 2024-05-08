@@ -80,6 +80,9 @@ export interface ApiParams {
 		| 'feedwatchlist'
 		| 'filerevert'
 		| 'flagconfig'
+		| 'flow'
+		| 'flow-parsoid-utils'
+		| 'flowthank'
 		| 'globalblock'
 		| 'globalpreferenceoverrides'
 		| 'globalpreferences'
@@ -150,6 +153,7 @@ export interface ApiParams {
 		| 'bouncehandler'
 		| 'categorytree'
 		| 'collection'
+		| 'cirrus-check-sanity'
 		| 'cspreport'
 		| 'cxcheckunreviewed'
 		| 'cxpublish'
@@ -259,6 +263,7 @@ export interface ApiBlockParams extends ApiParams {
 	partial?: boolean;
 	pagerestrictions?: string | string[];
 	namespacerestrictions?: namespace | namespace[];
+	actionrestrictions?: OneOrMore<'create' | 'move' | 'thanks' | 'upload'>;
 	token?: string;
 }
 
@@ -337,6 +342,15 @@ export interface ApiCheckTokenParams extends ApiParams {
 		| 'watch';
 	token?: string;
 	maxtokenage?: number;
+}
+
+export interface CirrusSearchApiCheckSanityParams extends ApiParams {
+	action: 'cirrus-check-sanity';
+	cluster?: 'cloudelastic' | 'codfw' | 'eqiad';
+	from: number;
+	limit?: limit;
+	sequenceid?: number;
+	rerenderfrequency?: number;
 }
 
 export interface CirrusSearchApiConfigDumpParams extends ApiParams {
@@ -507,6 +521,7 @@ export interface ApiComparePagesParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
+		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -539,6 +554,7 @@ export interface ApiComparePagesParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
+		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -841,6 +857,7 @@ export interface ApiEditPageParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
+		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -909,6 +926,7 @@ export interface ApiExpandTemplatesParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
+		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -935,7 +953,7 @@ export interface ConfirmEditFancyCaptchaApiFancyCaptchaReloadParams extends ApiP
 export interface FeaturedFeedsApiFeaturedFeedsParams extends ApiParams {
 	action: 'featuredfeed';
 	feedformat?: 'atom' | 'rss';
-	feed: 'featured' | 'onthisday' | 'potd';
+	feed: 'dyk' | 'featured' | 'good' | 'onthisday' | 'potd';
 	language?: string;
 }
 
@@ -1012,6 +1030,183 @@ export interface ApiFileRevertParams extends ApiParams {
 
 export interface ApiFlagConfigParams extends ApiParams {
 	action: 'flagconfig';
+}
+
+export interface FlowApiFlowParams extends ApiParams {
+	action: 'flow';
+	submodule:
+		| 'edit-header'
+		| 'edit-post'
+		| 'edit-title'
+		| 'edit-topic-summary'
+		| 'lock-topic'
+		| 'moderate-post'
+		| 'moderate-topic'
+		| 'new-topic'
+		| 'reply'
+		| 'undo-edit-header'
+		| 'undo-edit-post'
+		| 'undo-edit-topic-summary'
+		| 'view-header'
+		| 'view-post'
+		| 'view-post-history'
+		| 'view-topic'
+		| 'view-topic-history'
+		| 'view-topic-summary'
+		| 'view-topiclist'
+		| 'close-open-topic';
+	page?: string;
+	token?: string;
+}
+
+export interface FlowApiParsoidUtilsFlowParams extends ApiParams {
+	action: 'flow-parsoid-utils';
+	from: 'html' | 'wikitext';
+	to: 'html' | 'wikitext';
+	content: string;
+	title?: string;
+	pageid?: number;
+}
+
+export interface FlowApiFlowLockTopicParams extends FlowApiFlowParams {
+	submodule: 'close-open-topic' | 'lock-topic';
+	cotmoderationState: 'close' | 'lock' | 'reopen' | 'unlock';
+	cotreason: string;
+	cottoken?: string;
+}
+
+export interface FlowApiFlowEditHeaderParams extends FlowApiFlowParams {
+	submodule: 'edit-header';
+	ehprev_revision?: string;
+	ehcontent: string;
+	ehformat?: 'html' | 'wikitext';
+	ehtoken?: string;
+}
+
+export interface FlowApiFlowEditPostParams extends FlowApiFlowParams {
+	submodule: 'edit-post';
+	eppostId: string;
+	epprev_revision: string;
+	epcontent: string;
+	epformat?: 'html' | 'wikitext';
+	eptoken?: string;
+}
+
+export interface FlowApiFlowEditTitleParams extends FlowApiFlowParams {
+	submodule: 'edit-title';
+	etprev_revision: string;
+	etcontent: string;
+	ettoken?: string;
+}
+
+export interface FlowApiFlowEditTopicSummaryParams extends FlowApiFlowParams {
+	submodule: 'edit-topic-summary';
+	etsprev_revision?: string;
+	etssummary: string;
+	etsformat?: 'html' | 'wikitext';
+	etstoken?: string;
+}
+
+export interface FlowApiFlowModeratePostParams extends FlowApiFlowParams {
+	submodule: 'moderate-post';
+	mpmoderationState: '' | 'delete' | 'hide' | 'restore' | 'suppress' | 'undelete' | 'unhide' | 'unsuppress';
+	mpreason: string;
+	mppostId: string;
+	mptoken?: string;
+}
+
+export interface FlowApiFlowModerateTopicParams extends FlowApiFlowParams {
+	submodule: 'moderate-topic';
+	mtmoderationState: '' | 'delete' | 'hide' | 'restore' | 'suppress' | 'undelete' | 'unhide' | 'unsuppress';
+	mtreason: string;
+	mttoken?: string;
+}
+
+export interface FlowApiFlowNewTopicParams extends FlowApiFlowParams {
+	submodule: 'new-topic';
+	nttopic: string;
+	ntcontent: string;
+	ntformat?: 'html' | 'wikitext';
+	nttoken?: string;
+}
+
+export interface FlowApiFlowReplyParams extends FlowApiFlowParams {
+	submodule: 'reply';
+	repreplyTo: string;
+	repcontent: string;
+	repformat?: 'html' | 'wikitext';
+	reptoken?: string;
+}
+
+export interface FlowApiFlowUndoEditHeaderParams extends FlowApiFlowParams {
+	submodule: 'undo-edit-header';
+	uehstartId: string;
+	uehendId: string;
+}
+
+export interface FlowApiFlowUndoEditPostParams extends FlowApiFlowParams {
+	submodule: 'undo-edit-post';
+	uepstartId: string;
+	uependId: string;
+}
+
+export interface FlowApiFlowUndoEditTopicSummaryParams extends FlowApiFlowParams {
+	submodule: 'undo-edit-topic-summary';
+	uetsstartId: string;
+	uetsendId: string;
+}
+
+export interface FlowApiFlowViewHeaderParams extends FlowApiFlowParams {
+	submodule: 'view-header';
+	vhformat?: 'fixed-html' | 'html' | 'wikitext';
+	vhrevId?: string;
+}
+
+export interface FlowApiFlowViewPostParams extends FlowApiFlowParams {
+	submodule: 'view-post';
+	vppostId: string;
+	vpformat?: 'fixed-html' | 'html' | 'wikitext';
+}
+
+export interface FlowApiFlowViewPostHistoryParams extends FlowApiFlowParams {
+	submodule: 'view-post-history';
+	vphpostId: string;
+	vphformat?: 'fixed-html' | 'html' | 'wikitext';
+}
+
+export interface FlowApiFlowViewTopicParams extends FlowApiFlowParams {
+	submodule: 'view-topic';
+	vtformat?: 'fixed-html' | 'html' | 'wikitext';
+}
+
+export interface FlowApiFlowViewTopicHistoryParams extends FlowApiFlowParams {
+	submodule: 'view-topic-history';
+	vthformat?: 'fixed-html' | 'html' | 'wikitext';
+}
+
+export interface FlowApiFlowViewTopicSummaryParams extends FlowApiFlowParams {
+	submodule: 'view-topic-summary';
+	vtsformat?: 'fixed-html' | 'html' | 'wikitext';
+	vtsrevId?: string;
+}
+
+export interface FlowApiFlowViewTopicListParams extends FlowApiFlowParams {
+	submodule: 'view-topiclist';
+	'vtloffset-dir'?: 'fwd' | 'rev';
+	vtlsortby?: 'newest' | 'updated' | 'user';
+	vtlsavesortby?: boolean;
+	'vtloffset-id'?: string;
+	vtloffset?: string;
+	'vtlinclude-offset'?: boolean;
+	vtllimit?: limit;
+	vtltoconly?: boolean;
+	vtlformat?: 'fixed-html' | 'html' | 'wikitext';
+}
+
+export interface ThanksApiFlowThankParams extends ApiParams {
+	action: 'flowthank';
+	postid: string;
+	token?: string;
 }
 
 export interface GlobalBlockingApiGlobalBlockParams extends ApiParams {
@@ -1198,7 +1393,7 @@ export interface ApiImportParams extends ApiParams {
 	summary?: string;
 	xml?: upload;
 	interwikiprefix?: string;
-	interwikisource?: 'commons' | 'de' | 'es' | 'fr' | 'it' | 'meta' | 'nost' | 'outreachwiki' | 'pl' | 'test2wiki';
+	interwikisource?: string;
 	interwikipage?: string;
 	fullhistory?: boolean;
 	templates?: boolean;
@@ -1506,6 +1701,7 @@ export interface ApiParamInfoParams extends ApiParams {
 		| 'filerepoinfo'
 		| 'fileusage'
 		| 'flagged'
+		| 'flowinfo'
 		| 'gadgetcategories'
 		| 'gadgets'
 		| 'geosearch'
@@ -1665,6 +1861,7 @@ export interface ApiParseParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
+		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -1682,6 +1879,7 @@ export interface ApiParseParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
+		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -1841,6 +2039,7 @@ export interface ApiQueryParams extends ApiParams {
 		| 'transcodestatus'
 		| 'videoinfo'
 		| 'wbentityusage'
+		| 'flowinfo'
 		| 'description'
 		| 'mapdata'
 	>;
@@ -2283,13 +2482,17 @@ export interface ApiQueryAllUsersParams extends ApiQueryParams {
 		| 'confirmed'
 		| 'copyviobot'
 		| 'eventcoordinator'
+		| 'eventparticipant'
 		| 'extendedconfirmed'
 		| 'extendedmover'
 		| 'filemover'
+		| 'flood'
+		| 'flow-bot'
 		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'ipblock-exempt-grantor'
 		| 'massmessage-sender'
 		| 'no-ipinfo'
 		| 'patroller'
@@ -2314,13 +2517,17 @@ export interface ApiQueryAllUsersParams extends ApiQueryParams {
 		| 'confirmed'
 		| 'copyviobot'
 		| 'eventcoordinator'
+		| 'eventparticipant'
 		| 'extendedconfirmed'
 		| 'extendedmover'
 		| 'filemover'
+		| 'flood'
+		| 'flow-bot'
 		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'ipblock-exempt-grantor'
 		| 'massmessage-sender'
 		| 'no-ipinfo'
 		| 'patroller'
@@ -2419,7 +2626,9 @@ export interface ApiQueryAllUsersParams extends ApiQueryParams {
 		| 'flow-create-board'
 		| 'flow-delete'
 		| 'flow-edit-post'
+		| 'flow-edit-title'
 		| 'flow-hide'
+		| 'flow-lock'
 		| 'flow-suppress'
 		| 'globalblock'
 		| 'globalblock-exempt'
@@ -2706,7 +2915,6 @@ export interface ContentTranslationActionApiQueryContentTranslationLanguageTrend
 	interval?: 'month' | 'week';
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface ContentTranslationActionApiQueryContentTranslationStatsParams extends ApiQueryParams {}
 
 export interface ContentTranslationActionApiQueryContentTranslationSuggestionsParams extends ApiQueryParams {
@@ -2730,13 +2938,17 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'confirmed'
 		| 'copyviobot'
 		| 'eventcoordinator'
+		| 'eventparticipant'
 		| 'extendedconfirmed'
 		| 'extendedmover'
 		| 'filemover'
+		| 'flood'
+		| 'flow-bot'
 		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'ipblock-exempt-grantor'
 		| 'massmessage-sender'
 		| 'no-ipinfo'
 		| 'patroller'
@@ -2761,13 +2973,17 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'confirmed'
 		| 'copyviobot'
 		| 'eventcoordinator'
+		| 'eventparticipant'
 		| 'extendedconfirmed'
 		| 'extendedmover'
 		| 'filemover'
+		| 'flood'
+		| 'flow-bot'
 		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'ipblock-exempt-grantor'
 		| 'massmessage-sender'
 		| 'no-ipinfo'
 		| 'patroller'
@@ -2862,7 +3078,9 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'flow-create-board'
 		| 'flow-delete'
 		| 'flow-edit-post'
+		| 'flow-edit-title'
 		| 'flow-hide'
+		| 'flow-lock'
 		| 'flow-suppress'
 		| 'globalblock'
 		| 'globalblock-exempt'
@@ -3043,7 +3261,9 @@ export interface ApiQueryContributorsParams extends ApiQueryParams {
 		| 'flow-create-board'
 		| 'flow-delete'
 		| 'flow-edit-post'
+		| 'flow-edit-title'
 		| 'flow-hide'
+		| 'flow-lock'
 		| 'flow-suppress'
 		| 'globalblock'
 		| 'globalblock-exempt'
@@ -3416,8 +3636,9 @@ export interface ApiQueryFileUsageParams extends ApiQueryParams {
 	fucontinue?: string;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface ApiQueryFlaggedParams extends ApiQueryParams {}
+
+export interface FlowApiQueryPropFlowInfoParams extends ApiQueryParams {}
 
 export interface GadgetsApiQueryGadgetCategoriesParams extends ApiQueryParams {
 	gcprop?: OneOrMore<'members' | 'name' | 'title'>;
@@ -3547,28 +3768,39 @@ export interface GrowthExperimentsApiQueryImageSuggestionDataParams extends ApiQ
 	gisdcontinue?: string;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface GrowthExperimentsApiQueryMenteeStatusParams extends ApiQueryParams {}
 
-// tslint:disable-next-line:no-empty-interface
 export interface GrowthExperimentsApiQueryMentorListParams extends ApiQueryParams {}
 
 export interface GrowthExperimentsApiQueryMentorMenteeParams extends ApiQueryParams {
 	gemmmentor: string;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface GrowthExperimentsApiQueryMentorStatusParams extends ApiQueryParams {}
 
 export interface GrowthExperimentsApiQueryNextSuggestedTaskTypeParams extends ApiQueryParams {
-	gnsttactivetasktype: 'copyedit' | 'expand' | 'links' | 'references' | 'update';
+	gnsttactivetasktype:
+		| 'copyedit'
+		| 'expand'
+		| 'image-recommendation'
+		| 'links'
+		| 'references'
+		| 'section-image-recommendation'
+		| 'update';
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface GrowthExperimentsApiQueryStarredMenteesParams extends ApiQueryParams {}
 
 export interface GrowthExperimentsApiQueryGrowthTasksParams extends ApiQueryParams {
-	gttasktypes?: OneOrMore<'copyedit' | 'expand' | 'links' | 'references' | 'update'>;
+	gttasktypes?: OneOrMore<
+		| 'copyedit'
+		| 'expand'
+		| 'image-recommendation'
+		| 'links'
+		| 'references'
+		| 'section-image-recommendation'
+		| 'update'
+	>;
 	gttopics?: OneOrMore<
 		| 'africa'
 		| 'architecture'
@@ -3705,7 +3937,6 @@ export interface ApiQueryInfoParams extends ApiQueryParams {
 	incontinue?: string;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface PageTriageApiIsReviewedParams extends ApiQueryParams {}
 
 export interface ApiQueryIWBacklinksParams extends ApiQueryParams {
@@ -3747,7 +3978,6 @@ export interface ApiQueryLangLinksParams extends ApiQueryParams {
 	llurl?: boolean;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface ContentTranslationActionApiQueryLangLinksCountParams extends ApiQueryParams {}
 
 export interface ApiQueryLanguageinfoParams extends ApiQueryParams {
@@ -3778,6 +4008,7 @@ export interface MediaWikiLinterApiQueryLintErrorsParams extends ApiQueryParams 
 		| 'deletable-table-tag'
 		| 'fostered'
 		| 'html5-misnesting'
+		| 'large-tables'
 		| 'misc-tidy-replacement-issues'
 		| 'misnested-tag'
 		| 'missing-end-tag'
@@ -3785,6 +4016,7 @@ export interface MediaWikiLinterApiQueryLintErrorsParams extends ApiQueryParams 
 		| 'multi-colon-escape'
 		| 'multiline-html-table-in-list'
 		| 'multiple-unclosed-formatting-tags'
+		| 'night-mode-unaware-background-color'
 		| 'obsolete-tag'
 		| 'pwrap-bug-workaround'
 		| 'self-closed-tag'
@@ -3802,7 +4034,6 @@ export interface MediaWikiLinterApiQueryLintErrorsParams extends ApiQueryParams 
 	lntfrom?: number;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface MediaWikiLinterApiQueryLinterStatsParams extends ApiQueryParams {}
 
 export interface ApiQueryLogEventsParams extends ApiQueryParams {
@@ -3867,6 +4098,10 @@ export interface ApiQueryLogEventsParams extends ApiQueryParams {
 		| 'delete/delete_redir'
 		| 'delete/delete_redir2'
 		| 'delete/event'
+		| 'delete/flow-delete-post'
+		| 'delete/flow-delete-topic'
+		| 'delete/flow-restore-post'
+		| 'delete/flow-restore-topic'
 		| 'delete/restore'
 		| 'delete/revision'
 		| 'gblblock/*'
@@ -3899,9 +4134,12 @@ export interface ApiQueryLogEventsParams extends ApiQueryParams {
 		| 'growthexperiments/setmentor'
 		| 'growthexperiments/setmentor-no-previous-mentor'
 		| 'import/interwiki'
+		| 'import/lqt-to-flow-topic'
 		| 'import/upload'
 		| 'interwiki/*'
 		| 'ipinfo/*'
+		| 'lock/flow-lock-topic'
+		| 'lock/flow-restore-topic'
 		| 'managetags/activate'
 		| 'managetags/create'
 		| 'managetags/deactivate'
@@ -3964,6 +4202,10 @@ export interface ApiQueryLogEventsParams extends ApiQueryParams {
 		| 'suppress/cadelete'
 		| 'suppress/delete'
 		| 'suppress/event'
+		| 'suppress/flow-restore-post'
+		| 'suppress/flow-restore-topic'
+		| 'suppress/flow-suppress-post'
+		| 'suppress/flow-suppress-topic'
 		| 'suppress/hide-afl'
 		| 'suppress/reblock'
 		| 'suppress/revision'
@@ -3996,7 +4238,6 @@ export interface KartographerApiQueryMapDataParams extends ApiQueryParams {
 	mpdcontinue?: number;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface MediaWikiMassMessageApiQueryMMContentParams extends ApiQueryParams {}
 
 export interface PageViewInfoApiQueryMostViewedParams extends ApiQueryParams {
@@ -4048,7 +4289,6 @@ export interface ApiQueryOldreviewedpagesParams extends ApiQueryParams {
 	orlimit?: limit;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface ORESHooksApiQueryORESParams extends ApiQueryParams {}
 
 export interface PageAssessmentsApiQueryPageAssessmentsParams extends ApiQueryParams {
@@ -4433,6 +4673,7 @@ export interface WikibaseClientApiPageTermsParams extends ApiQueryParams {
 		| 'nah'
 		| 'nan'
 		| 'nan-hani'
+		| 'nan-hant'
 		| 'nap'
 		| 'nb'
 		| 'nds'
@@ -4660,6 +4901,7 @@ export interface WikibaseClientApiPageTermsParams extends ApiQueryParams {
 		| 'za'
 		| 'zea'
 		| 'zgh'
+		| 'zgh-latn'
 		| 'zh'
 		| 'zh-classical'
 		| 'zh-cn'
@@ -5046,7 +5288,6 @@ export interface ApiQueryTranscludedInParams extends ApiQueryParams {
 	ticontinue?: string;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface MediaWikiTimedMediaHandlerApiTranscodeStatusParams extends ApiQueryParams {}
 
 export interface NotificationsApiEchoUnreadNotificationPagesParams extends ApiQueryParams {
@@ -5775,6 +6016,7 @@ export interface ApiSetPageLanguageParams extends ApiParams {
 		| 'na'
 		| 'nah'
 		| 'nan'
+		| 'nan-hant'
 		| 'nap'
 		| 'nb'
 		| 'nds'
@@ -6029,6 +6271,7 @@ export interface ApiStashEditParams extends ApiParams {
 		| 'Scribunto'
 		| 'SecurePoll'
 		| 'css'
+		| 'flow-board'
 		| 'javascript'
 		| 'json'
 		| 'sanitized-css'
@@ -6094,34 +6337,7 @@ export interface ApiTagParams extends ApiParams {
 	rcid?: number | number[];
 	revid?: number | number[];
 	logid?: number | number[];
-	add?: OneOrMore<
-		| 'AWB'
-		| 'AntiVandal script'
-		| 'Deputy'
-		| 'Newcomer task'
-		| 'ProveIt edit'
-		| 'RedWarn'
-		| 'STiki'
-		| 'Single use'
-		| 'Ultraviolet'
-		| 'WPCleaner'
-		| 'WikiLoop Battlefield'
-		| 'bot trial'
-		| 'convenient-discussions'
-		| 'editProtectedHelper'
-		| 'fixed lint errors'
-		| 'huggle'
-		| 'large non-free file'
-		| 'moveToDraft'
-		| 'new user moving page out of userspace'
-		| 'possible birth or death date change'
-		| 'pronoun-change'
-		| 'self-published-blog'
-		| 'self-published source'
-		| 'shortdesc helper'
-		| 'talk banner shell conversion'
-		| 'twinkle'
-	>;
+	add?: string;
 	remove?: string | string[];
 	reason?: string;
 	tags?: string | string[];
@@ -6301,13 +6517,17 @@ export interface ApiUserrightsParams extends ApiParams {
 		| 'confirmed'
 		| 'copyviobot'
 		| 'eventcoordinator'
+		| 'eventparticipant'
 		| 'extendedconfirmed'
 		| 'extendedmover'
 		| 'filemover'
+		| 'flood'
+		| 'flow-bot'
 		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'ipblock-exempt-grantor'
 		| 'massmessage-sender'
 		| 'no-ipinfo'
 		| 'patroller'
@@ -6333,13 +6553,17 @@ export interface ApiUserrightsParams extends ApiParams {
 		| 'confirmed'
 		| 'copyviobot'
 		| 'eventcoordinator'
+		| 'eventparticipant'
 		| 'extendedconfirmed'
 		| 'extendedmover'
 		| 'filemover'
+		| 'flood'
+		| 'flow-bot'
 		| 'founder'
 		| 'import'
 		| 'interface-admin'
 		| 'ipblock-exempt'
+		| 'ipblock-exempt-grantor'
 		| 'massmessage-sender'
 		| 'no-ipinfo'
 		| 'patroller'
