@@ -91,7 +91,7 @@ interface I18N {
 	/**
 	 * Optional title text to use for the 'No' button.
 	 */
-	noTitle: string | undefined;
+	noTitle?: string;
 
 	/**
 	 * Word separator to place between the three text messages.
@@ -108,7 +108,7 @@ interface I18N {
 	/**
 	 * Optional title text to use for the 'Yes' button.
 	 */
-	yesTitle: string | undefined;
+	yesTitle?: string;
 }
 
 export {};
