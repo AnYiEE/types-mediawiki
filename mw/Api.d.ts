@@ -57,9 +57,9 @@ interface EditNoChangeResult extends EditSuccessResult {
 }
 
 interface EditChangedResult extends EditSuccessResult {
-	oldrevid: number;
 	newrevid: number;
 	newtimestamp: string;
+	oldrevid: number;
 }
 
 // type alias to fix #45
@@ -478,6 +478,7 @@ declare global {
 			 * are loaded. If all messages are known, the returned promise is resolved immediately.
 			 *
 			 * @since 1.27
+			 * @since 1.42 - accepts a single string message as parameter.
 			 * @param {string|string[]} messages Messages to retrieve
 			 * @param {ApiQueryAllMessagesParams} [options] Additional parameters for the API call
 			 * @returns {JQuery.Promise<boolean>}
@@ -691,7 +692,7 @@ declare global {
 			/**
 			 * Convenience method for `action=watch`.
 			 *
-			 * @since 1.35 - expiry parameter can be passed when Watchlist Expiry is enabled
+			 * @since 1.35 - expiry parameter can be passed when Watchlist Expiry is enabled.
 			 * @param {TypeOrArray<TitleLike>} pages Full page name or instance of {@link mw.Title}, or an
 			 *  array thereof. If an array is passed, the return value passed to the promise will also be an
 			 *  array of appropriate objects.

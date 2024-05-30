@@ -137,9 +137,9 @@ declare global {
 
 interface TextSelectionEncapsulateOptions {
 	/**
-	 * Text to insert before the cursor/selection.
+	 * Put the inserted text on a line of its own. Defaults to false.
 	 */
-	pre?: string;
+	ownline?: boolean;
 	/**
 	 * Text to insert between pre and post and select afterwards.
 	 */
@@ -149,13 +149,21 @@ interface TextSelectionEncapsulateOptions {
 	 */
 	post?: string;
 	/**
-	 * Put the inserted text on a line of its own. Defaults to false.
+	 * Text to insert before the cursor/selection.
 	 */
-	ownline?: boolean;
+	pre?: string;
 	/**
 	 * If there is a selection, replace it with peri instead of leaving it alone. Defaults to false.
 	 */
 	replace?: boolean;
+	/**
+	 * Position to end selection at. Defaults to the position to start setection at.
+	 */
+	selectionEnd?: number;
+	/**
+	 * Position to start selection at.
+	 */
+	selectionStart?: number;
 	/**
 	 * Select the peri text if it was inserted (but not if there was a selection and replace==false, or if splitlines==true). Defaults to true.
 	 */
@@ -164,14 +172,6 @@ interface TextSelectionEncapsulateOptions {
 	 * If multiple lines are selected, encapsulate each line individually. Defaults to false.
 	 */
 	splitlines?: boolean;
-	/**
-	 * Position to start selection at.
-	 */
-	selectionStart?: number;
-	/**
-	 * Position to end selection at. Defaults to the position to start setection at.
-	 */
-	selectionEnd?: number;
 }
 
 interface GetCaretPositionOptions {

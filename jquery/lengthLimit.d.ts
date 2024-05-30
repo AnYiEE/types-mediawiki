@@ -15,7 +15,7 @@ declare global {
 		 * @param {number} byteLimit Number of bytes the value may be in size.
 		 * @param {FilterFunction} [filterFunction] Function to call on the string before assessing the length.
 		 * @returns {TrimResult}
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/jQueryPlugins.html#.trimByteLength
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/module-jquery.lengthLimit.html#.'$.fn.trimByteLength'
 		 */
 		trimByteLength(safeVal: string, newVal: string, byteLimit: number, filterFunction?: FilterFunction): TrimResult;
 	}
@@ -35,7 +35,7 @@ declare global {
 		 *  called with fetched value as argument.
 		 * @param {FilterFunction} [filterFunction] Function to call on the string before assessing the length.
 		 * @returns {JQuery}
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/jQueryPlugins.html#.byteLimit
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/module-jquery.lengthLimit.html#.$.fn.byteLimit
 		 */
 		byteLimit(limit: number, filterFunction?: FilterFunction): this;
 		byteLimit(filterFunction?: FilterFunction): this;
@@ -57,7 +57,7 @@ declare global {
 		 *  called with fetched value as argument.
 		 * @param {FilterFunction} [filterFunction] Function to call on the string before assessing the length.
 		 * @returns {JQuery}
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/jQueryPlugins.html#.codePointLimit
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/module-jquery.lengthLimit.html#.$.fn.codePointLimit
 		 */
 		codePointLimit(limit: number, filterFunction?: FilterFunction): this;
 		codePointLimit(filterFunction?: FilterFunction): this;

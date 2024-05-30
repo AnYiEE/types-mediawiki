@@ -21,60 +21,69 @@ declare global {
 		 *     $( 'button' ).confirmable();
 		 * } );
 		 * ```
-		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/jQueryPlugins.html#.confirmable
+		 * @see https://doc.wikimedia.org/mediawiki-core/master/js/module-jquery.confirmable.html#.$.fn.confirmable
 		 */
 		confirmable: Confirmable;
 	}
 }
 
+// make all properties required, replacing optional values with undefined,
+// whether "exactOptionalPropertyTypes" is enabled or not.
+type RequiredOrUndefined<T> = {
+	[P in keyof Required<T>]: T[P];
+};
+
 interface Confirmable {
 	/**
-	 * @param {Partial<Options>} [options]
+	 * @param {Options} [options]
 	 */
-	(options?: Partial<Options>): this;
+	(options?: Options): this;
 
 	/**
 	 * Default options. Overridable primarily for internationalisation handling.
 	 */
-	defaultOptions: Options;
+	defaultOptions: RequiredOptions;
 
-	handler(event: JQuery.Event, options: Options): void;
+	handler(event: JQuery.Event, options: RequiredOptions): void;
 }
+
+type RequiredOptions = Required<Options> & {i18n: RequiredOrUndefined<I18N>};
 
 interface Options {
 	/**
 	 * Optional selector used for jQuery event delegation.
 	 */
-	delegate: string | null;
+	delegate?: string | null;
 
 	/**
 	 * Events to hook to.
 	 */
-	events: string;
+	events?: string;
 
 	/**
 	 * Text to use for interface elements.
 	 */
-	i18n: I18N;
+	i18n?: I18N;
 
 	/**
 	 * Callback to fire when preparing confirmable buttons. It is fired separately for the 'Yes' and 'No' button.
 	 * Receives the button jQuery object as the first parameter and 'yes' or 'no' as the second.
 	 */
-	buttonCallback($button: JQuery): JQuery;
+	buttonCallback?($button: JQuery): JQuery;
 
 	/**
 	 * Callback to fire when the action is confirmed (user clicks the 'Yes' button).
 	 */
-	handler: ((event: JQuery.Event) => void) | null;
+	handler?: ((event: JQuery.Event) => void) | null;
 
 	/**
 	 * Callback to fire when preparing confirmable interface.
 	 * Receives the interface jQuery object as the only parameter.
 	 */
-	wrapperCallback($interface: JQuery): JQuery;
+	wrapperCallback?($interface: JQuery): JQuery;
 }
 
+// tslint:disable-next-line:interface-name
 interface I18N {
 	/**
 	 * Text to use for the confirmation question.

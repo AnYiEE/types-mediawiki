@@ -39,13 +39,20 @@ type ModuleScript =
 	| string;
 
 interface ModuleRegistryEntry {
+	/**
+	 * @since 1.41
+	 */
 	declarator?: ModuleDeclarator | null;
 	dependencies: string[];
+	/**
+	 * @since 1.41
+	 */
 	deprecationWarning?: string | null;
 	group: number | null;
 	messages?: ModuleMessages | null;
 	module: Module;
 	packageExports: any;
+	script?: ModuleScript | null;
 	skip: string | null;
 	source: string;
 	state: 'error' | 'loaded' | 'missing' | 'registered' | 'ready';
@@ -307,6 +314,7 @@ declare global {
 			 * Implement a module given a function which returns the components of the module
 			 *
 			 * @private
+			 * @since 1.41
 			 * @param {ModuleDeclarator} declarator The declarator should return an array with the following keys:
 			 *
 			 * - 0. {string} module Name of module and current module version. Formatted
@@ -353,6 +361,8 @@ declare global {
 			 * Does not support mw.loader.store caching.
 			 *
 			 * @private
+			 * @since 1.41 - deprecationWarning parameter can be passed.
+			 * @deprecated since 1.41
 			 * @param {string} module
 			 * @param {ModuleScript} [script] Module code. This can be a function,
 			 *  a list of URLs to load via `<script src>`, a string for `domEval()`, or an
@@ -393,10 +403,10 @@ declare global {
 			 * the modules are registered.
 			 *
 			 * @private
+			 * @since 1.41 - version can no longer be a number (timestamp).
 			 * @param {string|Array} modules Module name or array of arrays, each containing
 			 *  a list of arguments compatible with this method
 			 * @param {string|number} [version] Module version hash (falls backs to empty string)
-			 *  Can also be a number (timestamp) for compatibility with MediaWiki 1.25 and earlier.
 			 * @param {Array<string|number>} [dependencies] Array of module names on which this module depends.
 			 * @param {string|null} [group=null] Group which the module is in
 			 * @param {string} [source="local"] Name of the source
@@ -523,6 +533,7 @@ declare global {
 				/**
 				 * Construct a JSON-serializable object representing the content of the store.
 				 *
+				 * @deprecated Removed since 1.41.
 				 * @returns {JsonModuleStore} Module store contents.
 				 */
 				function toJSON(): JsonModuleStore;

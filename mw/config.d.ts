@@ -428,8 +428,8 @@ interface LimitReport {
 }
 
 interface LimitReportValue {
-	value: number;
 	limit: number;
+	value: number;
 }
 
 export {};
